@@ -1,4 +1,4 @@
-import CurrentProject from '../components/CurrentProject/CurrentProject';
+import CurrentProject from '../components/page-components/CurrentProject/CurrentProject';
 
 const CurrentProjectPage = () => {
   return <CurrentProject />;

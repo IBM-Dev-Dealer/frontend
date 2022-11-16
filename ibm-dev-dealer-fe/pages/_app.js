@@ -1,4 +1,4 @@
-import Layout from '../components/Layout/Layout';
+import Layout from '../components/page-components/Layout/Layout';
 import '../styles/globals.scss';
 
 const App = ({ Component, pageProps }) => {
