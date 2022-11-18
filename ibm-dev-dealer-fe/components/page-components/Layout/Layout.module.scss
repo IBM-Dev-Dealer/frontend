@@ -1,8 +1,65 @@
+@import '../../../styles//colors';
+
 .layout {
-  height: 50%;
-  background-color: blue;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: $white;
 }
 
-.test {
-  color: red;
+.nav {
+  display: flex;
+  align-self: flex-end;
+
+  a {
+    padding: 7px;
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 5px 0 0 0;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 1px 4px $black;
+}
+
+.background1 {
+  background: $green;
+}
+
+.background2 {
+  background: $light-green;
+}
+
+.background3 {
+  background: $white-green;
+}
+
+.background4 {
+  background: $blue;
+}
+
+.background5 {
+  background: $light-mustard;
+}
+
+.background6 {
+  background: $mustard;
+}
+
+.background7 {
+  background: $orangeade;
 }
