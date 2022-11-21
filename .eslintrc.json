@@ -3,20 +3,67 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "next/core-web-vitals"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:json/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "next/core-web-vitals"
+  ],
+  "parser": "@babel/eslint-parser",
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "plugins": ["react", "react-hooks", "prettier"],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "camelcase": "error",
-    "spaced-comment": "error",
-    "quotes": ["error", "single"],
-    "no-duplicate-imports": "error",
-    "react/prop-types": ["off"]
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "tabWidth": 2,
+          "printWidth": 100,
+          "singleQuote": true,
+          "trailingComma": "all",
+          "jsxSingleQuote": true,
+          "parser": "flow",
+          "endOfLine": "auto",
+          "usePrettierrc": true,
+          "semi": true,
+          "bracketSpacing": true
+        }
+      ],
+      "eol-last": "error",
+      "max-len": ["error", { "code": 200 }],
+      "indent": "off",
+      "no-duplicate-imports": "warn",
+      "no-unused-vars": "warn",
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [".js", ".jsx"]
+        }
+      ],
+      "react/prop-types": "off",
+      "sort-imports": [
+        "warn",
+        {
+          "ignoreCase": false,
+          "ignoreDeclarationSort": true,
+          "ignoreMemberSort": false
+        }
+      ]
   },
-  "settings": {}
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "18.2.0"
+    }
+  }
 }
