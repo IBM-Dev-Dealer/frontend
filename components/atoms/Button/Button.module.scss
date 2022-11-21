@@ -8,6 +8,8 @@
   border-radius: map-get($spacing, "s");
   padding: map-get($spacing, "s");
   margin: map-get($spacing, "xs") 0;
+  transition-duration: 0.1s;
+  user-select: none;
 
   cursor: pointer;
   width: 100%;
