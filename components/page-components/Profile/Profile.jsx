@@ -1,5 +1,7 @@
+import Title from '../../atoms/Title/Title';
+
 const Profile = () => {
-  return <div>Profile</div>;
+  return <Title>Profile</Title>;
 };
 
 export default Profile;

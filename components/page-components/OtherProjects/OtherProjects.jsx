@@ -1,5 +1,7 @@
+import Title from '../../atoms/Title/Title';
+
 const OtherProjects = () => {
-  return <div>Other Projects</div>;
+  return <Title>Other Projects</Title>;
 };
 
 export default OtherProjects;

@@ -1,5 +1,5 @@
 @import './colors';
 
 $shadows: (
-    "box-small": 0 0 4px 2px map-get($map: $colors, $key: "transparent-gray")
+    "box-small": 0 0 4px 2px map-get($map: $colors, $key: "transparent-gray-05")
 )

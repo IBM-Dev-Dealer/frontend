@@ -1,5 +1,7 @@
+import Title from '../../atoms/Title/Title';
+
 const ManageEmployees = () => {
-  return <div>Manage Employees</div>;
+  return <Title>Manage Employees</Title>;
 };
 
 export default ManageEmployees;

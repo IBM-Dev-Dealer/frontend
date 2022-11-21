@@ -1,0 +1,5 @@
+@import '../../../styles/sizing';
+
+.title {
+    font-size: map-get($sizing, "xxl");
+}

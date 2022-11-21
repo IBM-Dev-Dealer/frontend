@@ -1,13 +1,24 @@
 @import '../../../styles/colors';
+@import '../../../styles/spacing';
+@import '../../../styles/shadows';
 
 .layout {
   width: 100vw;
   height: 100vh;
-  padding: 10px;
+  padding: map-get($spacing, "l");
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: map-get($colors, "white");
+}
+
+.logoWrapper {
+  padding: map-get($spacing, "xs");
+  box-shadow: map-get($shadows, "box-small");
+  border-radius: map-get($spacing, "s");
+  margin: map-get($spacing, "l");
+  display: inline-block;
 }
 
 .nav {
@@ -15,16 +26,21 @@
   align-self: flex-end;
 
   a {
-    padding: 7px;
-    border-radius: 5px 5px 0 0;
+    // padding: 7px;
+    padding: map-get($spacing, "xs");
+    margin-left: map-get($spacing, "xs");
+    // border-radius: 5px 5px 0 0;
+    border-radius: map-get($spacing, "s") map-get($spacing, "s") 0 0;
+    box-shadow: map-get($shadows, "box-small");
   }
 }
 
 .wrapper {
   width: 100%;
   height: 100%;
-  padding: 10px;
-  border-radius: 5px 0 0 0;
+  padding: map-get($spacing, "l");
+  // border-radius: 5px 0 0 0;
+  border-radius: map-get($spacing, "s") 0 0 0;
 }
 
 .footer {
@@ -32,8 +48,9 @@
   display: flex;
   justify-content: flex-end;
   padding: 10px;
-  border-radius: 0 0 1rem 1rem;
-  box-shadow: 0 1px 4px map-get($colors, "black");
+  // border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 map-get($spacing, "s") map-get($spacing, "s");
+  // box-shadow: 0 1px 4px map-get($colors, "black");
 }
 
 .background1 {

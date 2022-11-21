@@ -1,0 +1,46 @@
+@import "../../../styles/sizing";
+@import "../../../styles/spacing";
+@import "../../../styles/colors";
+@import "../../../styles/shadows";
+
+.carousel {
+    margin: map-get($spacing, "s") 0;
+}
+
+.carouselItem {
+    width: map-get($sizing, "6xl");
+    height: map-get($sizing, "5xl");
+    border-radius: map-get($sizing, "s");
+    padding: map-get($sizing, "s");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: map-get($shadows, "box-small");
+}
+
+.title {
+    padding: map-get($spacing, "s");
+    font-size: map-get($sizing, "xl");
+    color: map-get($colors, "transparent-gray-50");;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    padding: map-get($spacing, "s");
+    font-size: map-get($sizing, "xxl");
+    color: map-get($colors, "transparent-gray-50");
+    cursor: pointer;
+    transition-duration: 0.1s;
+    border-radius: map-get($sizing, "s");
+    user-select: none;
+
+    &:active {
+        opacity: 0.7;
+    }
+
+    &:hover {
+        background-color: map-get($colors, "transparent-gray-05");
+    }
+}
