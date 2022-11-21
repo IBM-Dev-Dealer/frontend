@@ -1,15 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import { getPageBackground, getTitle, ROUTES } from '../../../utils/utils';
+
 import styles from './Layout.module.scss';
 
-const Layout = ({ title = 'IBM Dev Dealer', logged = false, isPM, children }) => {
-  const defaultPage = '/';
-  const currentProject = '/current-project';
-  const otherProjects = '/other-projects';
-  const source = '/source';
-  const log = '/log';
-  const profile = '/profile';
-  const manageEmployees = '/manage-employees';
+const Layout = ({ logged = false, isPM = false, children }) => {
+  const { pathname } = useRouter();
+  const title = getTitle(pathname);
+  const pageBackground = `background${getPageBackground(pathname)}`;
 
   return (
     <>
@@ -17,20 +17,39 @@ const Layout = ({ title = 'IBM Dev Dealer', logged = false, isPM, children }) =>
         <title>{title}</title>
       </Head>
       <div className={styles.layout}>
-        <nav>
-          <Link href={defaultPage}>HOME</Link>
-          <Link href={currentProject}>CURRENT PROJECT</Link>
-          <Link href={otherProjects}>OTHER PROJECTS</Link>
-          <Link href={source}>SOURCE</Link>
-          <Link href={log}>{logged ? 'LOGOUT' : 'LOGIN/REGISTER'}</Link>
-          {logged && <Link href={profile}>Profile</Link>}
-          {isPM && <Link href={manageEmployees}>Manage Employees</Link>}
+        <nav className={styles.nav}>
+          <Link className={styles.background1} href={ROUTES.DEFAULT_PAGE}>
+            HOME
+          </Link>
+          <Link className={styles.background2} href={ROUTES.CURRENT_PROJECT}>
+            CURRENT PROJECT
+          </Link>
+          <Link className={styles.background3} href={ROUTES.OTHER_PROJECTS}>
+            OTHER PROJECTS
+          </Link>
+          <Link className={styles.background4} href={ROUTES.SOURCE}>
+            SOURCE
+          </Link>
+          {logged && (
+            <Link className={styles.background5} href={ROUTES.PROFILE}>
+              PROFILE
+            </Link>
+          )}
+          {isPM && (
+            <Link className={styles.background6} href={ROUTES.MANAGE_EMPLOYEES}>
+              MANAGE EMPLOYEES
+            </Link>
+          )}
+          <Link className={styles.background7} href={ROUTES.LOG}>
+            {logged ? 'LOGOUT' : 'LOGIN/REGISTER'}
+          </Link>
         </nav>
-        <div className={`pointer-events-auto ml-8 rounded-md bg-indigo-600 py-2 px-3 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-indigo-500 ${styles.test}`}>
-          Tailwind Salut Ceva text
-        </div>
-        <div>{children}</div>
-        <footer>Copy rights AMAZING TEAM DEV DEALER</footer>
+
+        <div className={`${styles.wrapper} ${styles[pageBackground]}`}>{children}</div>
+
+        <footer className={`${styles.footer} ${styles[pageBackground]}`}>
+          ©2022 DECÂT O ECHIPĂ
+        </footer>
       </div>
     </>
   );

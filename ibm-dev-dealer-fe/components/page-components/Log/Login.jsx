@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-const Login = () => {
-  const register = '/register';
+import { ROUTES } from '../../../utils/utils';
 
+const Login = () => {
   return (
     <div>
-      Login or <Link href={register}>Register</Link>
+      Login or <Link href={ROUTES.REGISTER}>Register</Link>
     </div>
   );
 };
