@@ -1,6 +1,6 @@
 @import '../../../styles/colors';
 
-.date_picker {
-  background: $orangeade;
+.datePicker {
+  background: map-get($colors, "orangeade");
   border-radius: 5px;
 }

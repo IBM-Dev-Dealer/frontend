@@ -1,4 +1,5 @@
-@import '../../../styles/colors';
+@import "../../../styles/colors";
+@import "../../../styles/shadows";
 
 .wrapper {
   width: 100%;
@@ -17,23 +18,24 @@
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  box-shadow: 0.1rem 0.1rem 0.3rem $black;
+  // box-shadow: 0.1rem 0.1rem 0.3rem $black;
+  box-shadow: map-get($shadows, "box-small");
 
   &.first {
-    background: $green;
-    border-color: $green;
+    background: map-get($colors, "green");
+    border-color: map-get($colors, "green");
     animation-name: first;
   }
 
   &.second {
-    background: $mustard;
-    border-color: $mustard;
+    background: map-get($colors, "mustard");
+    border-color: map-get($colors, "mustard");
     animation-name: second;
   }
 
   &.third {
-    background: $light-green;
-    border-color: $light-green;
+    background: map-get($colors, "light-green");
+    border-color: map-get($colors, "light-green");
     animation-name: third;
   }
 

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { getPageBackground, getTitle, ROUTES } from '../../../utils/utils';
+import { ROUTES, getPageBackground, getTitle } from '../../../utils/utils';
 
 import styles from './Layout.module.scss';
 

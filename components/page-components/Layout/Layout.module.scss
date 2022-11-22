@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: $white;
+  background: map-get($colors, "white");
 }
 
 .nav {
@@ -33,33 +33,33 @@
   justify-content: flex-end;
   padding: 10px;
   border-radius: 0 0 1rem 1rem;
-  box-shadow: 0 1px 4px $black;
+  box-shadow: 0 1px 4px map-get($colors, "black");
 }
 
 .background1 {
-  background: $green;
+  background: map-get($colors, "green");
 }
 
 .background2 {
-  background: $light-green;
+  background: map-get($colors, "light-green");
 }
 
 .background3 {
-  background: $white-green;
+  background: map-get($colors, "white-green");
 }
 
 .background4 {
-  background: $blue;
+  background: map-get($colors, "blue");
 }
 
 .background5 {
-  background: $light-mustard;
+  background: map-get($colors, "light-mustard");
 }
 
 .background6 {
-  background: $mustard;
+  background: map-get($colors, "mustard");
 }
 
 .background7 {
-  background: $orangeade;
+  background: map-get($colors, "orangeade");
 }

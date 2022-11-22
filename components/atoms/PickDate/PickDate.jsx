@@ -1,10 +1,10 @@
 import DatePicker from 'react-datepicker';
-import { date_picker } from './PickDate.module.scss';
+import { datePicker } from './PickDate.module.scss';
 
 const PickDate = ({ selectedDate, onSelectDate, onDateChange, dateFormat, showTimeSelect }) => {
   return (
     <DatePicker
-      className={date_picker}
+      className={datePicker}
       selected={selectedDate}
       onSelect={onSelectDate}
       onChange={onDateChange}
