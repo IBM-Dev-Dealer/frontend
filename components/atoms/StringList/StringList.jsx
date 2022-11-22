@@ -35,7 +35,7 @@ const StringList = () => {
         <div className='break-words overflow-clip'>{entry}</div>
         <div className='flex items-center'>
           <XMarkIcon
-            className='cursor-pointer w-6 h-6 hover:scale-110 active:opacity-20 active:scale-50'
+            className='cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50'
             onClick={() => removeEntry(entry)}
           />
         </div>
