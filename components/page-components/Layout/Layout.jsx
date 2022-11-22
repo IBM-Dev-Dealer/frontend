@@ -18,7 +18,7 @@ const Layout = ({ logged = false, isPM = false, children }) => {
       </Head>
       <div className={styles.layout}>
         <header className={styles.header}>
-          <div className={styles.logoWrapper}>logo</div>
+          <div className={styles.logoWrapper}>IBM Dev Dealer</div>
           <nav className={styles.nav}>
             <Link className={styles.link1} href={ROUTES.DEFAULT_PAGE}>
               Home
@@ -52,7 +52,7 @@ const Layout = ({ logged = false, isPM = false, children }) => {
         </header>
 
         <div className={`${styles.wrapper} ${styles[pageBackground]}`}>
-          <div>{children}</div>
+          <div className={styles.content}>{children}</div>
           <footer className={styles.footer}>©2022 DECÂT O ECHIPĂ</footer>
         </div>
       </div>

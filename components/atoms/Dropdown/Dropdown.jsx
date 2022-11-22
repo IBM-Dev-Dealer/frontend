@@ -1,14 +1,15 @@
 /* eslint-disable max-len */
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { classNames } from '../../../utils/utils';
 
-const Dropdown = ({ list, listPosition }) => {
+const Dropdown = ({ list, listPosition, value }) => {
+  const [selectedItem, setSelectedItem] = useState(value ?? null);
   return (
     <Menu as='div' className='relative inline-block text-left w-full'>
       <Menu.Button className='inline-flex w-full justify-center rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100'>
-        Options
+        {!selectedItem ? 'Options' : selectedItem.label}
         <ChevronDownIcon className='-mr-1 ml-2 h-5 w-5' aria-hidden='true' />
       </Menu.Button>
 
@@ -32,7 +33,13 @@ const Dropdown = ({ list, listPosition }) => {
                 <Menu.Item as='div' key={listItem.label} className='overflow-hidden'>
                   {({ active }) => (
                     <div
-                      href='#'
+                      role='presentation'
+                      onClick={() => {
+                        setSelectedItem(listItem);
+                      }}
+                      onKeyDown={() => {
+                        setSelectedItem(listItem);
+                      }}
                       className={classNames(
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm hover:bg-transparent-light-green-50 cursor-pointer overflow-hidden',

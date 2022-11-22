@@ -11,7 +11,8 @@
 
   display: flex;
   flex-direction: column;
-  background: map-get($colors, "white");
+  @apply bg-transparent-gray-05;
+  @apply bg-transparent-light-green-10;
 }
 
 .header {
@@ -20,13 +21,12 @@
 }
 
 .logoWrapper {
-  padding: map-get($spacing, "xs");
   box-shadow: map-get($shadows, "box-small");
   // border-radius: map-get($spacing, "s")
-  @apply rounded-xl;
   margin: map-get($spacing, "l");
   margin-left: 0;
   display: inline-flex;
+  @apply py-2 px-4 bg-white text-3xl rounded-xl;
 }
 
 .nav {
@@ -36,11 +36,7 @@
   a {
     padding: map-get($spacing, "xs");
     margin-left: map-get($spacing, "xs");
-    // border-radius: map-get($spacing, "s") map-get($spacing, "s") 0 0;
-    @apply rounded-tr-xl;
-    @apply rounded-tl-xl;
-    @apply rounded-bl-none;
-    @apply rounded-br-none;
+    @apply rounded-tr-xl rounded-tl-xl rounded-bl-none rounded-br-none;
     box-shadow: map-get($shadows, "box-small");
     user-select: none;
   }
@@ -50,12 +46,7 @@
   width: 100%;
   height: 100%;
   padding: map-get($spacing, "l");
-  // border-radius: map-get($spacing, "s")
-
-  @apply rounded-tr-none;
-  @apply rounded-tl-3xl;
-  @apply rounded-bl-3xl;
-  @apply rounded-br-3xl;
+  @apply rounded-tr-none rounded-tl-3xl rounded-bl-3xl rounded-br-3xl bg-white;
   border-top-right-radius: 0;
   display: flex;
   flex-direction: column;
