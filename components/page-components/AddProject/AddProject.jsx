@@ -1,6 +1,7 @@
 import Dropdown from '../../atoms/Dropdown/Dropdown';
 import Title from '../../atoms/Title/Title';
 import Button from '../../atoms/Button/Button';
+import StringList from '../../atoms/StringList/StringList';
 
 const AddProject = () => {
   return (
@@ -14,6 +15,7 @@ const AddProject = () => {
         ]}
       />
       <Button label={'prezz me'} />
+      <StringList />
     </div>
   );
 };

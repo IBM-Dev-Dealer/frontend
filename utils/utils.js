@@ -28,7 +28,7 @@ export const getTitle = (route) => {
   return `IBM Dev Dealer${newRoute}`;
 };
 
-export const classNames = (...classes) => classes.join(' ');
+export const classNames = (...classes) => classes.filter((className) => className).join(' ');
 
 export const colorizeJSXArray = (JSXElements) => {
   let i = 0;
