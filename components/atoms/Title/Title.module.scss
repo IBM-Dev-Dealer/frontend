@@ -3,5 +3,6 @@
 .title {
     // font-size: map-get($sizing, "xxl");
     @apply text-3xl;
-    @apply my-2;
+    @apply mt-2;
+    @apply mb-8;
 }
