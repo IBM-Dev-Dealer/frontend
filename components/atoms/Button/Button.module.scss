@@ -1,16 +1,25 @@
-@import '../../../styles/colors';
-@import '../../../styles/shadows';
-@import '../../../styles/spacing';
+@import "../../../styles/colors";
+@import "../../../styles/shadows";
+@import "../../../styles/spacing";
+@import "../../../styles/general";
 
 .button {
-    background: map-get($colors, "orangeade");
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    width: 100%;
-    box-shadow: map-get($shadows, "box-small");
+  background: map-get($colors, "orangeade");
+  border-radius: map-get($spacing, "s");
+  padding: map-get($spacing, "s");
+  margin: map-get($spacing, "xs") 0;
+  transition-duration: 0.1s;
+  user-select: none;
 
-    &:active {
-      background: map-get($colors, "mustard");
-    }
+  cursor: pointer;
+  width: 100%;
+  box-shadow: map-get($shadows, "box-small");
+
+  &:active {
+    background: map-get($colors, "mustard");
   }
+
+  &[disabled] {
+    @include element-disabled;
+  }
+}

@@ -22,8 +22,19 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": ["react", "react-hooks", "prettier", "unused-imports"],
     "rules": {
+      "no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "warn",
+        {
+          "vars": "all",
+          "varsIgnorePattern": "^_",
+          "args": "after-used",
+          "argsIgnorePattern": "^_"
+        }
+      ],
       "prettier/prettier": [
         "error",
         {
@@ -43,7 +54,6 @@
       "max-len": ["error", { "code": 200 }],
       "indent": "off",
       "no-duplicate-imports": "warn",
-      "no-unused-vars": "warn",
       "react/jsx-filename-extension": [
         "error",
         {

@@ -1,12 +1,13 @@
 import Link from 'next/link';
 
 import { ROUTES } from '../../../utils/utils';
+import Title from '../../atoms/Title/Title';
 
 const Login = () => {
   return (
-    <div>
+    <Title>
       Login or <Link href={ROUTES.REGISTER}>Register</Link>
-    </div>
+    </Title>
   );
 };
 

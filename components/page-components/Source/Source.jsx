@@ -1,5 +1,7 @@
+import Title from '../../atoms/Title/Title';
+
 const Source = () => {
-  return <div>Source</div>;
+  return <Title>Source</Title>;
 };
 
 export default Source;

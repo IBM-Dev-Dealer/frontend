@@ -16,6 +16,7 @@ const Layout = ({ logged = false, isPM = false, children }) => {
       <Head>
         <title>{title}</title>
       </Head>
+      <div className={styles.logoWrapper}>logo</div>
       <div className={styles.layout}>
         <nav className={styles.nav}>
           <Link className={styles.background1} href={ROUTES.DEFAULT_PAGE}>
