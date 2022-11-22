@@ -51,7 +51,7 @@
         }
       ],
       "eol-last": "error",
-      "max-len": ["none", { "code": 200 }],
+      "max-len": ["off", { "code": 200 }],
       "indent": "off",
       "no-duplicate-imports": "warn",
       "react/jsx-filename-extension": [
