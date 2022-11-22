@@ -4,15 +4,13 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { classNames } from '../../../utils/utils';
 
-export default function Dropdown() {
+const Dropdown = ({ list, listPosition }) => {
   return (
-    <Menu as='div' className='relative inline-block text-left'>
-      <div>
-        <Menu.Button className='inline-flex w-full justify-center rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100'>
-          Options
-          <ChevronDownIcon className='-mr-1 ml-2 h-5 w-5' aria-hidden='true' />
-        </Menu.Button>
-      </div>
+    <Menu as='div' className='relative inline-block text-left w-full'>
+      <Menu.Button className='inline-flex w-full justify-center rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100'>
+        Options
+        <ChevronDownIcon className='-mr-1 ml-2 h-5 w-5' aria-hidden='true' />
+      </Menu.Button>
 
       <Transition
         as={Fragment}
@@ -23,64 +21,34 @@ export default function Dropdown() {
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'
       >
-        <Menu.Items className='absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+        <Menu.Items
+          className={`absolute ${
+            listPosition === 'right' ? 'right' : 'left'
+          }-0 z-10 mt-2 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden w-full`}
+        >
           <div className='py-1'>
-            <Menu.Item>
-              {({ active }) => (
-                <div
-                  href='#'
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm',
+            {list.map((listItem) => {
+              return (
+                <Menu.Item as='div' key={listItem.label} className='overflow-hidden'>
+                  {({ active }) => (
+                    <div
+                      href='#'
+                      className={classNames(
+                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                        'block px-4 py-2 text-sm hover:bg-transparent-light-green-50 cursor-pointer overflow-hidden',
+                      )}
+                    >
+                      {listItem.label}
+                    </div>
                   )}
-                >
-                  Account settings
-                </div>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <div
-                  href='#'
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm',
-                  )}
-                >
-                  Support
-                </div>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <div
-                  href='#'
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm',
-                  )}
-                >
-                  License
-                </div>
-              )}
-            </Menu.Item>
-
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  type='submit'
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block w-full px-4 py-2 text-left text-sm',
-                  )}
-                >
-                  Sign out
-                </button>
-              )}
-            </Menu.Item>
+                </Menu.Item>
+              );
+            })}
           </div>
         </Menu.Items>
       </Transition>
     </Menu>
   );
-}
+};
+
+export default Dropdown;

@@ -20,6 +20,7 @@ module.exports = {
       mustard: '#edb458',
       orangeade: '#e8871e',
       gray: '#ccc',
+      'transparent-light-green-50': 'rgb(186, 212, 170, 0.5)',
     },
   },
   plugins: [],

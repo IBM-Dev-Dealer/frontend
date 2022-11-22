@@ -6,7 +6,13 @@ const AddProject = () => {
   return (
     <div>
       <Title>Add Project</Title>
-      <Dropdown />
+      <Dropdown
+        list={[
+          { label: 'item1', value: '#item1' },
+          { label: 'item2', value: '#item2' },
+          { label: 'item3', value: '#item3' },
+        ]}
+      />
       <Button label={'prezz me'} />
     </div>
   );
