@@ -57,7 +57,7 @@ const Layout = ({ logged = false, isPM = false, children }) => {
         </header>
 
         <div className={`${styles.wrapper} mainColorBorder${colorIndex}`}>
-          <div className={styles.content}>{children}</div>
+          <div>{children}</div>
           <footer className={styles.footer}>© 2022 Decât o echipă</footer>
         </div>
       </div>
