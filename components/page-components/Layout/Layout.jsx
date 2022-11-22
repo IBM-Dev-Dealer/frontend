@@ -26,6 +26,9 @@ const Layout = ({ logged = false, isPM = false, children }) => {
             <Link className={styles.link2} href={ROUTES.CURRENT_PROJECT}>
               CURRENT PROJECT
             </Link>
+            <Link className={styles.link2} href={ROUTES.ADD_PROJECT}>
+              ADD PROJECT
+            </Link>
             <Link className={styles.link3} href={ROUTES.OTHER_PROJECTS}>
               OTHER PROJECTS
             </Link>

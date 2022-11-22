@@ -11,6 +11,10 @@
   "dependencies": {
     "@babel/core": "^7.20.2",
     "@babel/eslint-parser": "^7.19.1",
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
+    "@types/next": "^9.0.0",
+    "@types/react": "^18.0.25",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "eslint-config-prettier": "^8.5.0",
@@ -26,6 +30,7 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "sass": "^1.56.1",
+    "sass-loader": "^13.2.0",
     "stylelint": "^14.15.0",
     "stylelint-scss": "^4.3.0"
   },
