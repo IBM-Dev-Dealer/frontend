@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { PlusIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import Button from '../Button/Button';
 import { colorizeJSXArray } from '../../../utils/utils';
@@ -6,10 +6,6 @@ import { colorizeJSXArray } from '../../../utils/utils';
 const StringList = () => {
   const [entries, setEntries] = useState([]);
   const [inputValue, setInputValue] = useState('');
-
-  useEffect(() => {
-    console.log('entries', entries);
-  }, [entries]);
 
   const handleInputContent = () => {
     if (inputValue === '') return;
