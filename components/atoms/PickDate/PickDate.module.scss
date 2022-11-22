@@ -1,10 +1,11 @@
-@import '../../../styles/colors';
-@import '../../../styles/spacing';
-@import '../../../styles/shadows';
+@import "../../../styles/colors";
+@import "../../../styles/spacing";
+@import "../../../styles/shadows";
 
 .datePicker {
   background: map-get($colors, "orangeade");
-  border-radius: map-get($spacing, "s");
+  // border-radius: map-get($spacing, "s")
+  @apply rounded-xl;
   padding: map-get($spacing, "s");
   box-shadow: map-get($shadows, "box-small");
   margin: map-get($spacing, "xs") 0;

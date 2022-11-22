@@ -1,5 +1,8 @@
 @import '../../../styles/sizing';
 
 .title {
-    font-size: map-get($sizing, "xxl");
+    // font-size: map-get($sizing, "xxl");
+    @apply text-3xl;
+    @apply mt-2;
+    @apply mb-8;
 }

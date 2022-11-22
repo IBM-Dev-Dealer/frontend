@@ -50,3 +50,5 @@ export const getTitle = (route) => {
 
   return `IBM Dev Dealer${newRoute}`;
 };
+
+export const classNames = (...classes) => classes.join(' ');

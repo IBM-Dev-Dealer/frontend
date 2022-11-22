@@ -1,12 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './colors';
 
 /* Box sizing rules */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  @apply ring-orangeade;
+  @apply border-gray;
+  @apply font-sans;
+  @apply transition-all;
+  @apply duration-100;
+  @apply font-medium;
+  @apply text-base;
 }
 
 /* Remove default margin */

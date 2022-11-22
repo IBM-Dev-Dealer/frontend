@@ -21,29 +21,32 @@ const Layout = ({ logged = false, isPM = false, children }) => {
           <div className={styles.logoWrapper}>logo</div>
           <nav className={styles.nav}>
             <Link className={styles.link1} href={ROUTES.DEFAULT_PAGE}>
-              HOME
+              Home
             </Link>
             <Link className={styles.link2} href={ROUTES.CURRENT_PROJECT}>
-              CURRENT PROJECT
+              Current Project
+            </Link>
+            <Link className={styles.link2} href={ROUTES.ADD_PROJECT}>
+              Add Project
             </Link>
             <Link className={styles.link3} href={ROUTES.OTHER_PROJECTS}>
-              OTHER PROJECTS
+              Other Projects
             </Link>
             <Link className={styles.link4} href={ROUTES.SOURCE}>
-              SOURCE
+              Source
             </Link>
             {logged && (
               <Link className={styles.link5} href={ROUTES.PROFILE}>
-                PROFILE
+                Profile
               </Link>
             )}
             {isPM && (
               <Link className={styles.link6} href={ROUTES.MANAGE_EMPLOYEES}>
-                MANAGE EMPLOYEES
+                Manage Employees
               </Link>
             )}
             <Link className={styles.link7} href={ROUTES.LOG}>
-              {logged ? 'LOGOUT' : 'LOGIN/REGISTER'}
+              {logged ? 'Logout' : 'Login/Register'}
             </Link>
           </nav>
         </header>

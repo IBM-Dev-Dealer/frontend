@@ -1,7 +1,7 @@
-@import '../../../styles/colors';
-@import '../../../styles/spacing';
-@import '../../../styles/shadows';
-@import '../../../styles/sizing';
+@import "../../../styles/colors";
+@import "../../../styles/spacing";
+@import "../../../styles/shadows";
+@import "../../../styles/sizing";
 
 .layout {
   width: 100vw;
@@ -22,7 +22,8 @@
 .logoWrapper {
   padding: map-get($spacing, "xs");
   box-shadow: map-get($shadows, "box-small");
-  border-radius: map-get($spacing, "s");
+  // border-radius: map-get($spacing, "s")
+  @apply rounded-xl;
   margin: map-get($spacing, "l");
   margin-left: 0;
   display: inline-flex;
@@ -35,7 +36,11 @@
   a {
     padding: map-get($spacing, "xs");
     margin-left: map-get($spacing, "xs");
-    border-radius: map-get($spacing, "s") map-get($spacing, "s") 0 0;
+    // border-radius: map-get($spacing, "s") map-get($spacing, "s") 0 0;
+    @apply rounded-tr-xl;
+    @apply rounded-tl-xl;
+    @apply rounded-bl-none;
+    @apply rounded-br-none;
     box-shadow: map-get($shadows, "box-small");
     user-select: none;
   }
@@ -45,7 +50,12 @@
   width: 100%;
   height: 100%;
   padding: map-get($spacing, "l");
-  border-radius: map-get($spacing, "s");
+  // border-radius: map-get($spacing, "s")
+
+  @apply rounded-tr-none;
+  @apply rounded-tl-3xl;
+  @apply rounded-bl-3xl;
+  @apply rounded-br-3xl;
   border-top-right-radius: 0;
   display: flex;
   flex-direction: column;
