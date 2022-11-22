@@ -9,7 +9,7 @@ import styles from './Layout.module.scss';
 const Layout = ({ logged = false, isPM = false, children }) => {
   const { pathname } = useRouter();
   const title = getTitle(pathname);
-  const pageBackground = `background${getPageBackground(pathname)}`;
+  const pageBackground = `page${getPageBackground(pathname)}`;
 
   return (
     <>
@@ -19,38 +19,43 @@ const Layout = ({ logged = false, isPM = false, children }) => {
       <div className={styles.logoWrapper}>logo</div>
       <div className={styles.layout}>
         <nav className={styles.nav}>
-          <Link className={styles.background1} href={ROUTES.DEFAULT_PAGE}>
+          <Link className={styles.link1} href={ROUTES.DEFAULT_PAGE}>
             HOME
           </Link>
-          <Link className={styles.background2} href={ROUTES.CURRENT_PROJECT}>
+          <Link className={styles.link2} href={ROUTES.CURRENT_PROJECT}>
             CURRENT PROJECT
           </Link>
-          <Link className={styles.background3} href={ROUTES.OTHER_PROJECTS}>
+          <Link className={styles.link2} href={ROUTES.ADD_PROJECT}>
+            ADD PROJECT
+          </Link>
+          <Link className={styles.link3} href={ROUTES.OTHER_PROJECTS}>
             OTHER PROJECTS
           </Link>
-          <Link className={styles.background4} href={ROUTES.SOURCE}>
+          <Link className={styles.link4} href={ROUTES.SOURCE}>
             SOURCE
           </Link>
           {logged && (
-            <Link className={styles.background5} href={ROUTES.PROFILE}>
+            <Link className={styles.link5} href={ROUTES.PROFILE}>
               PROFILE
             </Link>
           )}
           {isPM && (
-            <Link className={styles.background6} href={ROUTES.MANAGE_EMPLOYEES}>
+            <Link className={styles.link6} href={ROUTES.MANAGE_EMPLOYEES}>
               MANAGE EMPLOYEES
             </Link>
           )}
-          <Link className={styles.background7} href={ROUTES.LOG}>
+          <Link className={styles.link7} href={ROUTES.LOG}>
             {logged ? 'LOGOUT' : 'LOGIN/REGISTER'}
           </Link>
         </nav>
 
-        <div className={`${styles.wrapper} ${styles[pageBackground]}`}>{children}</div>
+        <div className={`${styles.wrapper} ${styles[pageBackground]}`}>
+          <>{children}</> <footer className={`${styles.footer}`}>©2022 DECÂT O ECHIPĂ</footer>
+        </div>
 
-        <footer className={`${styles.footer} ${styles[pageBackground]}`}>
+        {/* <footer className={`${styles[pageBackground]} ${styles.footer}`}>
           ©2022 DECÂT O ECHIPĂ
-        </footer>
+        </footer> */}
       </div>
     </>
   );
