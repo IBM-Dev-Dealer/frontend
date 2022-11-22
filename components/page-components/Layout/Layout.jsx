@@ -16,46 +16,42 @@ const Layout = ({ logged = false, isPM = false, children }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <div className={styles.logoWrapper}>logo</div>
       <div className={styles.layout}>
-        <nav className={styles.nav}>
-          <Link className={styles.link1} href={ROUTES.DEFAULT_PAGE}>
-            HOME
-          </Link>
-          <Link className={styles.link2} href={ROUTES.CURRENT_PROJECT}>
-            CURRENT PROJECT
-          </Link>
-          <Link className={styles.link2} href={ROUTES.ADD_PROJECT}>
-            ADD PROJECT
-          </Link>
-          <Link className={styles.link3} href={ROUTES.OTHER_PROJECTS}>
-            OTHER PROJECTS
-          </Link>
-          <Link className={styles.link4} href={ROUTES.SOURCE}>
-            SOURCE
-          </Link>
-          {logged && (
-            <Link className={styles.link5} href={ROUTES.PROFILE}>
-              PROFILE
+        <header className={styles.header}>
+          <div className={styles.logoWrapper}>logo</div>
+          <nav className={styles.nav}>
+            <Link className={styles.link1} href={ROUTES.DEFAULT_PAGE}>
+              HOME
             </Link>
-          )}
-          {isPM && (
-            <Link className={styles.link6} href={ROUTES.MANAGE_EMPLOYEES}>
-              MANAGE EMPLOYEES
+            <Link className={styles.link2} href={ROUTES.CURRENT_PROJECT}>
+              CURRENT PROJECT
             </Link>
-          )}
-          <Link className={styles.link7} href={ROUTES.LOG}>
-            {logged ? 'LOGOUT' : 'LOGIN/REGISTER'}
-          </Link>
-        </nav>
+            <Link className={styles.link3} href={ROUTES.OTHER_PROJECTS}>
+              OTHER PROJECTS
+            </Link>
+            <Link className={styles.link4} href={ROUTES.SOURCE}>
+              SOURCE
+            </Link>
+            {logged && (
+              <Link className={styles.link5} href={ROUTES.PROFILE}>
+                PROFILE
+              </Link>
+            )}
+            {isPM && (
+              <Link className={styles.link6} href={ROUTES.MANAGE_EMPLOYEES}>
+                MANAGE EMPLOYEES
+              </Link>
+            )}
+            <Link className={styles.link7} href={ROUTES.LOG}>
+              {logged ? 'LOGOUT' : 'LOGIN/REGISTER'}
+            </Link>
+          </nav>
+        </header>
 
         <div className={`${styles.wrapper} ${styles[pageBackground]}`}>
-          <>{children}</> <footer className={`${styles.footer}`}>©2022 DECÂT O ECHIPĂ</footer>
+          <div>{children}</div>
+          <footer className={styles.footer}>©2022 DECÂT O ECHIPĂ</footer>
         </div>
-
-        {/* <footer className={`${styles[pageBackground]} ${styles.footer}`}>
-          ©2022 DECÂT O ECHIPĂ
-        </footer> */}
       </div>
     </>
   );

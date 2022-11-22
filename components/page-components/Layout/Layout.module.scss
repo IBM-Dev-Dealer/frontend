@@ -7,11 +7,16 @@
   width: 100vw;
   height: 100vh;
   padding: map-get($spacing, "l");
+  padding-top: 0;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background: map-get($colors, "white");
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .logoWrapper {
@@ -19,6 +24,7 @@
   box-shadow: map-get($shadows, "box-small");
   border-radius: map-get($spacing, "s");
   margin: map-get($spacing, "l");
+  margin-left: 0;
   display: inline-flex;
 }
 
