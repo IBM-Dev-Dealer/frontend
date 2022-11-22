@@ -1,6 +1,7 @@
 export const ROUTES = {
   DEFAULT_PAGE: '/',
   CURRENT_PROJECT: '/current-project',
+  ADD_PROJECT: '/add-project',
   OTHER_PROJECTS: '/other-projects',
   SOURCE: '/source',
   LOG: '/log',
@@ -14,6 +15,7 @@ export const getPageBackground = (currentRoute) => {
     case ROUTES.DEFAULT_PAGE:
       return 1;
     case ROUTES.CURRENT_PROJECT:
+    case ROUTES.ADD_PROJECT:
       return 2;
     case ROUTES.OTHER_PROJECTS:
       return 3;

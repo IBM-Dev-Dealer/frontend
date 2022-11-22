@@ -15,5 +15,5 @@ const Loader = ({ loading }) => {
 export default Loader;
 
 Loader.defaultProps = {
-  loading: true,
+  loading: false,
 };
