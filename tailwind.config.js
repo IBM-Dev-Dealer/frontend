@@ -21,7 +21,12 @@ module.exports = {
       orangeade: '#e8871e',
       gray: '#ccc',
       'transparent-light-green-50': 'rgb(186, 212, 170, 0.5)',
+      'transparent-mustard-10': 'rgba(237, 180, 88, 0.1)',
+      'transparent-light-green-10': 'rgba(186, 212, 170, 0.10)',
     },
   },
   plugins: [],
+  experimental: {
+    applyComplexClasses: true,
+  },
 };
