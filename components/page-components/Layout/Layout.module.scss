@@ -9,15 +9,19 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background: map-get($colors, "white");
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .logoWrapper {
   padding: map-get($spacing, "xs");
   box-shadow: map-get($shadows, "box-small");
   border-radius: map-get($spacing, "s");
-  margin: map-get($spacing, "l");
+  margin-bottom: map-get($spacing, "l");
   display: inline-block;
 }
 
