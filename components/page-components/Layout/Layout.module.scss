@@ -1,11 +1,13 @@
 @import '../../../styles/colors';
 @import '../../../styles/spacing';
 @import '../../../styles/shadows';
+@import '../../../styles/sizing';
 
 .layout {
   width: 100vw;
   height: 100vh;
   padding: map-get($spacing, "l");
+  padding-top: 0;
 
   display: flex;
   flex-direction: column;
@@ -21,8 +23,9 @@
   padding: map-get($spacing, "xs");
   box-shadow: map-get($shadows, "box-small");
   border-radius: map-get($spacing, "s");
-  margin-bottom: map-get($spacing, "l");
-  display: inline-block;
+  margin: map-get($spacing, "l");
+  margin-left: 0;
+  display: inline-flex;
 }
 
 .nav {
@@ -30,12 +33,11 @@
   align-self: flex-end;
 
   a {
-    // padding: 7px;
     padding: map-get($spacing, "xs");
     margin-left: map-get($spacing, "xs");
-    // border-radius: 5px 5px 0 0;
     border-radius: map-get($spacing, "s") map-get($spacing, "s") 0 0;
     box-shadow: map-get($shadows, "box-small");
+    user-select: none;
   }
 }
 
@@ -43,44 +45,60 @@
   width: 100%;
   height: 100%;
   padding: map-get($spacing, "l");
-  // border-radius: 5px 0 0 0;
-  border-radius: map-get($spacing, "s") 0 0 0;
+  border-radius: map-get($spacing, "s");
+  border-top-right-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: map-get($shadows, "box-small");
 }
 
+.link1 {
+  background: map-get($colors, "green");
+}
+.link2 {
+  background: map-get($colors, "light-green");
+}
+.link3 {
+  background: map-get($colors, "white-green");
+}
+.link4 {
+  background: map-get($colors, "blue");
+}
+.link5 {
+  background: map-get($colors, "light-mustard");
+}
+.link6 {
+  background: map-get($colors, "mustard");
+}
+.link7 {
+  background: map-get($colors, "orangeade");
+}
+.page1 {
+  border: map-get($sizing, "xs") solid map-get($colors, "green");
+}
+.page2 {
+  border: map-get($sizing, "xs") solid map-get($colors, "light-green");
+}
+.page3 {
+  border: map-get($sizing, "xs") solid map-get($colors, "white-green");
+}
+.page4 {
+  border: map-get($sizing, "xs") solid map-get($colors, "blue");
+}
+.page5 {
+  border: map-get($sizing, "xs") solid map-get($colors, "light-mustard");
+}
+.page6 {
+  border: map-get($sizing, "xs") solid map-get($colors, "mustard");
+}
+.page7 {
+  border: map-get($sizing, "xs") solid map-get($colors, "orangeade");
+}
 .footer {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding: 10px;
-  // border-radius: 0 0 1rem 1rem;
   border-radius: 0 0 map-get($spacing, "s") map-get($spacing, "s");
-  // box-shadow: 0 1px 4px map-get($colors, "black");
-}
-
-.background1 {
-  background: map-get($colors, "green");
-}
-
-.background2 {
-  background: map-get($colors, "light-green");
-}
-
-.background3 {
-  background: map-get($colors, "white-green");
-}
-
-.background4 {
-  background: map-get($colors, "blue");
-}
-
-.background5 {
-  background: map-get($colors, "light-mustard");
-}
-
-.background6 {
-  background: map-get($colors, "mustard");
-}
-
-.background7 {
-  background: map-get($colors, "orangeade");
+  border-top: none;
 }
