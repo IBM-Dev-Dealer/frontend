@@ -1,6 +1,3 @@
-import Link from "next/link";
-
-import { ROUTES } from "../../../utils/utils";
 import TextInput from "../../atoms/TextInput/TextInput";
 import Title from "../../atoms/Title/Title";
 import { Formik, Form } from "formik";
@@ -18,9 +15,7 @@ const Login = () => {
 
 	return (
 		<>
-			<Title>
-				Login or <Link href={ROUTES.REGISTER}>Register</Link>
-			</Title>
+			<Title>Login or</Title>
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validate}
