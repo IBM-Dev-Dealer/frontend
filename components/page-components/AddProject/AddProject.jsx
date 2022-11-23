@@ -86,6 +86,7 @@ const AddProject = () => {
                       value: slackChannelInputValue,
                       setValue: setSlackChannelInputValue,
                       touch: () => setSlackChannelInputWasTouched(true),
+                      untouch: () => setSlackChannelInputWasTouched(false),
                       wasTouched: slackChannelInputWasTouched,
                     }}
                   />

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './Button.module.scss';
 
-const Button = ({ label, onClick, isLoading, className, type, isSquare }) => {
+const Button = ({ label, onClick, isLoading, disabled, className, type, isSquare }) => {
   return (
     <button
       type={type}
@@ -13,7 +13,7 @@ const Button = ({ label, onClick, isLoading, className, type, isSquare }) => {
       )}
       onClick={onClick}
       onKeyDown={onClick}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
     >
       {isLoading ? 'Loading...' : label}
     </button>

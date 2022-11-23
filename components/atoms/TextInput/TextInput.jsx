@@ -22,6 +22,7 @@ const TextInput = ({
   onChange,
   onKeyDown,
   onFocus,
+  onBlur,
   value,
 
   ...props
@@ -48,6 +49,7 @@ const TextInput = ({
         onKeyDown={onKeyDown}
         value={value}
         onFocus={onFocus}
+        onBlur={onBlur}
         autoComplete='false'
       />
       <label

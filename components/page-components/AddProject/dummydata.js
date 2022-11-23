@@ -1,6 +1,10 @@
-export const DATA_FIELDS_NAMES = ['technology', 'seniorityLevel'];
+export const DATA_FIELDS_NAMES = [
+  { codename: 'technology', label: 'Technology' },
+  { codename: 'seniorityLevel', label: 'Senority Level' },
+];
+
 export const DATA_FIELDS = {
-  [DATA_FIELDS_NAMES[0]]: [
+  [DATA_FIELDS_NAMES[0].codename]: [
     { label: 'JavaScript', codename: 'javascript' },
     { label: 'AngularJS', codename: 'angularjs' },
     { label: 'ReactJS', codename: 'reactjs' },
@@ -10,7 +14,7 @@ export const DATA_FIELDS = {
     { label: 'Kentico', codename: 'kentico' },
     { label: 'Commercetools', codename: 'commercetools' },
   ],
-  [DATA_FIELDS_NAMES[1]]: [
+  [DATA_FIELDS_NAMES[1].codename]: [
     { label: 'Junior', codename: 'junior' },
     { label: 'Junior-Mid', codename: 'junior-mid' },
     { label: 'Mid', codename: 'mid' },
