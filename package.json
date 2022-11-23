@@ -11,11 +11,12 @@
   "dependencies": {
     "@babel/core": "^7.20.2",
     "@babel/eslint-parser": "^7.19.1",
-    "classnames": "^2.3.2",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "@types/next": "^9.0.0",
     "@types/react": "^18.0.25",
+    "babel-preset-next": "^1.4.0",
+    "classnames": "^2.3.2",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "eslint-config-prettier": "^8.5.0",

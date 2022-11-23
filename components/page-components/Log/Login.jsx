@@ -1,18 +1,19 @@
 import TextInput from '../../atoms/TextInput/TextInput';
 import Title from '../../atoms/Title/Title';
 import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import Link from 'next/link';
 import { ROUTES } from '../../../utils/utils';
+
 const Login = () => {
   const initialValues = {
     email: '',
     password: '',
   };
 
-  const validate = Yup.object({
-    email: Yup.string().email('Invalid Email').required('Email field empty'),
-    password: Yup.string().required('Password field empty'),
+  const validate = yup.object({
+    email: yup.string().email('Invalid Email').required('Email field empty'),
+    password: yup.string().required('Password field empty'),
   });
 
   return (
@@ -25,6 +26,7 @@ const Login = () => {
         validationSchema={validate}
         onSubmit={(values) => {
           //   submitHandler(values);
+          console.log('values', values);
         }}
       >
         {(formik) => (
