@@ -26,14 +26,8 @@ const AddProject = () => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
-  const {
-    objectList: technologies,
-    setObjectList: setTechnologies,
-    selectedValue: selectedTechnology,
-    setSelectedValue: setSelectedTechnology,
-    dataFields,
-    setDataFields,
-  } = useObjectListState(DATA_FIELDS_NAMES);
+  const { objectList: technologies, setObjectList: setTechnologies } =
+    useObjectListState(DATA_FIELDS_NAMES);
 
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),
@@ -62,33 +56,36 @@ const AddProject = () => {
             {(formik) => {
               return (
                 <Form>
-                  <StringList
-                    emptyValue='#'
-                    setList={setSlackChannelList}
-                    list={slackChannelList}
-                    name='slackChannels'
-                    textInput={{
-                      label: 'Slack Channels',
-                      id: 'addproject-stringlist',
-                      disabled: false,
-                      name: 'slackChannelName',
-                      value: slackChannelInputValue,
-                      setValue: setSlackChannelInputValue,
-                      touch: () => setSlackChannelInputWasTouched(true),
-                      untouch: () => setSlackChannelInputWasTouched(false),
-                      wasTouched: slackChannelInputWasTouched,
-                    }}
-                  />
+                  <div className='flex flex-col gap-6'>
+                    <StringList
+                      emptyValue='#'
+                      setList={setSlackChannelList}
+                      list={slackChannelList}
+                      name='slackChannels'
+                      textInput={{
+                        label: 'Slack Channels',
+                        id: 'addproject-stringlist',
+                        disabled: false,
+                        name: 'slackChannelName',
+                        value: slackChannelInputValue,
+                        setValue: setSlackChannelInputValue,
+                        touch: () => setSlackChannelInputWasTouched(true),
+                        untouch: () => setSlackChannelInputWasTouched(false),
+                        wasTouched: slackChannelInputWasTouched,
+                      }}
+                    />
 
-                  <ObjectList
-                    setList={setTechnologies}
-                    list={technologies}
-                    name='technologies'
-                    dataFieldsNames={DATA_FIELDS_NAMES}
-                    dataFields={DATA_FIELDS}
-                  />
+                    <ObjectList
+                      setList={setTechnologies}
+                      list={technologies}
+                      name='technologies'
+                      dataFieldsNames={DATA_FIELDS_NAMES}
+                      dataFields={DATA_FIELDS}
+                      label='Add technologies'
+                    />
 
-                  <Button label={'Submit'} type='submit' />
+                    <Button label={'Submit'} type='submit' />
+                  </div>
                 </Form>
               );
             }}

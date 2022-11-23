@@ -4,7 +4,7 @@ import Button from '../../atoms/Button/Button';
 import ColoredItems from '../../atoms/ColoredItems/ColoredItems';
 import Dropdown from '../../atoms/Dropdown/Dropdown';
 
-const ObjectList = ({ setList, list, dataFieldsNames, dataFields }) => {
+const ObjectList = ({ setList, list, dataFieldsNames, dataFields, label }) => {
   const [selection, setSelection] = useState({});
   const [isValid, setIsValid] = useState(false);
 
@@ -16,6 +16,10 @@ const ObjectList = ({ setList, list, dataFieldsNames, dataFields }) => {
     }
   }, [dataFieldsNames.length, selection]);
 
+  useEffect(() => {
+    setSelection({});
+  }, [list]);
+
   const handleSubmit = () => {
     setList((prev) => {
       const newArr = [...prev];
@@ -24,19 +28,17 @@ const ObjectList = ({ setList, list, dataFieldsNames, dataFields }) => {
     });
   };
 
-  const removeEntry = (entry) => {
+  const removeEntry = (entry, index) => {
     setList((prev) => {
-      console.log('list prev', prev);
-      console.log('list entry', entry);
-      //   const newArr = [...prev];
-      //   const index = prev.indexOf(entry);
-      //   newArr.splice(index, 1);
-      return prev;
+      const newArr = [...prev];
+      newArr.splice(index, 1);
+      return newArr;
     });
   };
 
   return (
-    <>
+    <div>
+      <div className='text-sm'>{label}</div>
       <div className='flex gap-2 items-end'>
         {dataFieldsNames.map((field) => (
           <Dropdown
@@ -64,12 +66,12 @@ const ObjectList = ({ setList, list, dataFieldsNames, dataFields }) => {
           items={list.map((item) =>
             Object.keys(item)
               .map((key) => item[key].label)
-              .join('  /  '),
+              .join(' / '),
           )}
           removeItem={removeEntry}
         />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -12,7 +12,7 @@ const ColoredItems = ({ items, removeItem }) => {
         <div className='flex items-center'>
           <XMarkIcon
             className='cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50'
-            onClick={() => removeItem(entry)}
+            onClick={() => removeItem(entry, i)}
           />
         </div>
       </div>
