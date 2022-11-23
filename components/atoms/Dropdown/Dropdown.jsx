@@ -24,7 +24,7 @@ const Dropdown = ({ list, selected, select, placeholder }) => {
         <Menu.Items
           className={`absolute z-10 mt-2 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden w-full`}
         >
-          <div className='py-1'>
+          <div className='py-1 max-h-52 overflow-y-auto'>
             {list &&
               list.map((listItem) => {
                 return (
