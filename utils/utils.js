@@ -30,11 +30,10 @@ export const getTitle = (route) => {
 
 export const classNames = (...classes) => classes.join(' ');
 
-export const colorizeJSXArray = (JSXElements, logged) => {
+export const colorizeJSXArray = (JSXElements) => {
   let i = 0;
   const returned = JSXElements.map((element) => {
     if (!element) return element;
-    if (!logged && ![ROUTES.LOG, ROUTES.REGISTER].includes(element.key)) return null;
     i++;
     if (i === 7) {
       i = 0;
