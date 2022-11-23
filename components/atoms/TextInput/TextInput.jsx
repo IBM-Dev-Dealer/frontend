@@ -30,9 +30,9 @@ const TextInput = ({
   return (
     <div className={containerTailwindClass}>
       <input
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={value}
+        // onChange={onChange}
+        // onKeyDown={onKeyDown}
+        // value={value}
         disabled={disabled}
         className={
           !meta.error || !meta.touched
@@ -43,6 +43,9 @@ const TextInput = ({
         id={id}
         placeholder={placeholder}
         {...field}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        value={value}
         autoComplete='false'
       />
       <label

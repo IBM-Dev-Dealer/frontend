@@ -4,19 +4,29 @@ import Button from '../../atoms/Button/Button';
 import StringList from '../../atoms/StringList/StringList';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
+import { useState } from 'react';
 
 const INITIAL_VALUES = {
   client: '',
   technologies: [],
   repos: [],
+  slackChannelName: '',
   slackChannels: [],
 };
 
 const AddProject = () => {
+  const [slackChannelList, setSlackChannelList] = useState([]);
+  const [slackChannelInputValue, setSlackChannelInputValue] = useState('');
+
   const validate = yup.object({
-    client: yup.string().required('Please enter client name'),
+    client: yup.string().required('Please enter client name.'),
     technologies: yup.array().of(yup.string()).min(1).required(),
     repos: yup.array().of(yup.string()).min(1).required(),
+    slackChannelName: yup
+      .string()
+      .test('channel-name', 'Slack channel name shall not be empty.', () =>
+        slackChannelInputValue.length > 0 ? true : false,
+      ),
     slackChannels: yup.array().of(yup.string()).min(1).required(),
   });
 
@@ -45,8 +55,17 @@ const AddProject = () => {
                   />
                   <Button label={'prezz me'} type='button' />
                   <StringList
+                    setState={setSlackChannelList}
+                    state={slackChannelList}
                     name='slackChannels'
-                    textInput={{ label: 'label', id: 'addproject-stringlist', disabled: false }}
+                    textInput={{
+                      label: 'label',
+                      id: 'addproject-stringlist',
+                      disabled: false,
+                      name: 'slackChannelName',
+                      value: slackChannelInputValue,
+                      setValue: setSlackChannelInputValue,
+                    }}
                   />
                   <Button label={'Submit'} type='submit' />
                 </Form>

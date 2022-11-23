@@ -1,27 +1,30 @@
-import { useState } from 'react';
 import { PlusIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import Button from '../Button/Button';
 import { colorizeJSXArray } from '../../../utils/utils';
 import TextInput from '../TextInput/TextInput';
 
-const StringList = ({ textInput }) => {
-  const [entries, setEntries] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+const StringList = ({ textInput, setState, state }) => {
+  //   const [entries, setEntries] = useState([]);
+  //   const [inputValue, setInputValue] = useState('');
 
   const handleInputContent = () => {
-    console.log('inputValue', inputValue);
+    // console.log('inputValue', inputValue);
 
-    if (inputValue === '') return;
-    setEntries((prev) => {
+    // if (inputValue === '') return;
+    if (textInput.value === '') return;
+    // setEntries((prev) => {
+    setState((prev) => {
       const newArr = [...prev];
-      newArr.push(inputValue);
+      newArr.push(textInput.value);
       return newArr;
     });
-    setInputValue('');
+    // setInputValue('');
+    textInput.setValue('');
   };
 
   const removeEntry = (entry) => {
-    setEntries((prev) => {
+    // setEntries((prev) => {
+    setState((prev) => {
       const newArr = [...prev];
       const index = prev.indexOf(entry);
       newArr.splice(index, 1);
@@ -30,7 +33,7 @@ const StringList = ({ textInput }) => {
   };
 
   const entriesMap = colorizeJSXArray(
-    entries.map((entry, i) => (
+    state.map((entry, i) => (
       <div
         className='bg-light-mustard max-w-full py-2 px-4 rounded-xl flex justify-between gap-2 shadow-sm w-fit'
         key={`${entry}-${i}`}
@@ -64,13 +67,15 @@ const StringList = ({ textInput }) => {
           //   disabled={false}
           //   id={'test-id'}
           //   labelText={'test label'}
-          name='textinput-testname'
+          name={textInput.name}
           placeholder='placeholder'
           type='text'
-          value={inputValue}
+          //   value={inputValue}
+          value={textInput.value}
           onChange={(e) => {
             console.log('e.target.value', e.target.value);
-            setInputValue(e.target.value);
+            // setInputValue(e.target.value);
+            textInput.setValue(e.target.value);
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') handleInputContent();
