@@ -1,0 +1,58 @@
+// @tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "../../../styles/colors";
+.text_input__colors {
+	border-color: map-get($colors, "gray");
+	color: map-get($colors, "black");
+
+	&::placeholder {
+		color: transparent;
+	}
+	&:focus {
+		padding-bottom: 0.3rem;
+		font-weight: 700;
+		border-bottom-width: 4px;
+		border-image: linear-gradient(
+			to right,
+			map-get($colors, "orangeade"),
+			map-get($colors, "red")
+		);
+		border-image-slice: 1;
+	}
+	&:invalid {
+		box-shadow: none;
+	}
+	&:required {
+		box-shadow: none;
+	}
+}
+
+.label__color {
+	color: map-get($colors, "gray");
+}
+
+.form__field:placeholder-shown ~ .form__label {
+	font-size: 1.2rem;
+	cursor: text;
+	top: 40px;
+}
+
+.form__field:focus ~ .form__label {
+	position: absolute;
+	top: 0;
+	display: block;
+	transition: 0.2s;
+	font-size: 1.1rem;
+	color: map-get($colors, "orangeade");
+	font-weight: 700;
+}
+.form__field__error:focus ~ .form__label__error {
+	position: absolute;
+	top: 0;
+	display: block;
+	transition: 0.2s;
+	font-size: 1.1rem;
+	color: map-get($colors, "red");
+	font-weight: 700;
+}
