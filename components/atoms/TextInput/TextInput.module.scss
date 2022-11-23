@@ -1,22 +1,23 @@
-.input_class {
-	width: 100%;
-	border: 0;
-	border-bottom: 3px solid lightgray;
-	outline: 0;
-	font-size: 1.8rem;
-	color: black;
-	padding: 0.7rem 0;
-	background: transparent;
-	transition: border-color 0.2s;
+// @tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "../../../styles/colors";
+.text_input__colors {
+	border-color: map-get($colors, "gray");
+	color: map-get($colors, "black");
 
 	&::placeholder {
 		color: transparent;
 	}
 	&:focus {
-		padding-bottom: 0.6rem;
+		padding-bottom: 0.3rem;
 		font-weight: 700;
-		border-width: 4px;
-		border-image: linear-gradient(to right, #11998e, red);
+		border-bottom-width: 4px;
+		border-image: linear-gradient(
+			to right,
+			map-get($colors, "orangeade"),
+			map-get($colors, "red")
+		);
 		border-image-slice: 1;
 	}
 	&:invalid {
@@ -27,47 +28,14 @@
 	}
 }
 
-.input_label {
-	position: absolute;
-	top: 0;
-	display: block;
-	transition: 0.2s;
-	font-size: 1.5rem;
-	color: lightgray;
-}
-
-.errorTextInput {
-	width: 100%;
-	border: 0;
-	border-bottom: 3px solid lightgray;
-	outline: 0;
-	font-size: 1.8rem;
-	color: black;
-	padding: 0.7rem 0;
-	background: transparent;
-	transition: border-color 0.2s;
-	&::placeholder {
-		color: transparent;
-	}
-	&:focus {
-		padding-bottom: 0.6rem;
-		font-weight: 700;
-		border-width: 4px;
-		border-image: linear-gradient(to right, #11998e, red);
-		border-image-slice: 1;
-	}
-	&:invalid {
-		box-shadow: none;
-	}
-	&:required {
-		box-shadow: none;
-	}
+.label__color {
+	color: map-get($colors, "gray");
 }
 
 .form__field:placeholder-shown ~ .form__label {
-	font-size: 2rem;
+	font-size: 1.2rem;
 	cursor: text;
-	top: 20px;
+	top: 40px;
 }
 
 .form__field:focus ~ .form__label {
@@ -75,8 +43,8 @@
 	top: 0;
 	display: block;
 	transition: 0.2s;
-	font-size: 1.7rem;
-	color: #11998e;
+	font-size: 1.1rem;
+	color: map-get($colors, "orangeade");
 	font-weight: 700;
 }
 .form__field__error:focus ~ .form__label__error {
@@ -84,7 +52,7 @@
 	top: 0;
 	display: block;
 	transition: 0.2s;
-	font-size: 1.7rem;
-	color: red;
+	font-size: 1.1rem;
+	color: map-get($colors, "red");
 	font-weight: 700;
 }

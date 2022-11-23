@@ -2,9 +2,9 @@ import { ErrorMessage, useField } from "formik";
 import classNames from "classnames";
 import "./TextInput.module.scss";
 import {
-	input_class,
+	text_input__colors,
 	form__field,
-	input_label,
+	label__color,
 	form__label,
 	form__field__error,
 	form__label__error,
@@ -20,17 +20,25 @@ const TextInput = ({
 }) => {
 	const [field, meta] = useField(props);
 
-	// const date = new Date();
+	const containerTailwindClass = "pt-4 w-full mt-2.5 relative";
+	const inputTailwindClass =
+		"w-full border-0 border-b-4 outline-0 text-base py-3.5 px-0 bg-transparent transition-colors";
+	const labelTailwindClass = "absolute top-0 block text-sm transition-all";
+
 	return (
-		<div className="pt-4 w-4/5 mt-2.5 relative">
+		<div className={containerTailwindClass}>
 			<input
 				disabled={disabled}
 				className={
 					!meta.error || !meta.touched
-						? classNames(input_class, form__field)
-						: classNames(input_class, form__field, form__field__error)
+						? classNames(inputTailwindClass, text_input__colors, form__field)
+						: classNames(
+								inputTailwindClass,
+								text_input__colors,
+								form__field,
+								form__field__error
+						  )
 				}
-				// max={props.type === "date" ? moment(date).format("YYYY-MM-DD") : ""}  <-is left here just in case i want to block some dates
 				type={props.type}
 				id={id}
 				placeholder={placeholder}
@@ -40,8 +48,13 @@ const TextInput = ({
 			<label
 				className={
 					!meta.error || !meta.touched
-						? classNames(input_label, form__label)
-						: classNames(input_label, form__label, form__label__error)
+						? classNames(labelTailwindClass, label__color, form__label)
+						: classNames(
+								labelTailwindClass,
+								label__color,
+								form__label,
+								form__label__error
+						  )
 				}
 				htmlFor={id}
 			>
