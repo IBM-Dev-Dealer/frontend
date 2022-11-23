@@ -28,34 +28,9 @@ const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
     });
   };
 
-  // const entriesMap = colorizeJSXArray(
-  //   list.map((entry, i) => (
-  //     <div
-  //       className='bg-light-mustard max-w-full py-2 px-4 rounded-xl flex justify-between gap-2 shadow-sm w-fit'
-  //       key={`${entry}-${i}`}
-  //     >
-  //       <div className='break-words text-sm flex items-center'>{entry}</div>
-  //       <div className='flex items-center'>
-  //         <XMarkIcon
-  //           className='cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50'
-  //           onClick={() => removeEntry(entry)}
-  //         />
-  //       </div>
-  //     </div>
-  //   )),
-  // );
-
   return (
     <>
       <div className='flex gap-2 items-end'>
-        {/* <input
-          className='w-full border-solid border-2 border-gray my-2 px-2'
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') handleInputContent();
-          }}
-        /> */}
         <TextInput
           disabled={textInput.disabled}
           id={textInput.id}
@@ -80,7 +55,6 @@ const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
         />
       </div>
 
-      {/* <div className='flex gap-4 flex-wrap my-2'>{entriesMap}</div> */}
       <div className='flex gap-4 flex-wrap my-2'>
         <ColoredItems items={list} removeItem={removeEntry} />
       </div>
