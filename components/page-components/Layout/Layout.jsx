@@ -54,7 +54,7 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
   const colorIndex = selectedLink?.props.className.split('Bg')[1];
 
   return (
-    <>
+    <div className='flex h-fit'>
       <Head>
         <title>{title}</title>
       </Head>
@@ -69,7 +69,7 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
           <footer className={styles.footer}>© 2022 Decât o echipă</footer>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

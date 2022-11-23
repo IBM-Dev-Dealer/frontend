@@ -11,7 +11,7 @@
 
   display: flex;
   flex-direction: column;
-  @apply bg-transparent-light-green-10;
+  @apply bg-transparent-light-green-10 h-fit;
 }
 
 .header {
@@ -58,4 +58,5 @@
   justify-content: flex-end;
   border-radius: 0 0 map-get($spacing, "s") map-get($spacing, "s");
   border-top: none;
+  @apply mt-6;
 }
