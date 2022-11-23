@@ -4,7 +4,8 @@ import Button from '../../atoms/Button/Button';
 import StringList from '../../atoms/StringList/StringList';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
-import { useState } from 'react';
+import { useStringListState } from '../../atoms/StringList/useStringListState';
+import { useEffect } from 'react';
 
 const INITIAL_VALUES = {
   client: '',
@@ -15,8 +16,16 @@ const INITIAL_VALUES = {
 };
 
 const AddProject = () => {
-  const [slackChannelList, setSlackChannelList] = useState([]);
-  const [slackChannelInputValue, setSlackChannelInputValue] = useState('');
+  const {
+    stringList: slackChannelList,
+    setStringList: setSlackChannelList,
+    stringInputValue: slackChannelInputValue,
+    setStringInputValue: setSlackChannelInputValue,
+  } = useStringListState();
+
+  useEffect(() => {
+    if (slackChannelInputValue === '') setSlackChannelInputValue('#');
+  }, [slackChannelInputValue, setSlackChannelInputValue]);
 
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),

@@ -29,7 +29,7 @@ const StringList = ({ textInput, setList, list }) => {
         className='bg-light-mustard max-w-full py-2 px-4 rounded-xl flex justify-between gap-2 shadow-sm w-fit'
         key={`${entry}-${i}`}
       >
-        <div className='break-words overflow-clip'>{entry}</div>
+        <div className='break-words overflow-clip text-sm flex items-center'>{entry}</div>
         <div className='flex items-center'>
           <XMarkIcon
             className='cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50'
@@ -60,7 +60,6 @@ const StringList = ({ textInput, setList, list }) => {
           type='text'
           value={textInput.value}
           onChange={(e) => {
-            console.log('e.target.value', e.target.value);
             textInput.setValue(e.target.value);
           }}
           onKeyDown={(e) => {

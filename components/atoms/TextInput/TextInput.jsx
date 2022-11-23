@@ -9,12 +9,9 @@ import {
   text_input__colors,
 } from './TextInput.module.scss';
 
-// const containerTailwindClass = 'pt-4 w-full mt-2.5 relative';
 const containerTailwindClass = 'pt-8 w-full relative';
 const inputTailwindClass =
-  // 'bg-light-green w-full border-0 border-b-4 outline-0 text-base py-3.5 px-0 bg-transparent transition-colors';
-  ' w-full border-b-2 border-orangeade outline-0 text-base pb-4 px-0 bg-transparent transition-colors transition-all text-sm';
-// const labelTailwindClass = 'absolute top-0 block text-sm transition-all';
+  ' w-full border-b-2 border-orangeade outline-0 text-sm pb-4 px-0 bg-transparent transition-colors transition-all text-sm';
 const labelTailwindClass = 'absolute top-0 block text-sm transition-all';
 
 const TextInput = ({
