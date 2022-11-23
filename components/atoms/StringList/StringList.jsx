@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { PlusIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import Button from '../Button/Button';
 import { colorizeJSXArray } from '../../../utils/utils';
+import TextInput from '../TextInput/TextInput';
 
-const StringList = () => {
+const StringList = ({ textInput }) => {
   const [entries, setEntries] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
@@ -46,13 +47,29 @@ const StringList = () => {
   return (
     <>
       <div className='w-100 flex gap-2'>
-        <input
+        {/* <input
           className='w-full border-solid border-2 border-gray my-2 px-2'
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') handleInputContent();
           }}
+        /> */}
+        <TextInput
+          //   disabled={textInput.disabled}
+          //   id={textInput.id}
+          //   labelText={textInput.label}
+          disabled={false}
+          id={'test-id'}
+          labelText={'test label'}
+          name='textinput-testname'
+          placeholder='placeholder'
+          type='text'
+          //   value={inputValue}
+          //   onChange={(e) => setInputValue(e.target.value)}
+          //   onKeyDown={(e) => {
+          //     if (e.key === 'Enter') handleInputContent();
+          //   }}
         />
         <Button
           label={<PlusIcon className='w-6 h-6' />}

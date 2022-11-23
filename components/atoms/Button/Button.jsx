@@ -1,4 +1,4 @@
-import { classNames } from '../../../utils/utils';
+import classNames from 'classnames';
 import styles from './Button.module.scss';
 
 const Button = ({ label, onClick, isLoading, className }) => {

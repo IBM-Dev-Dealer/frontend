@@ -15,7 +15,7 @@ const AddProject = () => {
         ]}
       />
       <Button label={'prezz me'} />
-      <StringList />
+      <StringList textInput={{ label: 'label', id: 'addproject-stringlist', disabled: false }} />
     </div>
   );
 };

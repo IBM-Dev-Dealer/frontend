@@ -2,7 +2,7 @@
 import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { classNames } from '../../../utils/utils';
+import classNames from 'classnames';
 
 const Dropdown = ({ list, listPosition, value }) => {
   const [selectedItem, setSelectedItem] = useState(value ?? null);
