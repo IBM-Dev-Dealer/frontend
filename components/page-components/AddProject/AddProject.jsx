@@ -66,6 +66,7 @@ const AddProject = () => {
                   />
                   <Button label={'prezz me'} type='button' />
                   <StringList
+                    emptyValue='#'
                     setList={setSlackChannelList}
                     list={slackChannelList}
                     name='slackChannels'
