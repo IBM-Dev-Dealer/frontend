@@ -37,12 +37,12 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
           </Link>
         ) : null,
         <Link href={ROUTES.LOG} key={ROUTES.LOG}>
-          {logged ? 'Logout' : 'Login'}
+          Logout
         </Link>,
       ]
     : [
         <Link href={ROUTES.LOG} key={ROUTES.LOG}>
-          {logged ? 'Logout' : 'Login'}
+          Login
         </Link>,
         <Link href={ROUTES.REGISTER} key={ROUTES.REGISTER}>
           Register
