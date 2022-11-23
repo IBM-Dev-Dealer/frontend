@@ -21,6 +21,7 @@ const TextInput = ({
   disabled,
   onChange,
   onKeyDown,
+  onFocus,
   value,
 
   ...props
@@ -46,6 +47,7 @@ const TextInput = ({
         onChange={onChange}
         onKeyDown={onKeyDown}
         value={value}
+        onFocus={onFocus}
         autoComplete='false'
       />
       <label

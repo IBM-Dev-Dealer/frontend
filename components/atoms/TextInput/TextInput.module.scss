@@ -12,7 +12,7 @@
 	&:focus {
 		// padding-bottom: 0.3rem;
 		// font-weight: 700;
-		border-bottom-width: 4px;
+		@apply border-b-2;
 		border-image: linear-gradient(
 			to right,
 			map-get($colors, "orangeade"),

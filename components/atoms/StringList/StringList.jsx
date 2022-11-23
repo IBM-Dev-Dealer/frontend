@@ -65,6 +65,7 @@ const StringList = ({ textInput, setList, list }) => {
           onKeyDown={(e) => {
             if (e.key === 'Enter') handleInputContent();
           }}
+          onFocus={textInput.touch}
         />
         <Button
           label={<PlusIcon className='w-6 h-6' />}

@@ -21,11 +21,14 @@ const AddProject = () => {
     setStringList: setSlackChannelList,
     stringInputValue: slackChannelInputValue,
     setStringInputValue: setSlackChannelInputValue,
+    inputWasTouched: slackChannelInputWasTouched,
+    setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
   useEffect(() => {
-    if (slackChannelInputValue === '') setSlackChannelInputValue('#');
-  }, [slackChannelInputValue, setSlackChannelInputValue]);
+    if (slackChannelInputValue === '' && slackChannelInputWasTouched === true)
+      setSlackChannelInputValue('#');
+  }, [slackChannelInputValue, setSlackChannelInputValue, slackChannelInputWasTouched]);
 
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),
@@ -73,6 +76,7 @@ const AddProject = () => {
                       name: 'slackChannelName',
                       value: slackChannelInputValue,
                       setValue: setSlackChannelInputValue,
+                      touch: () => setSlackChannelInputWasTouched(true),
                     }}
                   />
                   <Button label={'Submit'} type='submit' />
