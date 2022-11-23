@@ -5,6 +5,8 @@ import StringList from '../../molecules/StringList/StringList';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useStringListState } from '../../molecules/StringList/useStringListState';
+import ObjectList from '../../molecules/ObjectList/ObjectList';
+import { useObjectListState } from '../../molecules/ObjectList/useObjectListState';
 
 const INITIAL_VALUES = {
   client: '',
@@ -24,10 +26,12 @@ const AddProject = () => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
-  // useEffect(() => {
-  //   if (slackChannelInputValue === '' && slackChannelInputWasTouched === true)
-  //     setSlackChannelInputValue('#');
-  // }, [slackChannelInputValue, setSlackChannelInputValue, slackChannelInputWasTouched]);
+  const {
+    objectList: technologies,
+    setObjectList: setTechnologies,
+    selectedValue: selectedTechnology,
+    setSelectedValue: setSelectedTechnolofy,
+  } = useObjectListState();
 
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),
@@ -80,6 +84,7 @@ const AddProject = () => {
                       wasTouched: slackChannelInputWasTouched,
                     }}
                   />
+                  <ObjectList setList={setSlackChannelList} />
                   <Button label={'Submit'} type='submit' />
                 </Form>
               );
