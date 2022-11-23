@@ -3,28 +3,19 @@ import Button from '../Button/Button';
 import { colorizeJSXArray } from '../../../utils/utils';
 import TextInput from '../TextInput/TextInput';
 
-const StringList = ({ textInput, setState, state }) => {
-  //   const [entries, setEntries] = useState([]);
-  //   const [inputValue, setInputValue] = useState('');
-
+const StringList = ({ textInput, setList, list }) => {
   const handleInputContent = () => {
-    // console.log('inputValue', inputValue);
-
-    // if (inputValue === '') return;
     if (textInput.value === '') return;
-    // setEntries((prev) => {
-    setState((prev) => {
+    setList((prev) => {
       const newArr = [...prev];
       newArr.push(textInput.value);
       return newArr;
     });
-    // setInputValue('');
     textInput.setValue('');
   };
 
   const removeEntry = (entry) => {
-    // setEntries((prev) => {
-    setState((prev) => {
+    setList((prev) => {
       const newArr = [...prev];
       const index = prev.indexOf(entry);
       newArr.splice(index, 1);
@@ -33,7 +24,7 @@ const StringList = ({ textInput, setState, state }) => {
   };
 
   const entriesMap = colorizeJSXArray(
-    state.map((entry, i) => (
+    list.map((entry, i) => (
       <div
         className='bg-light-mustard max-w-full py-2 px-4 rounded-xl flex justify-between gap-2 shadow-sm w-fit'
         key={`${entry}-${i}`}
@@ -64,17 +55,12 @@ const StringList = ({ textInput, setState, state }) => {
           disabled={textInput.disabled}
           id={textInput.id}
           labelText={textInput.label}
-          //   disabled={false}
-          //   id={'test-id'}
-          //   labelText={'test label'}
           name={textInput.name}
           placeholder='placeholder'
           type='text'
-          //   value={inputValue}
           value={textInput.value}
           onChange={(e) => {
             console.log('e.target.value', e.target.value);
-            // setInputValue(e.target.value);
             textInput.setValue(e.target.value);
           }}
           onKeyDown={(e) => {

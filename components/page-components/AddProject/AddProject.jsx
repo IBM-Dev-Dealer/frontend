@@ -55,8 +55,8 @@ const AddProject = () => {
                   />
                   <Button label={'prezz me'} type='button' />
                   <StringList
-                    setState={setSlackChannelList}
-                    state={slackChannelList}
+                    setList={setSlackChannelList}
+                    list={slackChannelList}
                     name='slackChannels'
                     textInput={{
                       label: 'label',
