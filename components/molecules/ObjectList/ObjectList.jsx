@@ -1,10 +1,10 @@
 import { PlusIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
 import Button from '../../atoms/Button/Button';
 import ColoredItems from '../../atoms/ColoredItems/ColoredItems';
+import Dropdown from '../../atoms/Dropdown/Dropdown';
 
-const ObjectList = () => {
-  const [list, setList] = useState([]);
+const ObjectList = ({ setList, list, dataFieldsNames, dataFields }) => {
+  console.log(dataFields);
   return (
     <>
       <div className='flex gap-2 items-end'>
@@ -24,6 +24,9 @@ const ObjectList = () => {
           }}
           onFocus={textInput.touch}
         /> */}
+        {dataFieldsNames.map((field) => (
+          <Dropdown list={dataFields[field]} key={field} />
+        ))}
         <Button
           label={<PlusIcon className='w-6 h-6' />}
           //   onClick={handleInputContent}

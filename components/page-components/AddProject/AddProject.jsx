@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import { useStringListState } from '../../molecules/StringList/useStringListState';
 import ObjectList from '../../molecules/ObjectList/ObjectList';
 import { useObjectListState } from '../../molecules/ObjectList/useObjectListState';
+import { DATA_FIELDS, DATA_FIELDS_NAMES } from './dummydata';
 
 const INITIAL_VALUES = {
   client: '',
@@ -30,12 +31,14 @@ const AddProject = () => {
     objectList: technologies,
     setObjectList: setTechnologies,
     selectedValue: selectedTechnology,
-    setSelectedValue: setSelectedTechnolofy,
-  } = useObjectListState();
+    setSelectedValue: setSelectedTechnology,
+    dataFields,
+    setDataFields,
+  } = useObjectListState(DATA_FIELDS_NAMES);
 
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),
-    technologies: yup.array().of(yup.string()).min(1).required(),
+    technologies: yup.array().of(yup.object()),
     repos: yup.array().of(yup.string()).min(1).required(),
     slackChannelName: yup.string(),
     // .test('channel-name', 'Slack channel name shall not be empty.', () =>
@@ -67,7 +70,9 @@ const AddProject = () => {
                       { label: 'item3', value: '#item3' },
                     ]}
                   />
+
                   <Button label={'prezz me'} type='button' />
+
                   <StringList
                     emptyValue='#'
                     setList={setSlackChannelList}
@@ -84,7 +89,15 @@ const AddProject = () => {
                       wasTouched: slackChannelInputWasTouched,
                     }}
                   />
-                  <ObjectList setList={setSlackChannelList} />
+
+                  <ObjectList
+                    setList={setTechnologies}
+                    list={technologies}
+                    name='technologies'
+                    dataFieldsNames={DATA_FIELDS_NAMES}
+                    dataFields={DATA_FIELDS}
+                  />
+
                   <Button label={'Submit'} type='submit' />
                 </Form>
               );
