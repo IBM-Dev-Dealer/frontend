@@ -25,29 +25,30 @@ const Dropdown = ({ list, selected, select, placeholder }) => {
           className={`absolute z-10 mt-2 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden w-full`}
         >
           <div className='py-1'>
-            {list.map((listItem) => {
-              return (
-                <Menu.Item as='div' key={listItem.label} className='overflow-hidden'>
-                  {({ active }) => (
-                    <div
-                      role='presentation'
-                      onClick={() => {
-                        select(listItem);
-                      }}
-                      onKeyDown={() => {
-                        select(listItem);
-                      }}
-                      className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm hover:bg-transparent-light-green-50 cursor-pointer overflow-hidden',
-                      )}
-                    >
-                      {listItem.label}
-                    </div>
-                  )}
-                </Menu.Item>
-              );
-            })}
+            {list &&
+              list.map((listItem) => {
+                return (
+                  <Menu.Item as='div' key={listItem.label} className='overflow-hidden'>
+                    {({ active }) => (
+                      <div
+                        role='presentation'
+                        onClick={() => {
+                          select(listItem);
+                        }}
+                        onKeyDown={() => {
+                          select(listItem);
+                        }}
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm hover:bg-transparent-light-green-50 cursor-pointer overflow-hidden',
+                        )}
+                      >
+                        {listItem.label}
+                      </div>
+                    )}
+                  </Menu.Item>
+                );
+              })}
           </div>
         </Menu.Items>
       </Transition>

@@ -1,16 +1,27 @@
 import { PlusIcon } from '@heroicons/react/20/solid';
 import Button from '../../atoms/Button/Button';
 import TextInput from '../../atoms/TextInput/TextInput';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ColoredItems from '../../atoms/ColoredItems/ColoredItems';
 
 const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
+  const [disabled, setDisabled] = useState(true);
+
   useEffect(() => {
-    if (textInput.value === '' && textInput.wasTouched === true) textInput.setValue(emptyValue);
+    if (textInput.value === '' || textInput.value === emptyValue) {
+      if (textInput.value === emptyValue) {
+        setDisabled(true);
+      } else setDisabled(false);
+
+      if (textInput.wasTouched === true) {
+        textInput.setValue(emptyValue);
+      } else {
+        setDisabled(true);
+      }
+    } else setDisabled(false);
   }, [textInput, emptyValue]);
 
   const handleInputContent = () => {
-    if (textInput.value === emptyValue) return;
     setList((prev) => {
       const newArr = [...prev];
       newArr.push(textInput.value);
@@ -47,8 +58,11 @@ const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
           }}
           onFocus={textInput.touch}
           onBlur={() => {
-            textInput.setValue('');
-            textInput.untouch();
+            setDisabled(false);
+            if (textInput.value === emptyValue) {
+              textInput.setValue('');
+              textInput.untouch();
+            }
           }}
         />
         <Button
@@ -56,6 +70,7 @@ const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
           onClick={handleInputContent}
           type='button'
           isSquare={true}
+          disabled={disabled}
         />
       </div>
 

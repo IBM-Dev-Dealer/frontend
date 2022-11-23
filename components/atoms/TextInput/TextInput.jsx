@@ -9,7 +9,7 @@ import {
   text_input__colors,
 } from './TextInput.module.scss';
 
-const containerTailwindClass = 'pt-8 w-full relative';
+const containerTailwindClass = 'pt-8 w-full relative my-2';
 const inputTailwindClass =
   ' w-full border-b-2 border-orangeade outline-0 text-sm pb-4 px-0 bg-transparent transition-colors transition-all text-sm';
 const labelTailwindClass = 'absolute top-0 block text-sm transition-all';

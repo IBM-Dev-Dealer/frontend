@@ -6,11 +6,18 @@ import * as yup from 'yup';
 import { useStringListState } from '../../molecules/StringList/useStringListState';
 import ObjectList from '../../molecules/ObjectList/ObjectList';
 import { useObjectListState } from '../../molecules/ObjectList/useObjectListState';
-import { DATA_FIELDS, DATA_FIELDS_NAMES } from './dummydata';
+import {
+  CAPACITY_DATA_FIELDS,
+  CAPACITY_DATA_FIELDS_NAMES,
+  SENORITY_LEVELS,
+  TECHNOLOGIES_DATA_FIELDS,
+  TECHNOLOGIES_DATA_FIELDS_NAMES,
+} from './dummydata';
 
 const INITIAL_VALUES = {
   client: '',
   technologies: [],
+  requiredCapacity: [],
   repos: [],
   slackChannelName: '',
   slackChannels: [],
@@ -26,8 +33,12 @@ const AddProject = () => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
-  const { objectList: technologies, setObjectList: setTechnologies } =
-    useObjectListState(DATA_FIELDS_NAMES);
+  const { objectList: technologies, setObjectList: setTechnologies } = useObjectListState(
+    TECHNOLOGIES_DATA_FIELDS_NAMES,
+  );
+
+  const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } =
+    useObjectListState(SENORITY_LEVELS);
 
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),
@@ -79,9 +90,18 @@ const AddProject = () => {
                       setList={setTechnologies}
                       list={technologies}
                       name='technologies'
-                      dataFieldsNames={DATA_FIELDS_NAMES}
-                      dataFields={DATA_FIELDS}
+                      dataFieldsNames={TECHNOLOGIES_DATA_FIELDS_NAMES}
+                      dataFields={TECHNOLOGIES_DATA_FIELDS}
                       label='Add technologies'
+                    />
+
+                    <ObjectList
+                      setList={setRequiredCapacity}
+                      list={requiredCapacity}
+                      name='requiredCapacity'
+                      dataFieldsNames={CAPACITY_DATA_FIELDS_NAMES}
+                      dataFields={CAPACITY_DATA_FIELDS}
+                      label='Add required capacity'
                     />
 
                     <Button label={'Submit'} type='submit' />
