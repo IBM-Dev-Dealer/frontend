@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from '../../atoms/Button/Button';
-import Loader from '../../atoms/Loader/Loader';
 import Title from '../../atoms/Title/Title';
 
 const Home = () => {
@@ -9,7 +8,6 @@ const Home = () => {
   return (
     <>
       <Title>Home</Title>
-      <Loader loading={isLoading} />
       <Button
         isLoading={isLoading}
         label='Label'

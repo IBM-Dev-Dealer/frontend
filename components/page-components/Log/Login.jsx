@@ -2,6 +2,8 @@ import TextInput from '../../atoms/TextInput/TextInput';
 import Title from '../../atoms/Title/Title';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
+import Link from 'next/link';
+import { ROUTES } from '../../../utils/utils';
 
 const Login = () => {
   const initialValues = {
@@ -16,7 +18,9 @@ const Login = () => {
 
   return (
     <>
-      <Title>Login or</Title>
+      <Title>
+        Login or <Link href={ROUTES.REGISTER}>Register</Link>
+      </Title>
       <Formik
         initialValues={initialValues}
         validationSchema={validate}

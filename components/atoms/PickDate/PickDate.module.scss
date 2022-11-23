@@ -9,4 +9,5 @@
   padding: map-get($spacing, "s");
   box-shadow: map-get($shadows, "box-small");
   margin: map-get($spacing, "xs") 0;
+  text-align: center;
 }
