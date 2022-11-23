@@ -24,11 +24,6 @@ const AddProject = () => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
-  // useEffect(() => {
-  //   if (slackChannelInputValue === '' && slackChannelInputWasTouched === true)
-  //     setSlackChannelInputValue('#');
-  // }, [slackChannelInputValue, setSlackChannelInputValue, slackChannelInputWasTouched]);
-
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),
     technologies: yup.array().of(yup.string()).min(1).required(),
