@@ -5,7 +5,6 @@ import StringList from '../../molecules/StringList/StringList';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useStringListState } from '../../molecules/StringList/useStringListState';
-import { useEffect } from 'react';
 
 const INITIAL_VALUES = {
   client: '',
@@ -25,10 +24,10 @@ const AddProject = () => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
-  useEffect(() => {
-    if (slackChannelInputValue === '' && slackChannelInputWasTouched === true)
-      setSlackChannelInputValue('#');
-  }, [slackChannelInputValue, setSlackChannelInputValue, slackChannelInputWasTouched]);
+  // useEffect(() => {
+  //   if (slackChannelInputValue === '' && slackChannelInputWasTouched === true)
+  //     setSlackChannelInputValue('#');
+  // }, [slackChannelInputValue, setSlackChannelInputValue, slackChannelInputWasTouched]);
 
   const validate = yup.object({
     client: yup.string().required('Please enter client name.'),
@@ -78,6 +77,7 @@ const AddProject = () => {
                       value: slackChannelInputValue,
                       setValue: setSlackChannelInputValue,
                       touch: () => setSlackChannelInputWasTouched(true),
+                      wasTouched: slackChannelInputWasTouched,
                     }}
                   />
                   <Button label={'Submit'} type='submit' />

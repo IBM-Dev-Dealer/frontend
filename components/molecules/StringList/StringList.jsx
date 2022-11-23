@@ -2,8 +2,13 @@ import { PlusIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import Button from '../../atoms/Button/Button';
 import { colorizeJSXArray } from '../../../utils/utils';
 import TextInput from '../../atoms/TextInput/TextInput';
+import { useEffect } from 'react';
 
 const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
+  useEffect(() => {
+    if (textInput.value === '' && textInput.wasTouched === true) textInput.setValue(emptyValue);
+  }, [textInput, emptyValue]);
+
   const handleInputContent = () => {
     if (textInput.value === emptyValue) return;
     setList((prev) => {
