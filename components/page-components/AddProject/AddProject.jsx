@@ -22,11 +22,10 @@ const AddProject = () => {
     client: yup.string().required('Please enter client name.'),
     technologies: yup.array().of(yup.string()).min(1).required(),
     repos: yup.array().of(yup.string()).min(1).required(),
-    slackChannelName: yup
-      .string()
-      .test('channel-name', 'Slack channel name shall not be empty.', () =>
-        slackChannelInputValue.length > 0 ? true : false,
-      ),
+    slackChannelName: yup.string(),
+    // .test('channel-name', 'Slack channel name shall not be empty.', () =>
+    //   slackChannelInputValue.length > 0 ? true : false,
+    // ),
     slackChannels: yup.array().of(yup.string()).min(1).required(),
   });
 
@@ -59,7 +58,7 @@ const AddProject = () => {
                     list={slackChannelList}
                     name='slackChannels'
                     textInput={{
-                      label: 'label',
+                      label: 'Slack Channels',
                       id: 'addproject-stringlist',
                       disabled: false,
                       name: 'slackChannelName',

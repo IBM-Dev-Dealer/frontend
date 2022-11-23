@@ -42,7 +42,7 @@ const StringList = ({ textInput, setList, list }) => {
 
   return (
     <>
-      <div className='w-100 flex gap-2'>
+      <div className='flex gap-2 items-end'>
         {/* <input
           className='w-full border-solid border-2 border-gray my-2 px-2'
           value={inputValue}
@@ -69,9 +69,9 @@ const StringList = ({ textInput, setList, list }) => {
         />
         <Button
           label={<PlusIcon className='w-6 h-6' />}
-          className='w-fit px-2 py-2'
           onClick={handleInputContent}
           type='button'
+          isSquare={true}
         />
       </div>
 

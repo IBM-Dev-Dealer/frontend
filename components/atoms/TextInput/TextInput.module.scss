@@ -10,8 +10,8 @@
 		color: transparent;
 	}
 	&:focus {
-		padding-bottom: 0.3rem;
-		font-weight: 700;
+		// padding-bottom: 0.3rem;
+		// font-weight: 700;
 		border-bottom-width: 4px;
 		border-image: linear-gradient(
 			to right,
@@ -33,7 +33,7 @@
 }
 
 .form__field:placeholder-shown ~ .form__label {
-	font-size: 1.2rem;
+	// font-size: 1.2rem;
 	cursor: text;
 	top: 40px;
 }
@@ -43,16 +43,16 @@
 	top: 0;
 	display: block;
 	transition: 0.2s;
-	font-size: 1.1rem;
+	// font-size: 1.1rem;
 	color: map-get($colors, "orangeade");
-	font-weight: 700;
+	// font-weight: 700;
 }
 .form__field__error:focus ~ .form__label__error {
 	position: absolute;
 	top: 0;
 	display: block;
 	transition: 0.2s;
-	font-size: 1.1rem;
+	// font-size: 1.1rem;
 	color: map-get($colors, "red");
-	font-weight: 700;
+	// font-weight: 700;
 }
