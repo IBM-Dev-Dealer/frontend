@@ -1,12 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './colors';
 
 /* Box sizing rules */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  @apply ring-orangeade;
+  @apply border-gray;
+  @apply font-sans;
+  @apply transition-all;
+  @apply duration-100;
+  @apply font-medium;
+  @apply text-base;
 }
 
 /* Remove default margin */
@@ -77,3 +85,18 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+.mainColorBg1 { @apply bg-light-mustard }
+.mainColorBg2 { @apply bg-green }
+.mainColorBg3 { @apply bg-light-green }
+.mainColorBg4 { @apply bg-white-green }
+.mainColorBg5 { @apply bg-blue }
+.mainColorBg6 { @apply bg-mustard }
+.mainColorBg7 { @apply bg-orangeade }
+.mainColorBorder1 { @apply border-light-mustard border-8 }
+.mainColorBorder2 { @apply border-green border-8 }
+.mainColorBorder3 { @apply border-light-green border-8 }
+.mainColorBorder4 { @apply border-white-green border-8 }
+.mainColorBorder5 { @apply border-blue border-8 }
+.mainColorBorder6 { @apply border-mustard border-8 }
+.mainColorBorder7 { @apply border-orangeade border-8 }

@@ -10,29 +10,6 @@ export const ROUTES = {
   MANAGE_EMPLOYEES: '/manage-employees',
 };
 
-export const getPageBackground = (currentRoute) => {
-  switch (currentRoute) {
-    case ROUTES.DEFAULT_PAGE:
-      return 1;
-    case ROUTES.CURRENT_PROJECT:
-    case ROUTES.ADD_PROJECT:
-      return 2;
-    case ROUTES.OTHER_PROJECTS:
-      return 3;
-    case ROUTES.SOURCE:
-      return 4;
-    case ROUTES.PROFILE:
-      return 5;
-    case ROUTES.MANAGE_EMPLOYEES:
-      return 6;
-    case ROUTES.LOG:
-    case ROUTES.REGISTER:
-      return 7;
-    default:
-      return;
-  }
-};
-
 export const getTitle = (route) => {
   let newRoute = route;
 
@@ -49,4 +26,27 @@ export const getTitle = (route) => {
   }
 
   return `IBM Dev Dealer${newRoute}`;
+};
+
+export const classNames = (...classes) => classes.join(' ');
+
+export const colorizeJSXArray = (JSXElements) => {
+  let i = 0;
+  const returned = JSXElements.map((element) => {
+    if (!element) return element;
+    i++;
+    if (i === 7) {
+      i = 0;
+    }
+    return {
+      ...element,
+      props: {
+        ...element.props,
+        className: element.props.className
+          ? `${element.props.className} mainColorBg${i + 1}`
+          : `mainColorBg${i + 1}`,
+      },
+    };
+  });
+  return returned.filter((el) => el);
 };
