@@ -49,7 +49,7 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
         </Link>,
       ];
 
-  const navLinksColorized = colorizeJSXArray(navLinks, logged);
+  const navLinksColorized = colorizeJSXArray(navLinks);
   const selectedLink = navLinksColorized.find((link) => link.props.href === pathname);
   const colorIndex = selectedLink?.props.className.split('Bg')[1];
 
