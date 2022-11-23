@@ -9,6 +9,8 @@ const StringList = ({ textInput }) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputContent = () => {
+    console.log('inputValue', inputValue);
+
     if (inputValue === '') return;
     setEntries((prev) => {
       const newArr = [...prev];
@@ -56,25 +58,29 @@ const StringList = ({ textInput }) => {
           }}
         /> */}
         <TextInput
-          //   disabled={textInput.disabled}
-          //   id={textInput.id}
-          //   labelText={textInput.label}
-          disabled={false}
-          id={'test-id'}
-          labelText={'test label'}
+          disabled={textInput.disabled}
+          id={textInput.id}
+          labelText={textInput.label}
+          //   disabled={false}
+          //   id={'test-id'}
+          //   labelText={'test label'}
           name='textinput-testname'
           placeholder='placeholder'
           type='text'
-          //   value={inputValue}
-          //   onChange={(e) => setInputValue(e.target.value)}
-          //   onKeyDown={(e) => {
-          //     if (e.key === 'Enter') handleInputContent();
-          //   }}
+          value={inputValue}
+          onChange={(e) => {
+            console.log('e.target.value', e.target.value);
+            setInputValue(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') handleInputContent();
+          }}
         />
         <Button
           label={<PlusIcon className='w-6 h-6' />}
           className='w-fit px-2 py-2'
           onClick={handleInputContent}
+          type='button'
         />
       </div>
 

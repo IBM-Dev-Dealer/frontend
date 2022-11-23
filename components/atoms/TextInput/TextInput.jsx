@@ -14,6 +14,9 @@ const TextInput = ({
   labelText,
   id,
   disabled,
+  onChange,
+  onKeyDown,
+  value,
 
   ...props
 }) => {
@@ -27,6 +30,9 @@ const TextInput = ({
   return (
     <div className={containerTailwindClass}>
       <input
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        value={value}
         disabled={disabled}
         className={
           !meta.error || !meta.touched
