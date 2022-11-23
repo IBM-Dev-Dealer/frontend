@@ -36,6 +36,9 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
             Manage Employees
           </Link>
         ) : null,
+        <Link href={ROUTES.LOG} key={ROUTES.LOG}>
+          {logged ? 'Logout' : 'Login'}
+        </Link>,
       ]
     : [
         <Link href={ROUTES.LOG} key={ROUTES.LOG}>
