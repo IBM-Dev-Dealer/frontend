@@ -1,10 +1,10 @@
 import Dropdown from '../../atoms/Dropdown/Dropdown';
 import Title from '../../atoms/Title/Title';
 import Button from '../../atoms/Button/Button';
-import StringList from '../../atoms/StringList/StringList';
+import StringList from '../../molecules/StringList/StringList';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
-import { useStringListState } from '../../atoms/StringList/useStringListState';
+import { useStringListState } from '../../molecules/StringList/useStringListState';
 import { useEffect } from 'react';
 
 const INITIAL_VALUES = {

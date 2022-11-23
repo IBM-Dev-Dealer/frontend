@@ -1,7 +1,7 @@
 import { PlusIcon, XMarkIcon } from '@heroicons/react/20/solid';
-import Button from '../Button/Button';
+import Button from '../../atoms/Button/Button';
 import { colorizeJSXArray } from '../../../utils/utils';
-import TextInput from '../TextInput/TextInput';
+import TextInput from '../../atoms/TextInput/TextInput';
 
 const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
   const handleInputContent = () => {
