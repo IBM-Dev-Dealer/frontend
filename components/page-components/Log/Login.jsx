@@ -1,7 +1,7 @@
 import TextInput from '../../atoms/TextInput/TextInput';
 import Title from '../../atoms/Title/Title';
 import { Form, Formik } from 'formik';
-import yup from 'yup';
+import * as yup from 'yup';
 
 const Login = () => {
   const initialValues = {
