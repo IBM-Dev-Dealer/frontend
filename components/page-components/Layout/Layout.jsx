@@ -1,12 +1,13 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Error from '../Error/Error';
 import { useRouter } from 'next/router';
 
 import { ROUTES, colorizeJSXArray, getTitle } from '../../../utils/utils';
 
 import styles from './Layout.module.scss';
 
-const Layout = ({ logged = false, isPM = false, children }) => {
+const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pathname } = useRouter();
   const title = getTitle(pathname);
 
@@ -26,11 +27,9 @@ const Layout = ({ logged = false, isPM = false, children }) => {
     <Link href={ROUTES.SOURCE} key={ROUTES.SOURCE}>
       Source
     </Link>,
-    logged ? (
-      <Link href={ROUTES.PROFILE} key={ROUTES.PROFILE}>
-        Profile
-      </Link>
-    ) : null,
+    <Link href={ROUTES.PROFILE} key={ROUTES.PROFILE}>
+      Profile
+    </Link>,
     isPM ? (
       <Link href={ROUTES.MANAGE_EMPLOYEES} key={ROUTES.MANAGE_EMPLOYEES}>
         Manage Employees
@@ -41,9 +40,9 @@ const Layout = ({ logged = false, isPM = false, children }) => {
     </Link>,
   ];
 
-  const navLinksColorized = colorizeJSXArray(navLinks);
+  const navLinksColorized = colorizeJSXArray(navLinks, logged);
   const selectedLink = navLinksColorized.find((link) => link.props.href === pathname);
-  const colorIndex = selectedLink.props.className.split('Bg')[1];
+  const colorIndex = selectedLink?.props.className.split('Bg')[1];
 
   return (
     <>
@@ -57,7 +56,7 @@ const Layout = ({ logged = false, isPM = false, children }) => {
         </header>
 
         <div className={`${styles.wrapper} mainColorBorder${colorIndex}`}>
-          <div>{children}</div>
+          {error ? <Error error={error} /> : <div>{children}</div>}
           <footer className={styles.footer}>© 2022 Decât o echipă</footer>
         </div>
       </div>

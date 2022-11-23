@@ -1,7 +1,7 @@
 import Login from '../components/page-components/Log/Login';
 
-const LogPage = ({ isLogged = true, logout = () => {} }) => {
-  return isLogged ? <Login /> : logout();
+const LogPage = ({ logged, logout = () => {} }) => {
+  return logged ? logout() : <Login />;
 };
 
 export default LogPage;
