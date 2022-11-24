@@ -4,7 +4,7 @@ import Button from "../../atoms/Button/Button";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
 
-const ObjectList = ({ setList, list, dataFields, label }) => {
+const ObjectList = ({ setList, list, dataFields, label, onChange }) => {
   const [selection, setSelection] = useState({});
   const [isValid, setIsValid] = useState(false);
 
@@ -24,6 +24,7 @@ const ObjectList = ({ setList, list, dataFields, label }) => {
     setList((prev) => {
       const newArr = [...prev];
       newArr.push(selection);
+      onChange && onChange(newArr);
       return newArr;
     });
   };
@@ -32,6 +33,7 @@ const ObjectList = ({ setList, list, dataFields, label }) => {
     setList((prev) => {
       const newArr = [...prev];
       newArr.splice(index, 1);
+      onChange && onChange(newArr);
       return newArr;
     });
   };
