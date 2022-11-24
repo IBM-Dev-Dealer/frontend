@@ -1,18 +1,9 @@
-import Carousel from '../../atoms/Carousel/Carousel';
-import Title from '../../atoms/Title/Title';
+import Client from "./Client/Client";
 
-const CurrentProject = () => {
-  // return <div>Current Project</div>;
+const CurrentProject = ({ client }) => {
   return (
     <div>
-      <Title>Current Project</Title>
-      <Carousel
-        elements={[
-          { title: 'title 1', image: 'https://via.placeholder.com/400x400' },
-          { title: 'title 2', image: 'https://via.placeholder.com/500x300' },
-          { title: 'title 3', image: 'https://via.placeholder.com/600x400' },
-        ]}
-      />
+      <Client {...client} />
     </div>
   );
 };
