@@ -8,6 +8,8 @@ import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import { generateNumbers } from "../../../utils/utils";
 import { useMemo } from "react";
+import TextInput from "../../atoms/TextInput/TextInput";
+import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
 
 const INITIAL_VALUES = {
   client: "",
@@ -39,13 +41,13 @@ const AddProject = ({ fields }) => {
     inputWasTouched: slackChannelInputWasTouched,
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
-
   const { objectList: technologies, setObjectList: setTechnologies } = useObjectListState();
-
   const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } = useObjectListState();
+  const { stringInputValue: clientInputValue, setStringInputValue: setClientInputValue } =
+    useTextInputState();
 
   const validate = yup.object({
-    client: yup.string().required("Please enter client name."),
+    client: yup.string().required("Enter client name."),
     technologies: yup.array().of(yup.object()),
     repos: yup.array().of(yup.string()).min(1).required(),
     slackChannelName: yup.string(),
@@ -72,6 +74,19 @@ const AddProject = ({ fields }) => {
               return (
                 <Form>
                   <div className='flex flex-col gap-6'>
+                    <TextInput
+                      name='client'
+                      labelText='Client'
+                      value={clientInputValue}
+                      onChange={(e) => setClientInputValue(e.target.value)}
+                      id={"addproject-client"}
+                      placeholder='Client'
+                      clearValue={(ref) => {
+                        setClientInputValue("");
+                        ref.current.blur();
+                      }}
+                    />
+
                     <StringList
                       emptyValue='#'
                       setList={setSlackChannelList}

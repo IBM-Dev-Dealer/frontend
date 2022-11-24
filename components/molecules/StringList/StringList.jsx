@@ -64,6 +64,10 @@ const StringList = ({ textInput, setList, list, emptyValue = "" }) => {
               textInput.untouch();
             }
           }}
+          clearValue={(ref) => {
+            textInput.setValue("");
+            textInput.untouch();
+          }}
         />
         <Button
           label={<PlusIcon className='w-6 h-6' />}
