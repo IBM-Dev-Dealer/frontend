@@ -6,7 +6,7 @@ const CurrentProjectPage = (props) => <CurrentProject {...props} />;
 export default CurrentProjectPage;
 
 export const getStaticProps = async () => {
-  const authorization = "authorizationa";
+  const authorization = "authorization";
   const props = await fetch(`${server}/api/currentProject`, {
     method: "GET",
     headers: { authorization },

@@ -13,6 +13,8 @@ import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
 
 const INITIAL_VALUES = {
   client: "",
+  clientLogoURL: "",
+  projectName: "",
   technologies: [],
   requiredCapacity: [],
   repoName: "",
@@ -67,6 +69,12 @@ const AddProject = ({ fields }) => {
   const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } = useObjectListState();
   const { stringInputValue: clientInputValue, setStringInputValue: setClientInputValue } =
     useTextInputState();
+  const {
+    stringInputValue: clientLogoURLInputValue,
+    setStringInputValue: setClientLogoURLInputValue,
+  } = useTextInputState();
+  const { stringInputValue: projectNameInputValue, setStringInputValue: setProjectNameInputValue } =
+    useTextInputState();
 
   const handleOnChange = useCallback(
     (setFormData, fieldName) => (data) => setFormData(fieldName, data),
@@ -75,6 +83,8 @@ const AddProject = ({ fields }) => {
 
   const validate = yup.object({
     client: yup.string().required("Enter client name."),
+    clientLogoURL: yup.string(),
+    projectName: yup.string().required("Enter project name."),
     technologies: yup.array().of(yup.object()),
     requiredCapacity: yup.array().of(yup.object()),
     repoName: yup.string(),
@@ -122,13 +132,47 @@ const AddProject = ({ fields }) => {
                       }}
                     />
 
+                    <TextInput
+                      name='clientLogoURL'
+                      labelText='Client Logo URL'
+                      value={clientLogoURLInputValue}
+                      onChange={(e) => {
+                        setClientLogoURLInputValue(e.target.value);
+                        handleOnChange(formik.setFieldValue, "clientLogoURL")(e.target.value);
+                      }}
+                      id={"addproject-clientLogoURL"}
+                      placeholder='ClientLogoURL'
+                      clearValue={(ref) => {
+                        setClientLogoURLInputValue("");
+                        formik.setFieldValue("clientLogoURL", "");
+                        ref.current.blur();
+                      }}
+                    />
+
+                    <TextInput
+                      name='projectName'
+                      labelText='Project Name'
+                      value={projectNameInputValue}
+                      onChange={(e) => {
+                        setProjectNameInputValue(e.target.value);
+                        handleOnChange(formik.setFieldValue, "projectName")(e.target.value);
+                      }}
+                      id={"addproject-projectName"}
+                      placeholder='ProjectName'
+                      clearValue={(ref) => {
+                        setProjectNameInputValue("");
+                        formik.setFieldValue("projectName", "");
+                        ref.current.blur();
+                      }}
+                    />
+
                     <ObjectList
                       setList={setTechnologies}
                       list={technologies}
                       onChange={handleOnChange(formik.setFieldValue, "technologies")}
                       name='technologies'
                       dataFields={technologiesDataFields}
-                      label='Add technologies'
+                      label='Add Technologies'
                     />
 
                     <ObjectList
@@ -137,7 +181,7 @@ const AddProject = ({ fields }) => {
                       onChange={handleOnChange(formik.setFieldValue, "requiredCapacity")}
                       name='requiredCapacity'
                       dataFields={capacityDataFields}
-                      label='Add required capacity'
+                      label='Add Required Capacity'
                     />
 
                     <StringList
@@ -181,7 +225,7 @@ const AddProject = ({ fields }) => {
                       onChange={handleOnChange(formik.setFieldValue, "accessZones")}
                       name='accessZones'
                       textInput={{
-                        label: "Access zones",
+                        label: "Access Zones",
                         id: "addproject-accessZones",
                         name: "accessZonesName",
                         value: accessZonesInputValue,
