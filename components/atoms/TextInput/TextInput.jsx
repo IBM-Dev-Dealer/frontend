@@ -13,7 +13,7 @@ import { useRef } from "react";
 
 const containerTailwindClass = "pt-8 w-full relative my-2 flex gap-2";
 const inputTailwindClass =
-  " w-full border-b-2 border-orangeade outline-0 text-sm pb-4 px-0 bg-transparent transition-colors transition-all text-sm flex grow";
+  "w-full border-b-2 border-orangeade outline-0 text-sm pb-4 px-0 bg-transparent transition-colors transition-all text-sm flex grow pr-7";
 const labelTailwindClass = "absolute top-0 block text-sm transition-all";
 
 const TextInput = ({
@@ -73,7 +73,7 @@ const TextInput = ({
             clearValue(inputRef);
           }}
           className={`cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50 self-end fill-gray
-          absolute bottom-2.5 right-0`}
+          absolute bottom-3 right-0`}
         />
       )}
     </div>

@@ -15,9 +15,12 @@ const INITIAL_VALUES = {
   client: "",
   technologies: [],
   requiredCapacity: [],
+  repoName: "",
   repos: [],
   slackChannelName: "",
   slackChannels: [],
+  accessZonesName: "",
+  accessZones: [],
 };
 
 const AddProject = ({ fields }) => {
@@ -41,6 +44,25 @@ const AddProject = ({ fields }) => {
     inputWasTouched: slackChannelInputWasTouched,
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
+
+  const {
+    stringList: reposList,
+    setStringList: setReposList,
+    stringInputValue: reposInputValue,
+    setStringInputValue: setReposInputValue,
+    inputWasTouched: reposInputWasTouched,
+    setInputWasTouched: setReposInputWasTouched,
+  } = useStringListState();
+
+  const {
+    stringList: accessZonesList,
+    setStringList: setAccessZonesList,
+    stringInputValue: accessZonesInputValue,
+    setStringInputValue: setAccessZonesInputValue,
+    inputWasTouched: accessZonesInputWasTouched,
+    setInputWasTouched: setAccessZonesInputWasTouched,
+  } = useStringListState();
+
   const { objectList: technologies, setObjectList: setTechnologies } = useObjectListState();
   const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } = useObjectListState();
   const { stringInputValue: clientInputValue, setStringInputValue: setClientInputValue } =
@@ -73,7 +95,7 @@ const AddProject = ({ fields }) => {
             {(formik) => {
               return (
                 <Form>
-                  <div className='flex flex-col gap-6'>
+                  <div className='flex flex-col gap-2'>
                     <TextInput
                       name='client'
                       labelText='Client'
@@ -84,24 +106,6 @@ const AddProject = ({ fields }) => {
                       clearValue={(ref) => {
                         setClientInputValue("");
                         ref.current.blur();
-                      }}
-                    />
-
-                    <StringList
-                      emptyValue='#'
-                      setList={setSlackChannelList}
-                      list={slackChannelList}
-                      name='slackChannels'
-                      textInput={{
-                        label: "Slack Channels",
-                        id: "addproject-stringlist",
-                        disabled: false,
-                        name: "slackChannelName",
-                        value: slackChannelInputValue,
-                        setValue: setSlackChannelInputValue,
-                        touch: () => setSlackChannelInputWasTouched(true),
-                        untouch: () => setSlackChannelInputWasTouched(false),
-                        wasTouched: slackChannelInputWasTouched,
                       }}
                     />
 
@@ -119,6 +123,55 @@ const AddProject = ({ fields }) => {
                       name='requiredCapacity'
                       dataFields={capacityDataFields}
                       label='Add required capacity'
+                    />
+
+                    <StringList
+                      setList={setReposList}
+                      list={reposList}
+                      name='repos'
+                      textInput={{
+                        label: "Repositories",
+                        id: "addproject-repos",
+                        name: "repoName",
+                        value: reposInputValue,
+                        setValue: setReposInputValue,
+                        touch: () => setReposInputWasTouched(true),
+                        untouch: () => setReposInputWasTouched(false),
+                        wasTouched: reposInputWasTouched,
+                      }}
+                    />
+
+                    <StringList
+                      emptyValue='#'
+                      setList={setSlackChannelList}
+                      list={slackChannelList}
+                      name='slackChannels'
+                      textInput={{
+                        label: "Slack Channels",
+                        id: "addproject-slackchannels",
+                        name: "slackChannelName",
+                        value: slackChannelInputValue,
+                        setValue: setSlackChannelInputValue,
+                        touch: () => setSlackChannelInputWasTouched(true),
+                        untouch: () => setSlackChannelInputWasTouched(false),
+                        wasTouched: slackChannelInputWasTouched,
+                      }}
+                    />
+
+                    <StringList
+                      setList={setAccessZonesList}
+                      list={accessZonesList}
+                      name='accessZones'
+                      textInput={{
+                        label: "Access zones",
+                        id: "addproject-accessZones",
+                        name: "accessZonesName",
+                        value: accessZonesInputValue,
+                        setValue: setAccessZonesInputValue,
+                        touch: () => setAccessZonesInputWasTouched(true),
+                        untouch: () => setAccessZonesInputWasTouched(false),
+                        wasTouched: accessZonesInputWasTouched,
+                      }}
                     />
 
                     <Button label={"Submit"} type='submit' />
