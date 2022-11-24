@@ -5,10 +5,11 @@ const getFields = async (req, res) => {
     const queryParamKeys = Object.keys(req.query);
 
     if (queryParamKeys.includes("fields")) {
-      const fields = [];
+      const fields = {};
+
       req.query.fields.forEach((paramKey) => {
         const foundField = ALL_FIELDS.find((field) => field.codename === paramKey);
-        if (foundField) fields.push(foundField);
+        if (foundField) fields[foundField.codename] = foundField;
       });
       return res.status(200).json({ fields });
     }

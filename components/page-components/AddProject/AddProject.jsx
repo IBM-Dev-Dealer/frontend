@@ -20,16 +20,13 @@ const INITIAL_VALUES = {
 
 const AddProject = ({ fields }) => {
   const technologiesDataFields = useMemo(
-    () => [
-      fields.find((field) => field.codename === "technology") ?? [],
-      fields.find((field) => field.codename === "seniorityLevel") ?? [],
-    ],
+    () => [fields["technology"] ?? [], fields["seniorityLevel"] ?? []],
     [fields],
   );
   const capacityDataFields = useMemo(
     () => [
       { codename: "devnumber", label: "No. of devs", fields: generateNumbers(100) },
-      fields.find((field) => field.codename === "seniorityLevel") ?? [],
+      fields["seniorityLevel"] ?? [],
     ],
     [fields],
   );
