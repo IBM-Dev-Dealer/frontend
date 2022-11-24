@@ -1,5 +1,3 @@
-import { generateNumbers } from "../../../utils/utils";
-
 const SENORITY_LEVELS = {
   codename: "seniorityLevel",
   label: "Senority Level",
@@ -28,10 +26,3 @@ const TECHNOLOGIES = {
 };
 
 export const ALL_FIELDS = [SENORITY_LEVELS, TECHNOLOGIES];
-
-export const TECHNOLOGIES_DATA_FIELDS = [TECHNOLOGIES, SENORITY_LEVELS];
-
-export const CAPACITY_DATA_FIELDS = [
-  { codename: "devnumber", label: "No. of devs", fields: generateNumbers(100) },
-  SENORITY_LEVELS,
-];
