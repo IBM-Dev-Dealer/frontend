@@ -1,25 +1,25 @@
-import Title from '../../atoms/Title/Title';
-import Button from '../../atoms/Button/Button';
-import StringList from '../../molecules/StringList/StringList';
-import { Form, Formik } from 'formik';
-import * as yup from 'yup';
-import { useStringListState } from '../../molecules/StringList/useStringListState';
-import ObjectList from '../../molecules/ObjectList/ObjectList';
-import { useObjectListState } from '../../molecules/ObjectList/useObjectListState';
+import Title from "../../atoms/Title/Title";
+import Button from "../../atoms/Button/Button";
+import StringList from "../../molecules/StringList/StringList";
+import { Form, Formik } from "formik";
+import * as yup from "yup";
+import { useStringListState } from "../../molecules/StringList/useStringListState";
+import ObjectList from "../../molecules/ObjectList/ObjectList";
+import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import {
   CAPACITY_DATA_FIELDS,
   CAPACITY_DATA_FIELDS_NAMES,
   SENORITY_LEVELS,
   TECHNOLOGIES_DATA_FIELDS,
   TECHNOLOGIES_DATA_FIELDS_NAMES,
-} from './dummydata';
+} from "./dummydata";
 
 const INITIAL_VALUES = {
-  client: '',
+  client: "",
   technologies: [],
   requiredCapacity: [],
   repos: [],
-  slackChannelName: '',
+  slackChannelName: "",
   slackChannels: [],
 };
 
@@ -41,7 +41,7 @@ const AddProject = () => {
     useObjectListState(SENORITY_LEVELS);
 
   const validate = yup.object({
-    client: yup.string().required('Please enter client name.'),
+    client: yup.string().required("Please enter client name."),
     technologies: yup.array().of(yup.object()),
     repos: yup.array().of(yup.string()).min(1).required(),
     slackChannelName: yup.string(),
@@ -61,7 +61,7 @@ const AddProject = () => {
             validationSchema={validate}
             onSubmit={(values) => {
               //   submitHandler(values);
-              console.log('[AddProject] form values', values);
+              console.log("[AddProject] form values", values);
             }}
           >
             {(formik) => {
@@ -74,10 +74,10 @@ const AddProject = () => {
                       list={slackChannelList}
                       name='slackChannels'
                       textInput={{
-                        label: 'Slack Channels',
-                        id: 'addproject-stringlist',
+                        label: "Slack Channels",
+                        id: "addproject-stringlist",
                         disabled: false,
-                        name: 'slackChannelName',
+                        name: "slackChannelName",
                         value: slackChannelInputValue,
                         setValue: setSlackChannelInputValue,
                         touch: () => setSlackChannelInputWasTouched(true),
@@ -104,7 +104,7 @@ const AddProject = () => {
                       label='Add required capacity'
                     />
 
-                    <Button label={'Submit'} type='submit' />
+                    <Button label={"Submit"} type='submit' />
                   </div>
                 </Form>
               );

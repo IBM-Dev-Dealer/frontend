@@ -1,8 +1,8 @@
-import { PlusIcon } from '@heroicons/react/20/solid';
-import { useEffect, useState } from 'react';
-import Button from '../../atoms/Button/Button';
-import ColoredItems from '../../atoms/ColoredItems/ColoredItems';
-import Dropdown from '../../atoms/Dropdown/Dropdown';
+import { PlusIcon } from "@heroicons/react/20/solid";
+import { useEffect, useState } from "react";
+import Button from "../../atoms/Button/Button";
+import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
+import Dropdown from "../../atoms/Dropdown/Dropdown";
 
 const ObjectList = ({ setList, list, dataFieldsNames, dataFields, label }) => {
   const [selection, setSelection] = useState({});
@@ -66,7 +66,7 @@ const ObjectList = ({ setList, list, dataFieldsNames, dataFields, label }) => {
           items={list.map((item) =>
             Object.keys(item)
               .map((key) => item[key].label)
-              .join(' / '),
+              .join(" / "),
           )}
           removeItem={removeEntry}
         />

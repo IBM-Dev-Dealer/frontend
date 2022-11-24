@@ -1,14 +1,14 @@
-import { PlusIcon } from '@heroicons/react/20/solid';
-import Button from '../../atoms/Button/Button';
-import TextInput from '../../atoms/TextInput/TextInput';
-import { useEffect, useState } from 'react';
-import ColoredItems from '../../atoms/ColoredItems/ColoredItems';
+import { PlusIcon } from "@heroicons/react/20/solid";
+import Button from "../../atoms/Button/Button";
+import TextInput from "../../atoms/TextInput/TextInput";
+import { useEffect, useState } from "react";
+import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
 
-const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
+const StringList = ({ textInput, setList, list, emptyValue = "" }) => {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    if (textInput.value === '' || textInput.value === emptyValue) {
+    if (textInput.value === "" || textInput.value === emptyValue) {
       if (textInput.value === emptyValue) {
         setDisabled(true);
       } else setDisabled(false);
@@ -54,13 +54,13 @@ const StringList = ({ textInput, setList, list, emptyValue = '' }) => {
             textInput.setValue(e.target.value);
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') handleInputContent();
+            if (e.key === "Enter") handleInputContent();
           }}
           onFocus={textInput.touch}
           onBlur={() => {
             setDisabled(false);
             if (textInput.value === emptyValue) {
-              textInput.setValue('');
+              textInput.setValue("");
               textInput.untouch();
             }
           }}

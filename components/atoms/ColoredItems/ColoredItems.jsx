@@ -1,5 +1,5 @@
-import { XMarkIcon } from '@heroicons/react/20/solid';
-import { colorizeJSXArray } from '../../../utils/utils';
+import { XMarkIcon } from "@heroicons/react/20/solid";
+import { colorizeJSXArray } from "../../../utils/utils";
 
 const ColoredItems = ({ items, removeItem }) => {
   const mappedItems = items.map((entry, i) => {

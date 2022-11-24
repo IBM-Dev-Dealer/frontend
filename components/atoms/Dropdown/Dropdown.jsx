@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
-import { Fragment } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import classNames from 'classnames';
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import classNames from "classnames";
 
 const Dropdown = ({ list, selected, select, placeholder }) => {
   return (
@@ -39,8 +39,8 @@ const Dropdown = ({ list, selected, select, placeholder }) => {
                           select(listItem);
                         }}
                         className={classNames(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm hover:bg-transparent-light-green-50 cursor-pointer overflow-hidden',
+                          active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                          "block px-4 py-2 text-sm hover:bg-transparent-light-green-50 cursor-pointer overflow-hidden",
                         )}
                       >
                         {listItem.label}
