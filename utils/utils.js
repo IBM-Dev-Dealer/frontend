@@ -1,28 +1,28 @@
 export const ROUTES = {
-  DEFAULT_PAGE: '/',
-  CURRENT_PROJECT: '/current-project',
-  ADD_PROJECT: '/add-project',
-  OTHER_PROJECTS: '/other-projects',
-  SOURCE: '/source',
-  LOG: '/log',
-  REGISTER: '/register',
-  PROFILE: '/profile',
-  MANAGE_EMPLOYEES: '/manage-employees',
+  DEFAULT_PAGE: "/",
+  CURRENT_PROJECT: "/current-project",
+  ADD_PROJECT: "/add-project",
+  OTHER_PROJECTS: "/other-projects",
+  SOURCE: "/source",
+  LOG: "/log",
+  REGISTER: "/register",
+  PROFILE: "/profile",
+  MANAGE_EMPLOYEES: "/manage-employees",
 };
 
 export const getTitle = (route) => {
   let newRoute = route;
 
-  if (route.includes('-')) {
-    newRoute = newRoute.replace('-', ' ');
+  if (route.includes("-")) {
+    newRoute = newRoute.replace("-", " ");
   }
 
   if (route.length > 1) {
-    newRoute = newRoute.replace('/', ' - ');
+    newRoute = newRoute.replace("/", " - ");
   }
 
   if (route.length === 1) {
-    newRoute = newRoute.replace('/', '');
+    newRoute = newRoute.replace("/", "");
   }
 
   return `IBM Dev Dealer${newRoute}`;
@@ -47,4 +47,12 @@ export const colorizeJSXArray = (JSXElements) => {
     };
   });
   return returned.filter((el) => el);
+};
+
+export const generateNumbers = (maxLimit) => {
+  const nums = [];
+  for (let i = 0; i <= maxLimit; i++) {
+    nums.push({ label: i, codename: i });
+  }
+  return nums;
 };

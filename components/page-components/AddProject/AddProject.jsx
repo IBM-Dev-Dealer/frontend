@@ -1,20 +1,36 @@
-import Dropdown from '../../atoms/Dropdown/Dropdown';
-import Title from '../../atoms/Title/Title';
-import Button from '../../atoms/Button/Button';
-import StringList from '../../molecules/StringList/StringList';
-import { Form, Formik } from 'formik';
-import * as yup from 'yup';
-import { useStringListState } from '../../molecules/StringList/useStringListState';
+import Title from "../../atoms/Title/Title";
+import Button from "../../atoms/Button/Button";
+import StringList from "../../molecules/StringList/StringList";
+import { Form, Formik } from "formik";
+import * as yup from "yup";
+import { useStringListState } from "../../molecules/StringList/useStringListState";
+import ObjectList from "../../molecules/ObjectList/ObjectList";
+import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
+import { generateNumbers } from "../../../utils/utils";
+import { useMemo } from "react";
 
 const INITIAL_VALUES = {
-  client: '',
+  client: "",
   technologies: [],
+  requiredCapacity: [],
   repos: [],
-  slackChannelName: '',
+  slackChannelName: "",
   slackChannels: [],
 };
 
-const AddProject = () => {
+const AddProject = ({ fields }) => {
+  const technologiesDataFields = useMemo(
+    () => [fields["technology"] ?? [], fields["seniorityLevel"] ?? []],
+    [fields],
+  );
+  const capacityDataFields = useMemo(
+    () => [
+      { codename: "devnumber", label: "No. of devs", fields: generateNumbers(100) },
+      fields["seniorityLevel"] ?? [],
+    ],
+    [fields],
+  );
+
   const {
     stringList: slackChannelList,
     setStringList: setSlackChannelList,
@@ -24,9 +40,13 @@ const AddProject = () => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
+  const { objectList: technologies, setObjectList: setTechnologies } = useObjectListState();
+
+  const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } = useObjectListState();
+
   const validate = yup.object({
-    client: yup.string().required('Please enter client name.'),
-    technologies: yup.array().of(yup.string()).min(1).required(),
+    client: yup.string().required("Please enter client name."),
+    technologies: yup.array().of(yup.object()),
     repos: yup.array().of(yup.string()).min(1).required(),
     slackChannelName: yup.string(),
     // .test('channel-name', 'Slack channel name shall not be empty.', () =>
@@ -45,37 +65,49 @@ const AddProject = () => {
             validationSchema={validate}
             onSubmit={(values) => {
               //   submitHandler(values);
-              console.log('[AddProject] form values', values);
+              console.log("[AddProject] form values", values);
             }}
           >
             {(formik) => {
               return (
                 <Form>
-                  <Dropdown
-                    list={[
-                      { label: 'item1', value: '#item1' },
-                      { label: 'item2', value: '#item2' },
-                      { label: 'item3', value: '#item3' },
-                    ]}
-                  />
-                  <Button label={'prezz me'} type='button' />
-                  <StringList
-                    emptyValue='#'
-                    setList={setSlackChannelList}
-                    list={slackChannelList}
-                    name='slackChannels'
-                    textInput={{
-                      label: 'Slack Channels',
-                      id: 'addproject-stringlist',
-                      disabled: false,
-                      name: 'slackChannelName',
-                      value: slackChannelInputValue,
-                      setValue: setSlackChannelInputValue,
-                      touch: () => setSlackChannelInputWasTouched(true),
-                      wasTouched: slackChannelInputWasTouched,
-                    }}
-                  />
-                  <Button label={'Submit'} type='submit' />
+                  <div className='flex flex-col gap-6'>
+                    <StringList
+                      emptyValue='#'
+                      setList={setSlackChannelList}
+                      list={slackChannelList}
+                      name='slackChannels'
+                      textInput={{
+                        label: "Slack Channels",
+                        id: "addproject-stringlist",
+                        disabled: false,
+                        name: "slackChannelName",
+                        value: slackChannelInputValue,
+                        setValue: setSlackChannelInputValue,
+                        touch: () => setSlackChannelInputWasTouched(true),
+                        untouch: () => setSlackChannelInputWasTouched(false),
+                        wasTouched: slackChannelInputWasTouched,
+                      }}
+                    />
+
+                    <ObjectList
+                      setList={setTechnologies}
+                      list={technologies}
+                      name='technologies'
+                      dataFields={technologiesDataFields}
+                      label='Add technologies'
+                    />
+
+                    <ObjectList
+                      setList={setRequiredCapacity}
+                      list={requiredCapacity}
+                      name='requiredCapacity'
+                      dataFields={capacityDataFields}
+                      label='Add required capacity'
+                    />
+
+                    <Button label={"Submit"} type='submit' />
+                  </div>
                 </Form>
               );
             }}

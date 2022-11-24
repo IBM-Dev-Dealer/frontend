@@ -1,5 +1,5 @@
-import { ErrorMessage, useField } from 'formik';
-import classNames from 'classnames';
+import { ErrorMessage, useField } from "formik";
+import classNames from "classnames";
 import {
   form__field,
   form__field__error,
@@ -7,12 +7,12 @@ import {
   form__label__error,
   label__color,
   text_input__colors,
-} from './TextInput.module.scss';
+} from "./TextInput.module.scss";
 
-const containerTailwindClass = 'pt-8 w-full relative';
+const containerTailwindClass = "pt-8 w-full relative my-2";
 const inputTailwindClass =
-  ' w-full border-b-2 border-orangeade outline-0 text-sm pb-4 px-0 bg-transparent transition-colors transition-all text-sm';
-const labelTailwindClass = 'absolute top-0 block text-sm transition-all';
+  " w-full border-b-2 border-orangeade outline-0 text-sm pb-4 px-0 bg-transparent transition-colors transition-all text-sm";
+const labelTailwindClass = "absolute top-0 block text-sm transition-all";
 
 const TextInput = ({
   placeholder,
@@ -22,6 +22,7 @@ const TextInput = ({
   onChange,
   onKeyDown,
   onFocus,
+  onBlur,
   value,
 
   ...props
@@ -48,6 +49,7 @@ const TextInput = ({
         onKeyDown={onKeyDown}
         value={value}
         onFocus={onFocus}
+        onBlur={onBlur}
         autoComplete='false'
       />
       <label
