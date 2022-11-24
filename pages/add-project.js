@@ -1,4 +1,4 @@
-import AddProject from '../components/page-components/AddProject/AddProject';
+import AddProject from "../components/page-components/AddProject/AddProject";
 
 const AddProjectPage = () => {
   return <AddProject />;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../components/atoms/Loader/Loader";
 import Layout from "../components/page-components/Layout/Layout";
 import "../styles/globals.scss";

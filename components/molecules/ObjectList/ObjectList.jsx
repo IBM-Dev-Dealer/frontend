@@ -4,17 +4,17 @@ import Button from "../../atoms/Button/Button";
 import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 
-const ObjectList = ({ setList, list, dataFieldsNames, dataFields, label }) => {
+const ObjectList = ({ setList, list, dataFields, label }) => {
   const [selection, setSelection] = useState({});
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    if (Object.keys(selection).length === dataFieldsNames.length) {
+    if (Object.keys(selection).length === dataFields.length) {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
-  }, [dataFieldsNames.length, selection]);
+  }, [dataFields.length, selection]);
 
   useEffect(() => {
     setSelection({});
@@ -40,15 +40,15 @@ const ObjectList = ({ setList, list, dataFieldsNames, dataFields, label }) => {
     <div>
       <div className='text-sm'>{label}</div>
       <div className='flex gap-2 items-end'>
-        {dataFieldsNames.map((field) => (
+        {dataFields.map((dataField) => (
           <Dropdown
-            list={dataFields[field.codename]}
-            key={field.codename}
-            placeholder={field.label}
+            list={dataField.fields}
+            key={dataField.codename}
+            placeholder={dataField.label}
             select={(item) => {
-              setSelection((prev) => ({ ...prev, [field.codename]: item }));
+              setSelection((prev) => ({ ...prev, [dataField.codename]: item }));
             }}
-            selected={selection[field.codename]}
+            selected={selection[dataField.codename]}
           />
         ))}
 
