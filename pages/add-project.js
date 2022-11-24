@@ -2,7 +2,6 @@ import AddProject from "../components/page-components/AddProject/AddProject";
 import { server } from "../config";
 
 const AddProjectPage = (props) => {
-  console.log("props", props);
   return <AddProject {...props} />;
 };
 
