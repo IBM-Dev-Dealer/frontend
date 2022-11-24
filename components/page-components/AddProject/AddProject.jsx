@@ -6,10 +6,8 @@ import * as yup from "yup";
 import { useStringListState } from "../../molecules/StringList/useStringListState";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
-import {
-  CAPACITY_DATA_FIELDS,
-  TECHNOLOGIES_DATA_FIELDS,
-} from "../../../pages/api/mock/addProjectMock";
+import { generateNumbers } from "../../../utils/utils";
+import { useMemo } from "react";
 
 const INITIAL_VALUES = {
   client: "",
@@ -20,7 +18,22 @@ const INITIAL_VALUES = {
   slackChannels: [],
 };
 
-const AddProject = () => {
+const AddProject = ({ fields }) => {
+  const technologiesDataFields = useMemo(
+    () => [
+      fields.find((field) => field.codename === "technology") ?? [],
+      fields.find((field) => field.codename === "seniorityLevel") ?? [],
+    ],
+    [fields],
+  );
+  const capacityDataFields = useMemo(
+    () => [
+      { codename: "devnumber", label: "No. of devs", fields: generateNumbers(100) },
+      fields.find((field) => field.codename === "seniorityLevel") ?? [],
+    ],
+    [fields],
+  );
+
   const {
     stringList: slackChannelList,
     setStringList: setSlackChannelList,
@@ -30,11 +43,9 @@ const AddProject = () => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
-  const { objectList: technologies, setObjectList: setTechnologies } =
-    useObjectListState(TECHNOLOGIES_DATA_FIELDS);
+  const { objectList: technologies, setObjectList: setTechnologies } = useObjectListState();
 
-  const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } =
-    useObjectListState(CAPACITY_DATA_FIELDS);
+  const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } = useObjectListState();
 
   const validate = yup.object({
     client: yup.string().required("Please enter client name."),
@@ -86,7 +97,7 @@ const AddProject = () => {
                       setList={setTechnologies}
                       list={technologies}
                       name='technologies'
-                      dataFields={TECHNOLOGIES_DATA_FIELDS}
+                      dataFields={technologiesDataFields}
                       label='Add technologies'
                     />
 
@@ -94,7 +105,7 @@ const AddProject = () => {
                       setList={setRequiredCapacity}
                       list={requiredCapacity}
                       name='requiredCapacity'
-                      dataFields={CAPACITY_DATA_FIELDS}
+                      dataFields={capacityDataFields}
                       label='Add required capacity'
                     />
 

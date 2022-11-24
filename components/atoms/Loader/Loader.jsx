@@ -1,4 +1,4 @@
-import { wrapper, dot, first, second, third } from './Loader.module.scss';
+import { dot, first, second, third, wrapper } from "./Loader.module.scss";
 
 const Loader = ({ loading }) => {
   return (

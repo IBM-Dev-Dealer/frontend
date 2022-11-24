@@ -1,8 +1,8 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import Button from "../../atoms/Button/Button";
-import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
+import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
 
 const ObjectList = ({ setList, list, dataFields, label }) => {
   const [selection, setSelection] = useState({});
@@ -40,17 +40,18 @@ const ObjectList = ({ setList, list, dataFields, label }) => {
     <div>
       <div className='text-sm'>{label}</div>
       <div className='flex gap-2 items-end'>
-        {dataFields.map((dataField) => (
-          <Dropdown
-            list={dataField.fields}
-            key={dataField.codename}
-            placeholder={dataField.label}
-            select={(item) => {
-              setSelection((prev) => ({ ...prev, [dataField.codename]: item }));
-            }}
-            selected={selection[dataField.codename]}
-          />
-        ))}
+        {dataFields &&
+          dataFields.map((dataField) => (
+            <Dropdown
+              list={dataField.fields}
+              key={dataField.codename}
+              placeholder={dataField.label}
+              select={(item) => {
+                setSelection((prev) => ({ ...prev, [dataField.codename]: item }));
+              }}
+              selected={selection[dataField.codename]}
+            />
+          ))}
 
         <Button
           label={<PlusIcon className='w-6 h-6' />}

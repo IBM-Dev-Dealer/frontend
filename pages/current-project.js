@@ -1,4 +1,5 @@
 import CurrentProject from "../components/page-components/CurrentProject/CurrentProject";
+import { server } from "../config";
 
 const CurrentProjectPage = (props) => <CurrentProject {...props} />;
 
@@ -6,7 +7,7 @@ export default CurrentProjectPage;
 
 export const getStaticProps = async () => {
   const authorization = "authorizationa";
-  const props = await fetch("http://localhost:3000/api/currentProject", {
+  const props = await fetch(`${server}/api/currentProject`, {
     method: "GET",
     headers: { authorization },
   }).then((res) => res.json());
