@@ -55,7 +55,7 @@ const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback, devData
                       selected={formik.values.dev}
                     />
                     {formik.values.dev && (
-                      <div className='flex flex-col gap-2 pt-2 border-t border-transparent-gray-05'>
+                      <div className='flex flex-col gap-2 pt-2 border-t border-transparent-gray-05 px-4'>
                         <Dropdown
                           name='businessResults'
                           list={DIMENSIONS_RATING}
@@ -98,7 +98,7 @@ const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback, devData
                         {devData && (
                           <div>
                             <div className='text-sm'>Previous seniority levels per technology</div>
-                            <ul className='p-4 bg-transparent-gray-05 rounded-md my-2'>
+                            <ul className='p-4 bg-transparent-gray-05 rounded-lg my-2 shadow-md'>
                               {devData.devData.techSeniority.map((item, i) => (
                                 <li
                                   key={i}
