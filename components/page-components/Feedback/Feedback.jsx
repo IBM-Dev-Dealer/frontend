@@ -73,6 +73,7 @@ const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback }) => {
                           placeholder='Business Results'
                           selected={formik.values.businessResults}
                           select={(value) => formik.setFieldValue("businessResults", value)}
+                          infoMessage='This section will evaluate your individual contribution to the account results: how you delivered your key committed business and financial objectives.'
                         />
 
                         <Dropdown
