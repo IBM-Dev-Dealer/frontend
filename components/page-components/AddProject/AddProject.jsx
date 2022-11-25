@@ -10,7 +10,6 @@ import { generateNumbers } from "../../../utils/utils";
 import { useCallback, useMemo } from "react";
 import TextInput from "../../atoms/TextInput/TextInput";
 import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
-import InfoNote from "../../atoms/InfoNote/InfoNote";
 
 const INITIAL_VALUES = {
   client: "",
@@ -132,8 +131,6 @@ const AddProject = ({ fields }) => {
                         ref.current.blur();
                       }}
                     />
-
-                    <InfoNote message='This is an informative message.' />
 
                     <TextInput
                       name='clientLogoURL'
