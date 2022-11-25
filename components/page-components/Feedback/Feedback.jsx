@@ -25,7 +25,7 @@ const VALIDATE = {
   }),
 };
 
-const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback }) => {
+const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback, devData }) => {
   return (
     <div>
       <Title>Feedback</Title>
@@ -55,18 +55,7 @@ const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback }) => {
                       selected={formik.values.dev}
                     />
                     {formik.values.dev && (
-                      <div className='flex flex-col gap-2'>
-                        <StarRating
-                          name='teamInteraction'
-                          rating={formik.values.teamInteraction}
-                          setRating={(value) => formik.setFieldValue("teamInteraction", value)}
-                          maxRating={5}
-                          label={"Team Interaction"}
-                          infoMessage={
-                            "Your collaboration and teaming to cultivate positive working relationships with project team members and other stakeholders, such as clients and partners."
-                          }
-                        />
-
+                      <div className='flex flex-col gap-2 pt-2 border-t border-transparent-gray-05'>
                         <Dropdown
                           name='businessResults'
                           list={DIMENSIONS_RATING}
@@ -93,6 +82,32 @@ const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback }) => {
                           select={(value) => formik.setFieldValue("innovation", value)}
                           infoMessage='Your demonstration of innovation through leveraging intellectual capital and best practices to bring improvements in how we work and what we deliver. Locates internal intellectual capital and connects with experts.'
                         />
+
+                        <StarRating
+                          name='teamInteraction'
+                          rating={formik.values.teamInteraction}
+                          setRating={(value) => formik.setFieldValue("teamInteraction", value)}
+                          maxRating={5}
+                          label={"Team Interaction"}
+                          infoMessage={
+                            "Your collaboration and teaming to cultivate positive working relationships with project team members and other stakeholders, such as clients and partners."
+                          }
+                        />
+
+                        {/* TODO: replace with proper list component */}
+                        {devData && (
+                          <div>
+                            <div className='text-sm'>Previous seniority levels per technology</div>
+                            <ul className='p-4 bg-transparent-gray-05 rounded-md my-2'>
+                              {devData.devData.techSeniority.map((item, i) => (
+                                <li
+                                  key={i}
+                                  className='text-sm'
+                                >{`${item.technology.label} - ${item.seniorityLevel.label}`}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     )}
                   </Form>
