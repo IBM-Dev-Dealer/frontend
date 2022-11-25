@@ -18,10 +18,7 @@ const PickDate = ({
             <div className='flex'>
               <DatePicker
                 selected={periodState.value.start}
-                onChange={(date) => {
-                  console.log(date);
-                  periodState.set({ start: date, end: periodState.value.end });
-                }}
+                onChange={(date) => periodState.set({ start: date, end: periodState.value.end })}
                 customInput={
                   <Button
                     type='button'
@@ -36,10 +33,7 @@ const PickDate = ({
               <div className='w-4' />
               <DatePicker
                 selected={periodState.value.end}
-                onChange={(date) => {
-                  console.log(date);
-                  periodState.set({ start: periodState.value.start, end: date });
-                }}
+                onChange={(date) => periodState.set({ start: periodState.value.start, end: date })}
                 customInput={
                   <Button
                     type='button'
