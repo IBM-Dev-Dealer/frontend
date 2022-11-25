@@ -10,8 +10,6 @@ const PickDate = ({
   singleDateState,
   periodState,
 }) => {
-  // const [date, setDate] = useState();
-
   return (
     <div>
       <div className='text-sm'>{label}</div>
@@ -78,7 +76,3 @@ const PickDate = ({
 };
 
 export default PickDate;
-
-PickDate.defaultProps = {
-  // dateFormat: "dd.MM.yyyy",
-};
