@@ -82,6 +82,7 @@ const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback }) => {
                           placeholder='Client Success'
                           selected={formik.values.clientSuccess}
                           select={(value) => formik.setFieldValue("clientSuccess", value)}
+                          infoMessage='Your individual contribution to client success. Rates your impact on client outcomes by going above and beyond to add value to internal and/or external IBM clients. Creates work products that meet client expectation. Delivers quality work products. Effective time management. Effective communication.'
                         />
 
                         <Dropdown
@@ -90,6 +91,7 @@ const Feedback = ({ loggedUserRole, projectId, devsWhoRequestedFeedback }) => {
                           placeholder='Innovation'
                           selected={formik.values.innovation}
                           select={(value) => formik.setFieldValue("innovation", value)}
+                          infoMessage='Your demonstration of innovation through leveraging intellectual capital and best practices to bring improvements in how we work and what we deliver. Locates internal intellectual capital and connects with experts.'
                         />
                       </div>
                     )}
