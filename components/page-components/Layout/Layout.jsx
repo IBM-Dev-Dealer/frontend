@@ -1,11 +1,11 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import Error from '../Error/Error';
-import { useRouter } from 'next/router';
+import Head from "next/head";
+import Link from "next/link";
+import Error from "../Error/Error";
+import { useRouter } from "next/router";
 
-import { ROUTES, colorizeJSXArray, getTitle } from '../../../utils/utils';
+import { ROUTES, colorizeJSXArray, getTitle } from "../../../utils/utils";
 
-import styles from './Layout.module.scss';
+import styles from "./Layout.module.scss";
 
 const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pathname } = useRouter();
@@ -24,6 +24,9 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
         </Link>,
         <Link href={ROUTES.OTHER_PROJECTS} key={ROUTES.OTHER_PROJECTS}>
           Other Projects
+        </Link>,
+        <Link href={ROUTES.FEEDBACK} key={ROUTES.FEEDBACK}>
+          Feedback
         </Link>,
         <Link href={ROUTES.SOURCE} key={ROUTES.SOURCE}>
           Source
@@ -51,7 +54,7 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
 
   const navLinksColorized = colorizeJSXArray(navLinks);
   const selectedLink = navLinksColorized.find((link) => link.props.href === pathname);
-  const colorIndex = selectedLink?.props.className.split('Bg')[1];
+  const colorIndex = selectedLink?.props.className.split("Bg")[1];
 
   return (
     <div className='flex h-fit'>

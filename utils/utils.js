@@ -4,6 +4,7 @@ export const ROUTES = {
   ADD_PROJECT: "/add-project",
   OTHER_PROJECTS: "/other-projects",
   SOURCE: "/source",
+  FEEDBACK: "/feedback",
   LOG: "/log",
   REGISTER: "/register",
   PROFILE: "/profile",
