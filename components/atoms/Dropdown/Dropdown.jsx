@@ -25,6 +25,20 @@ const Dropdown = ({ list, selected, select, placeholder }) => {
           className={`absolute z-10 mt-2 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden w-full`}
         >
           <div className='py-1 max-h-52 overflow-y-auto'>
+            <Menu.Item as='div' key={placeholder} className='overflow-hidden'>
+              {({ active }) => (
+                <div
+                  role='presentation'
+                  className={classNames(
+                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    `block px-4 py-2 text-sm overflow-hidden border-b border-transparent-gray-05 font-semibold text-gray 
+                    tracking-wide`,
+                  )}
+                >
+                  {placeholder}
+                </div>
+              )}
+            </Menu.Item>
             {list &&
               list.map((listItem) => {
                 return (
