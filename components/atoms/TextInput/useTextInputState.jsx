@@ -1,13 +1,10 @@
 import { useState } from "react";
 
-export const useStringListState = () => {
-  const [stringList, setStringList] = useState([]);
+export const useTextInputState = () => {
   const [stringInputValue, setStringInputValue] = useState("");
   const [inputWasTouched, setInputWasTouched] = useState(false);
 
   return {
-    stringList,
-    setStringList,
     stringInputValue,
     setStringInputValue,
     inputWasTouched,

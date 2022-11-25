@@ -4,7 +4,7 @@ import TextInput from "../../atoms/TextInput/TextInput";
 import { useEffect, useState } from "react";
 import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
 
-const StringList = ({ textInput, setList, list, emptyValue = "" }) => {
+const StringList = ({ textInput, setList, list, emptyValue = "", onChange }) => {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
@@ -19,12 +19,14 @@ const StringList = ({ textInput, setList, list, emptyValue = "" }) => {
         setDisabled(true);
       }
     } else setDisabled(false);
-  }, [textInput, emptyValue]);
+  }, [emptyValue, textInput]);
 
   const handleInputContent = () => {
+    if (textInput.value === emptyValue) return;
     setList((prev) => {
       const newArr = [...prev];
       newArr.push(textInput.value);
+      onChange && onChange(newArr);
       return newArr;
     });
     textInput.setValue(emptyValue);
@@ -35,6 +37,7 @@ const StringList = ({ textInput, setList, list, emptyValue = "" }) => {
       const newArr = [...prev];
       const index = prev.indexOf(entry);
       newArr.splice(index, 1);
+      onChange && onChange(newArr);
       return newArr;
     });
   };
@@ -63,6 +66,10 @@ const StringList = ({ textInput, setList, list, emptyValue = "" }) => {
               textInput.setValue("");
               textInput.untouch();
             }
+          }}
+          clearValue={(ref) => {
+            textInput.setValue("");
+            textInput.untouch();
           }}
         />
         <Button

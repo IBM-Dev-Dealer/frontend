@@ -7,15 +7,22 @@ import { useStringListState } from "../../molecules/StringList/useStringListStat
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import { generateNumbers } from "../../../utils/utils";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import TextInput from "../../atoms/TextInput/TextInput";
+import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
 
 const INITIAL_VALUES = {
   client: "",
+  clientLogoURL: "",
+  projectName: "",
   technologies: [],
   requiredCapacity: [],
+  repoName: "",
   repos: [],
   slackChannelName: "",
   slackChannels: [],
+  accessZonesName: "",
+  accessZones: [],
 };
 
 const AddProject = ({ fields }) => {
@@ -25,7 +32,7 @@ const AddProject = ({ fields }) => {
   );
   const capacityDataFields = useMemo(
     () => [
-      { codename: "devnumber", label: "No. of devs", fields: generateNumbers(100) },
+      { codename: "noOfDevs", label: "No. of devs", fields: generateNumbers(100) },
       fields["seniorityLevel"] ?? [],
     ],
     [fields],
@@ -40,19 +47,55 @@ const AddProject = ({ fields }) => {
     setInputWasTouched: setSlackChannelInputWasTouched,
   } = useStringListState();
 
-  const { objectList: technologies, setObjectList: setTechnologies } = useObjectListState();
+  const {
+    stringList: reposList,
+    setStringList: setReposList,
+    stringInputValue: reposInputValue,
+    setStringInputValue: setReposInputValue,
+    inputWasTouched: reposInputWasTouched,
+    setInputWasTouched: setReposInputWasTouched,
+  } = useStringListState();
 
+  const {
+    stringList: accessZonesList,
+    setStringList: setAccessZonesList,
+    stringInputValue: accessZonesInputValue,
+    setStringInputValue: setAccessZonesInputValue,
+    inputWasTouched: accessZonesInputWasTouched,
+    setInputWasTouched: setAccessZonesInputWasTouched,
+  } = useStringListState();
+
+  const { objectList: technologies, setObjectList: setTechnologies } = useObjectListState();
   const { objectList: requiredCapacity, setObjectList: setRequiredCapacity } = useObjectListState();
+  const { stringInputValue: clientInputValue, setStringInputValue: setClientInputValue } =
+    useTextInputState();
+  const {
+    stringInputValue: clientLogoURLInputValue,
+    setStringInputValue: setClientLogoURLInputValue,
+  } = useTextInputState();
+  const { stringInputValue: projectNameInputValue, setStringInputValue: setProjectNameInputValue } =
+    useTextInputState();
+
+  const handleOnChange = useCallback(
+    (setFormData, fieldName) => (data) => setFormData(fieldName, data),
+    [],
+  );
 
   const validate = yup.object({
-    client: yup.string().required("Please enter client name."),
+    client: yup.string().required("Enter client name."),
+    clientLogoURL: yup.string(),
+    projectName: yup.string().required("Enter project name."),
     technologies: yup.array().of(yup.object()),
+    requiredCapacity: yup.array().of(yup.object()),
+    repoName: yup.string(),
     repos: yup.array().of(yup.string()).min(1).required(),
     slackChannelName: yup.string(),
     // .test('channel-name', 'Slack channel name shall not be empty.', () =>
     //   slackChannelInputValue.length > 0 ? true : false,
     // ),
     slackChannels: yup.array().of(yup.string()).min(1).required(),
+    accessZonesName: yup.string(),
+    accessZones: yup.array().of(yup.string()).min(1).required(),
   });
 
   return (
@@ -70,17 +113,103 @@ const AddProject = ({ fields }) => {
           >
             {(formik) => {
               return (
-                <Form>
-                  <div className='flex flex-col gap-6'>
+                <Form onKeyDown={(e) => (e.key === "Enter" ? e.preventDefault() : null)}>
+                  <div className='flex flex-col gap-2'>
+                    <TextInput
+                      name='client'
+                      labelText='Client'
+                      value={clientInputValue}
+                      onChange={(e) => {
+                        setClientInputValue(e.target.value);
+                        handleOnChange(formik.setFieldValue, "client")(e.target.value);
+                      }}
+                      id={"addproject-client"}
+                      placeholder='Client'
+                      clearValue={(ref) => {
+                        setClientInputValue("");
+                        formik.setFieldValue("client", "");
+                        ref.current.blur();
+                      }}
+                    />
+
+                    <TextInput
+                      name='clientLogoURL'
+                      labelText='Client Logo URL'
+                      value={clientLogoURLInputValue}
+                      onChange={(e) => {
+                        setClientLogoURLInputValue(e.target.value);
+                        handleOnChange(formik.setFieldValue, "clientLogoURL")(e.target.value);
+                      }}
+                      id={"addproject-clientLogoURL"}
+                      placeholder='ClientLogoURL'
+                      clearValue={(ref) => {
+                        setClientLogoURLInputValue("");
+                        formik.setFieldValue("clientLogoURL", "");
+                        ref.current.blur();
+                      }}
+                    />
+
+                    <TextInput
+                      name='projectName'
+                      labelText='Project Name'
+                      value={projectNameInputValue}
+                      onChange={(e) => {
+                        setProjectNameInputValue(e.target.value);
+                        handleOnChange(formik.setFieldValue, "projectName")(e.target.value);
+                      }}
+                      id={"addproject-projectName"}
+                      placeholder='ProjectName'
+                      clearValue={(ref) => {
+                        setProjectNameInputValue("");
+                        formik.setFieldValue("projectName", "");
+                        ref.current.blur();
+                      }}
+                    />
+
+                    <ObjectList
+                      setList={setTechnologies}
+                      list={technologies}
+                      onChange={handleOnChange(formik.setFieldValue, "technologies")}
+                      name='technologies'
+                      dataFields={technologiesDataFields}
+                      label='Add Technologies'
+                    />
+
+                    <ObjectList
+                      setList={setRequiredCapacity}
+                      list={requiredCapacity}
+                      onChange={handleOnChange(formik.setFieldValue, "requiredCapacity")}
+                      name='requiredCapacity'
+                      dataFields={capacityDataFields}
+                      label='Add Required Capacity'
+                    />
+
+                    <StringList
+                      setList={setReposList}
+                      list={reposList}
+                      onChange={handleOnChange(formik.setFieldValue, "repos")}
+                      name='repos'
+                      textInput={{
+                        label: "Repositories",
+                        id: "addproject-repos",
+                        name: "repoName",
+                        value: reposInputValue,
+                        setValue: setReposInputValue,
+                        touch: () => setReposInputWasTouched(true),
+                        untouch: () => setReposInputWasTouched(false),
+                        wasTouched: reposInputWasTouched,
+                      }}
+                    />
+
                     <StringList
                       emptyValue='#'
                       setList={setSlackChannelList}
                       list={slackChannelList}
+                      onChange={handleOnChange(formik.setFieldValue, "slackChannels")}
                       name='slackChannels'
                       textInput={{
                         label: "Slack Channels",
-                        id: "addproject-stringlist",
-                        disabled: false,
+                        id: "addproject-slackchannels",
                         name: "slackChannelName",
                         value: slackChannelInputValue,
                         setValue: setSlackChannelInputValue,
@@ -90,20 +219,21 @@ const AddProject = ({ fields }) => {
                       }}
                     />
 
-                    <ObjectList
-                      setList={setTechnologies}
-                      list={technologies}
-                      name='technologies'
-                      dataFields={technologiesDataFields}
-                      label='Add technologies'
-                    />
-
-                    <ObjectList
-                      setList={setRequiredCapacity}
-                      list={requiredCapacity}
-                      name='requiredCapacity'
-                      dataFields={capacityDataFields}
-                      label='Add required capacity'
+                    <StringList
+                      setList={setAccessZonesList}
+                      list={accessZonesList}
+                      onChange={handleOnChange(formik.setFieldValue, "accessZones")}
+                      name='accessZones'
+                      textInput={{
+                        label: "Access Zones",
+                        id: "addproject-accessZones",
+                        name: "accessZonesName",
+                        value: accessZonesInputValue,
+                        setValue: setAccessZonesInputValue,
+                        touch: () => setAccessZonesInputWasTouched(true),
+                        untouch: () => setAccessZonesInputWasTouched(false),
+                        wasTouched: accessZonesInputWasTouched,
+                      }}
                     />
 
                     <Button label={"Submit"} type='submit' />

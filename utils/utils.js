@@ -51,7 +51,7 @@ export const colorizeJSXArray = (JSXElements) => {
 
 export const generateNumbers = (maxLimit) => {
   const nums = [];
-  for (let i = 0; i <= maxLimit; i++) {
+  for (let i = 1; i <= maxLimit; i++) {
     nums.push({ label: i, codename: i });
   }
   return nums;
