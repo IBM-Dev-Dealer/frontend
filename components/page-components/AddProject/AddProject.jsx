@@ -10,11 +10,13 @@ import { generateNumbers } from "../../../utils/utils";
 import { useCallback, useMemo } from "react";
 import TextInput from "../../atoms/TextInput/TextInput";
 import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
+import PickDate from "../../atoms/PickDate/PickDate";
 
 const INITIAL_VALUES = {
   client: "",
   clientLogoURL: "",
   projectName: "",
+  projectPeriod: { start: null, end: null },
   technologies: [],
   requiredCapacity: [],
   repoName: "",
@@ -85,6 +87,7 @@ const AddProject = ({ fields }) => {
     client: yup.string().required("Enter client name."),
     clientLogoURL: yup.string(),
     projectName: yup.string().required("Enter project name."),
+    projectPeriod: yup.object({ start: yup.string(), end: yup.string() }),
     technologies: yup.array().of(yup.object()),
     requiredCapacity: yup.array().of(yup.object()),
     repoName: yup.string(),
@@ -163,6 +166,17 @@ const AddProject = ({ fields }) => {
                         setProjectNameInputValue("");
                         formik.setFieldValue("projectName", "");
                         ref.current.blur();
+                      }}
+                    />
+
+                    <PickDate
+                      name='projectPeriod'
+                      label='Project duration'
+                      isPeriod
+                      placeholderPeriod={{ start: "Starting date", end: "Ending date" }}
+                      periodState={{
+                        set: handleOnChange(formik.setFieldValue, "projectPeriod"),
+                        value: formik.values.projectPeriod,
                       }}
                     />
 
