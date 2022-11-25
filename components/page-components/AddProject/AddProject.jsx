@@ -10,11 +10,13 @@ import { generateNumbers } from "../../../utils/utils";
 import { useCallback, useMemo } from "react";
 import TextInput from "../../atoms/TextInput/TextInput";
 import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
+import PickDate from "../../atoms/PickDate/PickDate";
 
 const INITIAL_VALUES = {
   client: "",
   clientLogoURL: "",
   projectName: "",
+  projectPeriod: { start: null, end: null },
   technologies: [],
   requiredCapacity: [],
   repoName: "",
@@ -24,6 +26,24 @@ const INITIAL_VALUES = {
   accessZonesName: "",
   accessZones: [],
 };
+
+const VALIDATE = yup.object({
+  client: yup.string().required("Enter client name."),
+  clientLogoURL: yup.string(),
+  projectName: yup.string().required("Enter project name."),
+  projectPeriod: yup.object({ start: yup.string(), end: yup.string() }),
+  technologies: yup.array().of(yup.object()),
+  requiredCapacity: yup.array().of(yup.object()),
+  repoName: yup.string(),
+  repos: yup.array().of(yup.string()).min(1).required(),
+  slackChannelName: yup.string(),
+  // .test('channel-name', 'Slack channel name shall not be empty.', () =>
+  //   slackChannelInputValue.length > 0 ? true : false,
+  // ),
+  slackChannels: yup.array().of(yup.string()).min(1).required(),
+  accessZonesName: yup.string(),
+  accessZones: yup.array().of(yup.string()).min(1).required(),
+});
 
 const AddProject = ({ fields }) => {
   const technologiesDataFields = useMemo(
@@ -81,23 +101,6 @@ const AddProject = ({ fields }) => {
     [],
   );
 
-  const validate = yup.object({
-    client: yup.string().required("Enter client name."),
-    clientLogoURL: yup.string(),
-    projectName: yup.string().required("Enter project name."),
-    technologies: yup.array().of(yup.object()),
-    requiredCapacity: yup.array().of(yup.object()),
-    repoName: yup.string(),
-    repos: yup.array().of(yup.string()).min(1).required(),
-    slackChannelName: yup.string(),
-    // .test('channel-name', 'Slack channel name shall not be empty.', () =>
-    //   slackChannelInputValue.length > 0 ? true : false,
-    // ),
-    slackChannels: yup.array().of(yup.string()).min(1).required(),
-    accessZonesName: yup.string(),
-    accessZones: yup.array().of(yup.string()).min(1).required(),
-  });
-
   return (
     <>
       <Title>Add Project</Title>
@@ -105,7 +108,7 @@ const AddProject = ({ fields }) => {
         <div className='max-w-sm m-auto'>
           <Formik
             initialValues={INITIAL_VALUES}
-            validationSchema={validate}
+            validationSchema={VALIDATE}
             onSubmit={(values) => {
               //   submitHandler(values);
               console.log("[AddProject] form values", values);
@@ -163,6 +166,17 @@ const AddProject = ({ fields }) => {
                         setProjectNameInputValue("");
                         formik.setFieldValue("projectName", "");
                         ref.current.blur();
+                      }}
+                    />
+
+                    <PickDate
+                      name='projectPeriod'
+                      label='Project duration'
+                      isPeriod
+                      placeholderPeriod={{ start: "Starting date", end: "Ending date" }}
+                      periodState={{
+                        set: handleOnChange(formik.setFieldValue, "projectPeriod"),
+                        value: formik.values.projectPeriod,
                       }}
                     />
 
