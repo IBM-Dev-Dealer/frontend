@@ -35,7 +35,8 @@ const VALIDATE = {
     innovation: yup.object({ label: yup.string(), codename: yup.string() }).nullable(true),
     newSeniorityLevels: yup
       .array()
-      .of(yup.object({ technology: yup.object(), seniorityLevel: yup.object() })),
+      .of(yup.object({ technology: yup.object(), seniorityLevel: yup.object() }))
+      .nullable(true),
     additionalFeedback: yup.string(),
   }),
   DEV: yup.object({
