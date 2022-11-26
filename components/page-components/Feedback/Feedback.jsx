@@ -7,6 +7,7 @@ import { DIMENSIONS_RATING } from "./staticVariables";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useState } from "react";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
+import Button from "../../atoms/Button/Button";
 
 const INITIAL_VALUES = {
   PM: {
@@ -22,11 +23,11 @@ const INITIAL_VALUES = {
 
 const VALIDATE = {
   PM: yup.object({
-    dev: yup.string(),
+    dev: yup.object(),
     teamInteraction: yup.number(),
-    businessResults: yup.object({ label: yup.string(), codename: yup.string() }),
-    clientSuccess: yup.object({ label: yup.string(), codename: yup.string() }),
-    innovation: yup.object({ label: yup.string(), codename: yup.string() }),
+    businessResults: yup.object({ label: yup.string(), codename: yup.string() }).nullable(true),
+    clientSuccess: yup.object({ label: yup.string(), codename: yup.string() }).nullable(true),
+    innovation: yup.object({ label: yup.string(), codename: yup.string() }).nullable(true),
     newSeniorityLevels: yup
       .array()
       .of(yup.object({ technology: yup.object(), seniorityLevel: yup.object() })),
@@ -65,7 +66,6 @@ const Feedback = ({
               }}
             >
               {(formik) => {
-                console.log(formik.values);
                 return (
                   <Form
                     onKeyDown={(e) => (e.key === "Enter" ? e.preventDefault() : null)}
@@ -76,6 +76,7 @@ const Feedback = ({
                       list={devsWhoRequestedFeedback}
                       placeholder='Developer to give feedback to'
                       select={(dev) => {
+                        setNewSeniorityLevelsVisible(false);
                         formik.resetForm();
                         formik.setFieldValue("dev", dev);
                       }}
@@ -130,7 +131,7 @@ const Feedback = ({
                                 <li
                                   key={i}
                                   className='text-sm'
-                                >{`${item.technology.label} - ${item.seniorityLevel.label}`}</li>
+                                >{`${item.technology.label} / ${item.seniorityLevel.label}`}</li>
                               ))}
                             </ul>
                             <div className='flex justify-end'>
@@ -172,13 +173,14 @@ const Feedback = ({
                         )}
 
                         {/* TODO: replace with proper list component - TEXT AREA */}
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2 my-2'>
                           <div className='text-sm'>Add more feedback</div>
                           <textarea
+                            className={`w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4 
+                            text-sm overflow-auto`}
                             name='additionalFeedback'
                             onKeyDown={(e) => {
                               if (e.key === "Enter") {
-                                console.log(formik.values.additionalFeedback);
                                 e.preventDefault();
                                 formik.setFieldValue(
                                   "additionalFeedback",
@@ -191,9 +193,10 @@ const Feedback = ({
                               formik.setFieldValue("additionalFeedback", e.target.value);
                             }}
                             rows={12}
-                            className='w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4'
                           />
                         </div>
+
+                        <Button label='Submit Feedback' type='submit' />
                       </div>
                     )}
                   </Form>
