@@ -52,7 +52,7 @@ const Feedback = ({
   devData,
   newSeniorityLevelFields,
 }) => {
-  const [feedbackView, setFeedbackView] = useState(loggedUserRoles[1]);
+  const [feedbackView, setFeedbackView] = useState("");
   const [newSeniorityLevelsVisible, setNewSeniorityLevelsVisible] = useState(false);
 
   const { objectList: newSeniorityLevels, setObjectList: setNewSeniorityLevels } =
@@ -70,7 +70,7 @@ const Feedback = ({
           infoMessage={"Change feedback view based on what you want to give feedback for."}
           infoMessagePosition='right'
           list={loggedUserRoles.map((role) => ({ label: role }))}
-          placeholder={`Give feedback as: ${feedbackView}`}
+          placeholder={feedbackView ? `Give feedback as: ${feedbackView}` : "Select Feedback View"}
           select={(role) => setFeedbackView(role.label)}
         />
       </div>
