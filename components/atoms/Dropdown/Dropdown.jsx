@@ -5,7 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import classNames from "classnames";
 import InfoNote from "../InfoNote/InfoNote";
 
-const Dropdown = ({ list, selected, select, placeholder, infoMessage }) => {
+const Dropdown = ({ list, selected, select, placeholder, infoMessage, infoMessagePosition }) => {
   return (
     <div className='flex flex-row items-center gap-2 my-2 w-full'>
       <Menu as='div' className='relative inline-block text-left w-full'>
@@ -69,7 +69,7 @@ const Dropdown = ({ list, selected, select, placeholder, infoMessage }) => {
           </Menu.Items>
         </Transition>
       </Menu>
-      {infoMessage && <InfoNote message={infoMessage} />}
+      {infoMessage && <InfoNote message={infoMessage} position={infoMessagePosition} />}
     </div>
   );
 };

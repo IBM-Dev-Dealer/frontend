@@ -19,6 +19,11 @@ const INITIAL_VALUES = {
     newSeniorityLevels: [],
     additionalFeedback: "",
   },
+  DEV: {
+    overallRating: 1,
+    whatWentWell: "",
+    whatCouldBeImproved: "",
+  },
 };
 
 const VALIDATE = {
@@ -33,15 +38,21 @@ const VALIDATE = {
       .of(yup.object({ technology: yup.object(), seniorityLevel: yup.object() })),
     additionalFeedback: yup.string(),
   }),
+  DEV: yup.object({
+    overallRating: yup.number(),
+    whatWentWell: yup.string(),
+    whatCouldBeImproved: yup.string(),
+  }),
 };
 
 const Feedback = ({
-  loggedUserRole,
+  loggedUserRoles,
   projectId,
   devsWhoRequestedFeedback,
   devData,
   newSeniorityLevelFields,
 }) => {
+  const [feedbackView, setFeedbackView] = useState(loggedUserRoles[1]);
   const [newSeniorityLevelsVisible, setNewSeniorityLevelsVisible] = useState(false);
 
   const { objectList: newSeniorityLevels, setObjectList: setNewSeniorityLevels } =
@@ -54,9 +65,22 @@ const Feedback = ({
   return (
     <div>
       <Title>Feedback</Title>
+      <div className='mb-6 max-w-xl m-auto'>
+        <Dropdown
+          infoMessage={"Change feedback view based on what you want to give feedback for."}
+          infoMessagePosition='right'
+          list={loggedUserRoles.map((role) => ({ label: role }))}
+          placeholder={`Give feedback as: ${feedbackView}`}
+          select={(role) => setFeedbackView(role.label)}
+        />
+      </div>
+
       <div>
-        {loggedUserRole === "project-manager" && (
+        {feedbackView === "project-manager" && (
           <div className='max-w-md m-auto'>
+            <div className='text-center	drop-shadow-sm text-xl mb-2'>
+              Give feedback to a developer
+            </div>
             <Formik
               initialValues={INITIAL_VALUES.PM}
               validationSchema={VALIDATE.PM}
@@ -192,13 +216,97 @@ const Feedback = ({
                             onChange={(e) => {
                               formik.setFieldValue("additionalFeedback", e.target.value);
                             }}
-                            rows={12}
+                            rows={8}
                           />
                         </div>
 
                         <Button label='Submit Feedback' type='submit' />
                       </div>
                     )}
+                  </Form>
+                );
+              }}
+            </Formik>
+          </div>
+        )}
+
+        {feedbackView === "dev" && (
+          <div className='max-w-md m-auto'>
+            <div className='text-center	drop-shadow-sm text-xl mb-2'>Give feedback to a project</div>
+            <Formik
+              initialValues={INITIAL_VALUES.DEV}
+              validationSchema={VALIDATE.DEV}
+              onSubmit={(values) => {
+                //   submitHandler(values);
+                console.log("[AddProject] form values", values);
+              }}
+            >
+              {(formik) => {
+                return (
+                  <Form
+                    onKeyDown={(e) => (e.key === "Enter" ? e.preventDefault() : null)}
+                    className='flex flex-col gap-2'
+                  >
+                    <StarRating
+                      name='overallRating'
+                      rating={formik.values.overallRating}
+                      setRating={(value) => formik.setFieldValue("overallRating", value)}
+                      maxRating={5}
+                      label={"Overall Rating"}
+                      infoMessage={
+                        "Rating of the overall project. How well did the project go. How satisfying or stressful it was. How were the tasks managed."
+                      }
+                    />
+
+                    {/* TODO: replace with proper list component - TEXT AREA */}
+                    <div className='flex flex-col gap-2 my-2'>
+                      <div className='text-sm'>What went well</div>
+                      <textarea
+                        className={`w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4 
+                            text-sm overflow-auto`}
+                        name='whatWentWell'
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            formik.setFieldValue(
+                              "whatWentWell",
+                              `${formik.values.whatWentWell}\r\n`,
+                            );
+                          }
+                        }}
+                        value={formik.values.whatWentWell}
+                        onChange={(e) => {
+                          formik.setFieldValue("whatWentWell", e.target.value);
+                        }}
+                        rows={8}
+                      />
+                    </div>
+
+                    {/* TODO: replace with proper list component - TEXT AREA */}
+                    <div className='flex flex-col gap-2 my-2'>
+                      <div className='text-sm'>What could be improved</div>
+                      <textarea
+                        className={`w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4 
+                            text-sm overflow-auto`}
+                        name='whatCouldBeImproved'
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            formik.setFieldValue(
+                              "whatCouldBeImproved",
+                              `${formik.values.whatCouldBeImproved}\r\n`,
+                            );
+                          }
+                        }}
+                        value={formik.values.whatCouldBeImproved}
+                        onChange={(e) => {
+                          formik.setFieldValue("whatCouldBeImproved", e.target.value);
+                        }}
+                        rows={8}
+                      />
+                    </div>
+
+                    <Button label='Submit Feedback' type='submit' />
                   </Form>
                 );
               }}

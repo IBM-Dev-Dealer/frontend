@@ -10,7 +10,7 @@ export default FeedbackPage;
 export const getStaticProps = async () => {
   const authorization = "authorization";
 
-  const loggedUserRole = "project-manager";
+  const loggedUserRoles = ["project-manager", "dev"];
   const projectId = "id-of-project";
 
   const devData = await fetch(`${server}/api/getDevData`, {
@@ -27,9 +27,9 @@ export const getStaticProps = async () => {
     headers: { authorization },
   }).then((res) => res.json());
 
-  const props = { loggedUserRole, projectId, ...devData, newSeniorityLevelFields: fields.fields };
+  const props = { loggedUserRoles, projectId, ...devData, newSeniorityLevelFields: fields.fields };
 
-  if (loggedUserRole === "project-manager") {
+  if (loggedUserRoles.includes("project-manager")) {
     props.devsWhoRequestedFeedback = [
       { label: "Dev Devinson", userId: "dev-devinson" },
       { label: "Lev Tolstoievsky", userId: "lev-tolstoievsky" },
