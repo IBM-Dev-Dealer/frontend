@@ -18,7 +18,16 @@ export const getStaticProps = async () => {
     headers: { authorization },
   }).then((res) => res.json());
 
-  const props = { loggedUserRole, projectId, devData };
+  const queriedFields = Object.keys(devData.devData.techSeniority[0]);
+
+  const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
+
+  const fields = await fetch(`${server}/api/getFields?${queryParams}`, {
+    method: "GET",
+    headers: { authorization },
+  }).then((res) => res.json());
+
+  const props = { loggedUserRole, projectId, ...devData, newSeniorityLevelFields: fields.fields };
 
   if (loggedUserRole === "project-manager") {
     props.devsWhoRequestedFeedback = [
