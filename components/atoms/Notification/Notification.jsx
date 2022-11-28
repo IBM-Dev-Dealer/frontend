@@ -1,33 +1,8 @@
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { useEffect, useState } from "react";
-
-const setNotificationColor = (kind, setColor) => {
-  switch (kind) {
-    case "success":
-      setColor("border-y-green");
-      break;
-    case "error":
-      setColor("border-y-");
-      break;
-    case "info":
-      setColor("border-y-mustard");
-      break;
-  }
-};
+import { useState } from "react";
 
 const Notification = ({ message, kind = "success", onClose = () => {} }) => {
-  const [borderColorClass, setBorderColorClass] = useState("border-y-green");
   const [opacity, setOpacity] = useState("opacity-100");
-
-  useEffect(() => {
-    setNotificationColor(kind, setBorderColorClass);
-  }, []);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setOpacity("opacity-0");
-  //   }, 5000);
-  // }, []);
 
   if (opacity === "opacity-0")
     setTimeout(() => {
@@ -36,13 +11,17 @@ const Notification = ({ message, kind = "success", onClose = () => {} }) => {
 
   return (
     <div
-      className={`relative w-64 bg-white shadow-xl rounded-xl border-y-4 ${borderColorClass} ${opacity} 
+      className={`relative w-64 bg-white shadow-xl rounded-xl border-y-4 
+      ${kind === "success" && "border-y-green"} 
+      ${kind === "error" && "border-y-red"} 
+      ${kind === "info" && "border-y-mustard"} 
+      ${opacity} 
       flex justify-between items-center p-4`}
     >
       <div className='text-sm select-none'>{message}</div>
       <XMarkIcon
         onClick={() => {
-          onClose();
+          setOpacity("opacity-0");
         }}
         className={`cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50`}
       />
