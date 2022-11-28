@@ -6,12 +6,15 @@ import { ROUTES, colorizeJSXArray, getTitle } from "../../../utils/utils";
 import styles from "./Layout.module.scss";
 import { useEffect, useMemo } from "react";
 import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
+import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
 
 const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pathname } = useRouter();
   const title = getTitle(pathname);
 
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
+
+  const { notify } = useNotifications();
 
   const colorizeNavTabs = () => {
     const navLinksColorized = colorizeJSXArray(navLinks);
@@ -101,7 +104,6 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
           </div>
         </div>
       </div>
-      {/* <Notification message={"fwefwefwefrwef"} kind='success' /> */}
     </>
   );
 };
