@@ -1,52 +1,15 @@
 import Title from "../../atoms/Title/Title";
-import * as yup from "yup";
 import { Form, Formik } from "formik";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import StarRating from "../../atoms/StarRating/StarRating";
-import { DIMENSIONS_RATING } from "./staticVariables";
+import { DIMENSIONS_RATING, INFO_MESSAGE } from "./constants";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useState } from "react";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import Button from "../../atoms/Button/Button";
 import Link from "next/link";
 import { ROUTES } from "../../../utils/utils";
-
-const INITIAL_VALUES = {
-  PM: {
-    dev: "",
-    teamInteraction: 1,
-    businessResults: null,
-    clientSuccess: null,
-    innovation: null,
-    newSeniorityLevels: [],
-    additionalFeedback: "",
-  },
-  DEV: {
-    overallRating: 1,
-    whatWentWell: "",
-    whatCouldBeImproved: "",
-  },
-};
-
-const VALIDATE = {
-  PM: yup.object({
-    dev: yup.object(),
-    teamInteraction: yup.number(),
-    businessResults: yup.object({ label: yup.string(), codename: yup.string() }).nullable(true),
-    clientSuccess: yup.object({ label: yup.string(), codename: yup.string() }).nullable(true),
-    innovation: yup.object({ label: yup.string(), codename: yup.string() }).nullable(true),
-    newSeniorityLevels: yup
-      .array()
-      .of(yup.object({ technology: yup.object(), seniorityLevel: yup.object() }))
-      .nullable(true),
-    additionalFeedback: yup.string(),
-  }),
-  DEV: yup.object({
-    overallRating: yup.number(),
-    whatWentWell: yup.string(),
-    whatCouldBeImproved: yup.string(),
-  }),
-};
+import { INITIAL_VALUES, VALIDATE } from "./formikConstants";
 
 const GiveFeedback = ({
   loggedUserRoles,
@@ -77,9 +40,8 @@ const GiveFeedback = ({
         </Link>
       </Title>
       <div className='mb-6 max-w-xl m-auto'>
-        <Button className='my-6' label='Switch to: Give Feedback' />
         <Dropdown
-          infoMessage={"Change feedback view based on what you want to give feedback for."}
+          infoMessage={INFO_MESSAGE.FEEDBACK_VIEW}
           infoMessagePosition='right'
           list={loggedUserRoles.map((role) => ({ label: role }))}
           placeholder={feedbackView ? `Give feedback as: ${feedbackView}` : "Select Feedback View"}
@@ -126,7 +88,7 @@ const GiveFeedback = ({
                           placeholder='Business Results'
                           selected={formik.values.businessResults}
                           select={(value) => formik.setFieldValue("businessResults", value)}
-                          infoMessage='This section will evaluate your individual contribution to the account results: how you delivered your key committed business and financial objectives.'
+                          infoMessage={INFO_MESSAGE.BUSINESS_RESULTS}
                         />
 
                         <Dropdown
@@ -135,7 +97,7 @@ const GiveFeedback = ({
                           placeholder='Client Success'
                           selected={formik.values.clientSuccess}
                           select={(value) => formik.setFieldValue("clientSuccess", value)}
-                          infoMessage='Your individual contribution to client success. Rates your impact on client outcomes by going above and beyond to add value to internal and/or external IBM clients. Creates work products that meet client expectation. Delivers quality work products. Effective time management. Effective communication.'
+                          infoMessage={INFO_MESSAGE.CLIENT_SUCCESS}
                         />
 
                         <Dropdown
@@ -144,7 +106,7 @@ const GiveFeedback = ({
                           placeholder='Innovation'
                           selected={formik.values.innovation}
                           select={(value) => formik.setFieldValue("innovation", value)}
-                          infoMessage='Your demonstration of innovation through leveraging intellectual capital and best practices to bring improvements in how we work and what we deliver. Locates internal intellectual capital and connects with experts.'
+                          infoMessage={INFO_MESSAGE.INNOVATION}
                         />
 
                         <StarRating
@@ -153,9 +115,7 @@ const GiveFeedback = ({
                           setRating={(value) => formik.setFieldValue("teamInteraction", value)}
                           maxRating={5}
                           label={"Team Interaction"}
-                          infoMessage={
-                            "Your collaboration and teaming to cultivate positive working relationships with project team members and other stakeholders, such as clients and partners."
-                          }
+                          infoMessage={INFO_MESSAGE.TEAM_INTERACTION}
                         />
 
                         {/* TODO: replace with proper list component - UNORDERED LIST */}
@@ -198,7 +158,6 @@ const GiveFeedback = ({
                               } ?? [],
                               newSeniorityLevelFields["seniorityLevel"] ?? [],
                             ]}
-                            // list={formik.values.newSeniorityLevels}
                             list={newSeniorityLevels}
                             setList={(newList) => {
                               formik.setFieldValue("newSeniorityLevels", newList);

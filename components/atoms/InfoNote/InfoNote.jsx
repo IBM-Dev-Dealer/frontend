@@ -1,7 +1,7 @@
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 
-const InfoNote = ({ message, position = "left" }) => {
+const InfoNote = ({ message, position = "right" }) => {
   const [displayMessage, setDisplayMessage] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -24,8 +24,8 @@ const InfoNote = ({ message, position = "left" }) => {
       <div
         className={`leading-5 select-none p-4 rounded-xl shadow-lg border-t-orangeade border-t-2 text-xs z-10 w-64 bg-white 
         absolute top-8
-        ${position === "left" && "left-0"}
-        ${position === "right" && "right-0"}
+        ${position === "right" && "left-0"}
+        ${position === "left" && "right-0"}
         ${position === "center" && "-left-28"}
         opacity-${displayMessage ? "100" : "0"} ${isHidden ? "hidden" : "block"}`}
       >
