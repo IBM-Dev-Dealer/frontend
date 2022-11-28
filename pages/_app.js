@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loader from "../components/atoms/Loader/Loader";
 import Layout from "../components/page-components/Layout/Layout";
-import { PageColorContextProvider } from "../context/pageColorContext/PageColorContextProvider";
+import { PageColorContextProvider } from "../context/pageColorContext/providers/PageColorContextProvider";
 import "../styles/globals.scss";
 
 const App = ({ Component, pageProps }) => {

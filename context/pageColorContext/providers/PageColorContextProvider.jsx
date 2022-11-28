@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-// import { PageColorContext } from "../pages/_app";
 
 export const PageColorContext = createContext();
 
