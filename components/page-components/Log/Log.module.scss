@@ -1,0 +1,4 @@
+@import "../../../styles/colors";
+.linkColor {
+	color: map-get($colors, "orangeade");
+}
