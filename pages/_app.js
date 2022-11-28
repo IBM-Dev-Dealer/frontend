@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import Loader from "../components/atoms/Loader/Loader";
 import Layout from "../components/page-components/Layout/Layout";
 import { PageColorContextProvider } from "../context/pageColorContext/PageColorContextProvider";
@@ -6,11 +7,14 @@ import "../styles/globals.scss";
 
 const App = ({ Component, pageProps }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { events: routerEvents } = useRouter();
+
   const { logged, isPM, error } = pageProps;
 
-  // useEffect(() => {
-  //   setTimeout(() => setIsLoading(false), 2000);
-  // }, []);
+  useEffect(() => {
+    routerEvents.on("routeChangeStart", () => setIsLoading(true));
+    routerEvents.on("routeChangeComplete", () => setIsLoading(false));
+  }, [routerEvents]);
 
   return (
     <PageColorContextProvider>
