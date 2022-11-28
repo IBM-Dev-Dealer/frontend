@@ -59,7 +59,7 @@ const Login = () => {
 							className={classNames("text-xs", linkColor)}
 							href={ROUTES.REGISTER}
 						>
-							Clik Here!
+							Click Here!
 						</Link>
 					</p>
 				</div>
