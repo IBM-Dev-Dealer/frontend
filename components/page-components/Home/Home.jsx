@@ -17,7 +17,7 @@ const Home = () => {
         onClick={() => {
           notify({
             kind: "error",
-            message: "erfgherth gwrts betzr h bdsrt ndrt hb set ns rtn sr g sd r",
+            message: "This was added manually",
           });
           setIsLoading(true);
           setTimeout(() => {

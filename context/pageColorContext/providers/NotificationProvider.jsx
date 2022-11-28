@@ -10,15 +10,15 @@ export const NotificationContextProvider = ({ children }) => {
       message: "This is a test messae erthe rt hfrjythertnert hw etg sr th bwet g a4 a5h srt hsr5.",
     },
     {
-      kind: "success",
-      message: "This is a test messae erthe rt hfrjythertnert hw etg sr th bwet g a4 a5h srt hsr5.",
+      kind: "error",
+      message: "Thidsadasdsdasw etg sr th bwet g a4 a5h srt hsr5.",
     },
   ]);
 
   const notify = (newNotification) =>
     setNotifications((prev) => {
       const newNotifications = [...prev];
-      newNotifications.push(newNotification);
+      newNotifications.unshift(newNotification);
       return newNotifications;
     });
 
@@ -38,16 +38,12 @@ export const NotificationContextProvider = ({ children }) => {
   return (
     <NotificationContext.Provider value={value}>
       <>{children}</>
-      <div className='absolute bottom-12 left-12 max-w-xs flex flex-col gap-4'>
+      <div className='absolute bottom-12 left-12 flex flex-col gap-4'>
         {notifications.map((notification, i) => (
           <Notification
             key={i}
-            message={
-              notification +
-              " .  " +
-              "This is a test messae erthe rt hfrjythertnert hw etg sr th bwet g a4 a5h srt hsr5."
-            }
-            kind='success'
+            message={notification.message}
+            kind={notification.kind}
             onClose={() => {
               onNotificationClose(i);
             }}

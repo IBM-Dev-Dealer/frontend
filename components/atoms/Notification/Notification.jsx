@@ -23,11 +23,11 @@ const Notification = ({ message, kind = "success", onClose = () => {} }) => {
     setNotificationColor(kind, setBorderColorClass);
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setOpacity("opacity-0");
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setOpacity("opacity-0");
+  //   }, 5000);
+  // }, []);
 
   if (opacity === "opacity-0")
     setTimeout(() => {
@@ -36,15 +36,15 @@ const Notification = ({ message, kind = "success", onClose = () => {} }) => {
 
   return (
     <div
-      className={`relative  bg-white shadow-xl rounded-xl border-y-4 ${borderColorClass} pt-8 pb-6 px-4 ${opacity}`}
+      className={`relative w-64 bg-white shadow-xl rounded-xl border-y-4 ${borderColorClass} ${opacity} 
+      flex justify-between items-center p-4`}
     >
       <div className='text-sm select-none'>{message}</div>
       <XMarkIcon
         onClick={() => {
           onClose();
         }}
-        className={`cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50 
-      absolute top-2 right-2`}
+        className={`cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50`}
       />
     </div>
   );
