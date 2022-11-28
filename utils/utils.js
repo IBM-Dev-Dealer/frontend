@@ -5,6 +5,8 @@ export const ROUTES = {
   OTHER_PROJECTS: "/other-projects",
   SOURCE: "/source",
   FEEDBACK: "/feedback",
+  GIVE_FEEDBACK: "/feedback/give-feedback",
+  REQUEST_FEEDBACK: "/feedback/request-feedback",
   LOG: "/log",
   REGISTER: "/register",
   PROFILE: "/profile",

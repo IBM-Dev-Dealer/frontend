@@ -8,6 +8,8 @@ import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useState } from "react";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import Button from "../../atoms/Button/Button";
+import Link from "next/link";
+import { ROUTES } from "../../../utils/utils";
 
 const INITIAL_VALUES = {
   PM: {
@@ -46,7 +48,7 @@ const VALIDATE = {
   }),
 };
 
-const Feedback = ({
+const GiveFeedback = ({
   loggedUserRoles,
   projectId,
   devsWhoRequestedFeedback,
@@ -65,8 +67,17 @@ const Feedback = ({
 
   return (
     <div>
-      <Title>Feedback</Title>
+      <Title>
+        Give Feedback{" "}
+        <Link
+          href={ROUTES.REQUEST_FEEDBACK}
+          className='cursor-pointer border-b hover:border-black border-transparent active:opacity-20'
+        >
+          Want to request feedback instead?
+        </Link>
+      </Title>
       <div className='mb-6 max-w-xl m-auto'>
+        <Button className='my-6' label='Switch to: Give Feedback' />
         <Dropdown
           infoMessage={"Change feedback view based on what you want to give feedback for."}
           infoMessagePosition='right'
@@ -319,4 +330,4 @@ const Feedback = ({
   );
 };
 
-export default Feedback;
+export default GiveFeedback;

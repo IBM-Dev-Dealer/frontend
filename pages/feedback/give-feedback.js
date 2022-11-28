@@ -1,11 +1,11 @@
-import Feedback from "../components/page-components/Feedback/Feedback";
-import { server } from "../config/index";
+import GiveFeedback from "../../components/page-components/GiveFeedback/GiveFeedback";
+import { server } from "../../config/index";
 
-const FeedbackPage = (props) => {
-  return <Feedback {...props} />;
+const GiveFeedbackPage = (props) => {
+  return <GiveFeedback {...props} />;
 };
 
-export default FeedbackPage;
+export default GiveFeedbackPage;
 
 export const getStaticProps = async () => {
   const authorization = "authorization";
