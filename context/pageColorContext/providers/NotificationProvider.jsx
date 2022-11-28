@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import Notification from "../../../components/atoms/Notification/Notification";
+import { replaceAll } from "../../../utils/utils";
 
 export const NotificationContext = createContext();
 
@@ -41,7 +42,7 @@ export const NotificationContextProvider = ({ children }) => {
       <div className='absolute bottom-12 left-12 flex flex-col gap-4'>
         {notifications.map((notification, i) => (
           <Notification
-            key={i}
+            key={`${notification.kind}_${replaceAll(notification.message, " ", "_")}`}
             message={notification.message}
             kind={notification.kind}
             onClose={() => {

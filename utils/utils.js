@@ -59,3 +59,12 @@ export const generateNumbers = (maxLimit) => {
   }
   return nums;
 };
+
+export const replaceAll = (fullString, stringToReplace, replacementString) => {
+  if (!fullString.includes(stringToReplace)) return fullString;
+  return replaceAll(
+    fullString.replace(stringToReplace, replacementString),
+    stringToReplace,
+    replacementString,
+  );
+};
