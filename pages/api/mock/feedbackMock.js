@@ -15,3 +15,9 @@ export const DEV_DATA = {
     },
   ],
 };
+
+export const PROJECTS = [
+  { projectId: "project-id-1", name: "Project 1" },
+  { projectId: "project-id-2", name: "Project 2" },
+  { projectId: "project-id-3", name: "Project 3" },
+];

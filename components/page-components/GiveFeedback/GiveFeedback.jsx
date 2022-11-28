@@ -77,7 +77,6 @@ const GiveFeedback = ({
         </Link>
       </Title>
       <div className='mb-6 max-w-xl m-auto'>
-        <Button className='my-6' label='Switch to: Give Feedback' />
         <Dropdown
           infoMessage={"Change feedback view based on what you want to give feedback for."}
           infoMessagePosition='right'
