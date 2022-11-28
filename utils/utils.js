@@ -1,5 +1,5 @@
 export const ROUTES = {
-  DEFAULT_PAGE: "/",
+  HOME: "/home",
   CURRENT_PROJECT: "/current-project",
   ADD_PROJECT: "/add-project",
   OTHER_PROJECTS: "/other-projects",
