@@ -15,6 +15,21 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
 
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
 
+  const colorizeNavTabs = () => {
+    const navLinksColorized = colorizeJSXArray(navLinks);
+    const newContext = { ...pageColorIndexes };
+    navLinksColorized.forEach((link) => {
+      if (!newContext[link.props.href]) {
+        newContext[link.props.href] = link.props.className.split("Bg")[1];
+      }
+    });
+    setPageColorIndexes(newContext);
+  };
+
+  useEffect(() => {
+    colorizeNavTabs();
+  }, []);
+
   const navLinks = useMemo(
     () =>
       logged
@@ -59,23 +74,6 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
           ],
     [isPM, logged],
   );
-
-  const colorizeNavTabs = () => {
-    const navLinksColorized = colorizeJSXArray(navLinks);
-
-    const newContext = { ...pageColorIndexes };
-    navLinksColorized.forEach((link) => {
-      if (!newContext[link.props.href]) {
-        newContext[link.props.href] = link.props.className.split("Bg")[1];
-      }
-      console.log("newContext", newContext);
-    });
-    setPageColorIndexes(newContext);
-  };
-
-  useEffect(() => {
-    colorizeNavTabs();
-  }, []);
 
   const navLinksColorized = useMemo(() => colorizeJSXArray(navLinks), [navLinks]);
 
