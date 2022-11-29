@@ -2,18 +2,18 @@ import Head from "next/head";
 import Link from "next/link";
 import Error from "../Error/Error";
 import { useRouter } from "next/router";
-
 import { ROUTES, colorizeJSXArray, getTitle } from "../../../utils/utils";
-
 import styles from "./Layout.module.scss";
-import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
 import { useEffect, useMemo } from "react";
+import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
+import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import Notifications from "../../molecules/Notifications/Notifications";
 
 const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pathname } = useRouter();
   const title = getTitle(pathname);
-
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
+  const { notifications, removeNotification } = useNotifications();
 
   const colorizeNavTabs = () => {
     const navLinksColorized = colorizeJSXArray(navLinks);
@@ -86,22 +86,25 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
     .filter((c) => c)[0];
 
   return (
-    <div className='flex h-fit'>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <div className={styles.layout}>
-        <header className={styles.header}>
-          <div className={styles.logoWrapper}>IBM Dev Dealer</div>
-          <nav className={styles.nav}>{navLinksColorized}</nav>
-        </header>
+    <>
+      <div className='flex h-fit'>
+        <Head>
+          <title>{title}</title>
+        </Head>
+        <div className={styles.layout}>
+          <header className={styles.header}>
+            <div className={styles.logoWrapper}>IBM Dev Dealer</div>
+            <nav className={styles.nav}>{navLinksColorized}</nav>
+          </header>
 
-        <div className={`${styles.wrapper} mainColorBorder${colorIndex}`}>
-          {error ? <Error error={error} /> : <div>{children}</div>}
-          <footer className={styles.footer}>© 2022 Decât o echipă</footer>
+          <div className={`${styles.wrapper} mainColorBorder${colorIndex}`}>
+            {error ? <Error error={error} /> : <div>{children}</div>}
+            <footer className={styles.footer}>© 2022 Decât o echipă</footer>
+          </div>
         </div>
       </div>
-    </div>
+      <Notifications notifications={notifications} removeNotification={removeNotification} />
+    </>
   );
 };
 

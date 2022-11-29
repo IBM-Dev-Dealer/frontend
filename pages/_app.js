@@ -2,7 +2,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loader from "../components/atoms/Loader/Loader";
 import Layout from "../components/page-components/Layout/Layout";
-import { PageColorContextProvider } from "../context/pageColorContext/PageColorContextProvider";
+import { NotificationContextProvider } from "../context/pageColorContext/providers/NotificationProvider";
+import { PageColorContextProvider } from "../context/pageColorContext/providers/PageColorContextProvider";
 import "../styles/globals.scss";
 
 const App = ({ Component, pageProps }) => {
@@ -17,12 +18,14 @@ const App = ({ Component, pageProps }) => {
   }, [routerEvents]);
 
   return (
-    <PageColorContextProvider>
-      <Layout logged={logged} isPM={isPM} error={error}>
-        <Loader loading={isLoading} />
-        <Component {...pageProps} />
-      </Layout>
-    </PageColorContextProvider>
+    <NotificationContextProvider>
+      <PageColorContextProvider>
+        <Layout logged={logged} isPM={isPM} error={error}>
+          <Loader loading={isLoading} />
+          <Component {...pageProps} />
+        </Layout>
+      </PageColorContextProvider>
+    </NotificationContextProvider>
   );
 };
 

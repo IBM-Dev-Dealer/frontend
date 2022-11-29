@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import Button from '../../atoms/Button/Button';
-import Title from '../../atoms/Title/Title';
+import { useState } from "react";
+import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import Button from "../../atoms/Button/Button";
+import Title from "../../atoms/Title/Title";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const { notify } = useNotifications();
 
   return (
     <>
@@ -12,10 +15,16 @@ const Home = () => {
         isLoading={isLoading}
         label='Label'
         onClick={() => {
+          const id = Math.floor(Math.random() * 10000).toString();
+          notify({
+            kind: "error",
+            message: id + " . This was added manually",
+            id,
+          });
           setIsLoading(true);
           setTimeout(() => {
             setIsLoading(false);
-          }, 2000);
+          }, 250);
         }}
       />
     </>
