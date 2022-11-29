@@ -1,14 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
 import Error from "../Error/Error";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useMemo } from "react";
 import { ROUTES, colorizeJSXArray, getTitle } from "../../../utils/utils";
 import styles from "./Layout.module.scss";
-import { useEffect, useMemo } from "react";
 import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
 import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
 import Notifications from "../../molecules/Notifications/Notifications";
-import Image from "next/image";
 import LOGO from "../../../public/logo-full-svg.svg";
 
 const Layout = ({ logged = true, isPM = false, error, children }) => {
