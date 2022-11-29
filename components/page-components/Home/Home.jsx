@@ -13,12 +13,12 @@ const Home = () => {
       <Title>Home</Title>
       <Button
         isLoading={isLoading}
-        label='Label'
+        label='Trigger error notification'
         onClick={() => {
           const id = Math.floor(Math.random() * 10000).toString();
           notify({
             kind: "error",
-            message: id + " . This was added manually",
+            message: `ID: ${id}. Error triggered manually.`,
             id,
           });
           setIsLoading(true);
