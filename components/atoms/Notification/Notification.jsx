@@ -12,6 +12,12 @@ const Notification = ({ message = "", kind = "success", id = "", onClose }) => {
     }
   }, [id, onClose, opacity]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setOpacity("opacity-0");
+    }, 10000);
+  }, []);
+
   return (
     <div
       className={`relative w-64 bg-white shadow-xl rounded-xl border-y-4 ${
@@ -23,7 +29,6 @@ const Notification = ({ message = "", kind = "success", id = "", onClose }) => {
       <div className='text-sm select-none'>{message}</div>
       <XMarkIcon
         onClick={() => {
-          console.log("id close", id);
           setOpacity("opacity-0");
         }}
         className={`cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50 shrink-0`}
