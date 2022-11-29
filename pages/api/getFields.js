@@ -1,3 +1,5 @@
+import { ALL_FIELDS } from "./mock/addProjectMock";
+
 // const getFields = async (req, res) => {
 //   if (req.method === "GET" && req.headers.authorization === "authorization") {
 //     const queryParamKeys = Object.keys(req.query);
@@ -16,5 +18,22 @@
 //   return res.status(500).json({ error: "Please authenticate!", logged: false });
 // };
 
-const getFields = async (queryParams) => ({ fields });
+const getFields = async (queryFields) => {
+  console.log("queryFields", queryFields);
+  const fields = {};
+
+  queryFields.forEach((paramKey) => {
+    const foundField = ALL_FIELDS.find((field) => field.codename === paramKey);
+    console.log("foundField", foundField);
+    if (foundField) fields[foundField.codename] = foundField;
+  });
+
+  return { fields };
+
+  // req.query.fields.forEach((paramKey) => {
+  //   const foundField = ALL_FIELDS.find((field) => field.codename === paramKey);
+  //   if (foundField) fields[foundField.codename] = foundField;
+  // });
+  // return res.status(200).json({ fields });
+};
 export default getFields;

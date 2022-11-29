@@ -1,5 +1,6 @@
 import GiveFeedback from "../../components/page-components/GiveFeedback/GiveFeedback";
 import getDevData from "../api/getDevData";
+import getFields from "../api/getFields";
 
 const GiveFeedbackPage = (props) => {
   return <GiveFeedback {...props} />;
@@ -26,10 +27,12 @@ export const getStaticProps = async () => {
 
   const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
 
-  const fields = await fetch(`${process.env.API_URL}/api/getFields?${queryParams}`, {
-    method: "GET",
-    headers: { authorization },
-  }).then((res) => res.json());
+  // const fields = await fetch(`${process.env.API_URL}/api/getFields?${queryParams}`, {
+  //   method: "GET",
+  //   headers: { authorization },
+  // }).then((res) => res.json());
+
+  const fields = await getFields(queriedFields);
 
   const props = { loggedUserRoles, projectId, ...devData, newSeniorityLevelFields: fields.fields };
 
