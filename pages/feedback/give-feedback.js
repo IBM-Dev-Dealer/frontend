@@ -1,5 +1,4 @@
 import GiveFeedback from "../../components/page-components/GiveFeedback/GiveFeedback";
-import { server } from "../../config/index";
 
 const GiveFeedbackPage = (props) => {
   return <GiveFeedback {...props} />;
