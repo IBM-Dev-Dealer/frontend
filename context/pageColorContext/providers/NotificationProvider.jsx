@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 export const NotificationContext = createContext();
 
@@ -16,10 +16,6 @@ export const NotificationContextProvider = ({ children }) => {
     },
   ]);
 
-  useEffect(() => {
-    console.log("notifications", notifications);
-  }, [notifications]);
-
   const notify = useCallback(
     (newNotification) =>
       setNotifications((prev) => {
@@ -31,7 +27,6 @@ export const NotificationContextProvider = ({ children }) => {
   );
 
   const removeNotification = useCallback((id) => {
-    console.log("removed id", id);
     setNotifications((prev) => {
       const newArr = JSON.parse(JSON.stringify(prev));
       return newArr.filter((n) => n.id !== id);
