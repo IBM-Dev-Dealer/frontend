@@ -1,5 +1,4 @@
 import RequestFeedback from "../../components/page-components/RequestFeedback/RequestFeedback";
-import { server } from "../../config";
 
 const RequestFeedbackPage = (props) => {
   return <RequestFeedback {...props} />;
@@ -12,7 +11,7 @@ export const getStaticProps = async () => {
 
   const loggedUserRoles = ["project-manager", "dev"];
 
-  const projects = await fetch(`${server}/api/getProjectsWithoutFeedback`, {
+  const projects = await fetch(`${process.env.HOST}/api/getProjectsWithoutFeedback`, {
     method: "GET",
     headers: { authorization },
   }).then((res) => res.json());

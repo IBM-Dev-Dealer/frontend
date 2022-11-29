@@ -1,5 +1,4 @@
 import AddProject from "../components/page-components/AddProject/AddProject";
-import { server } from "../config";
 
 const AddProjectPage = (props) => {
   return <AddProject {...props} />;
@@ -12,7 +11,7 @@ export const getStaticProps = async () => {
   const queriedFields = ["technology", "seniorityLevel"];
   const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
 
-  const props = await fetch(`${server}/api/getFields?${queryParams}`, {
+  const props = await fetch(`${process.env.HOST}/api/getFields?${queryParams}`, {
     method: "GET",
     headers: { authorization },
   }).then((res) => res.json());
