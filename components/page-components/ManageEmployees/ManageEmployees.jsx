@@ -1,4 +1,4 @@
-import Title from '../../atoms/Title/Title';
+import Title from "../../atoms/Title/Title";
 
 const ManageEmployees = () => {
   return <Title>Manage Employees</Title>;
