@@ -7,7 +7,5 @@ import { DEV_DATA } from "./mock/feedbackMock";
 
 //   return res.status(500).json({ error: "Please authenticate!", logged: false });
 // };
-const getDevData = () => {
-  return { devData: DEV_DATA };
-};
+const getDevData = () => ({ devData: DEV_DATA });
 export default getDevData;
