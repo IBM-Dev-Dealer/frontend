@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import styles from './Carousel.module.scss';
+import { useState } from "react";
+import styles from "./Carousel.module.scss";
 
 const Carousel = ({ elements }) => {
   const [selected, setSelected] = useState(elements.length > 0 ? elements[0] : null);
@@ -7,7 +7,7 @@ const Carousel = ({ elements }) => {
 
   const handleSelectionChange = (direction) => {
     switch (direction) {
-      case 'forward':
+      case "forward":
         if (elements.length - 1 > selectedIndex) {
           setSelected(elements[selectedIndex + 1]);
           setSelectedIndex((prev) => prev + 1);
@@ -16,7 +16,7 @@ const Carousel = ({ elements }) => {
           setSelectedIndex(0);
         }
         break;
-      case 'backward':
+      case "backward":
         if (selectedIndex - 1 >= 0) {
           setSelected(elements[selectedIndex - 1]);
           setSelectedIndex((prev) => prev - 1);
@@ -33,25 +33,25 @@ const Carousel = ({ elements }) => {
       <div
         className={styles.carouselItem}
         style={{
-          backgroundImage: selected.image ? `url(${selected.image})` : 'none',
+          backgroundImage: selected.image ? `url(${selected.image})` : "none",
         }}
       >
         <div
           className={styles.button}
-          onClick={() => handleSelectionChange('backward')}
+          onClick={() => handleSelectionChange("backward")}
           role='presentation'
         >
-          {'<'}
+          {"<"}
         </div>
 
         <div className={styles.title}>{selected.title}</div>
 
         <div
           className={styles.button}
-          onClick={() => handleSelectionChange('forward')}
+          onClick={() => handleSelectionChange("forward")}
           role='presentation'
         >
-          {'>'}
+          {">"}
         </div>
       </div>
     </div>
