@@ -24,11 +24,7 @@ const Notification = ({ message = "", kind = "success", id = "", onClose }) => {
       <XMarkIcon
         onClick={() => {
           console.log("id close", id);
-          // setOpacity("opacity-0");
-          // setTimeout(() => {
-          //   onClose && onClose(id);
-          // }, 500);
-          onClose && onClose(id);
+          setOpacity("opacity-0");
         }}
         className={`cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50 shrink-0`}
       />

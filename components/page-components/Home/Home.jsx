@@ -15,7 +15,7 @@ const Home = () => {
         isLoading={isLoading}
         label='Label'
         onClick={() => {
-          const id = Math.random().toString();
+          const id = Math.floor(Math.random() * 10000).toString();
           notify({
             kind: "error",
             message: id + " . This was added manually",

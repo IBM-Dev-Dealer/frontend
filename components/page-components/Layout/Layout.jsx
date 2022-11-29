@@ -15,8 +15,6 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
   const { notifications, removeNotification } = useNotifications();
 
-  console.log("notifications", notifications, "removeNotification", removeNotification);
-
   const colorizeNavTabs = () => {
     const navLinksColorized = colorizeJSXArray(navLinks);
     const newContext = { ...pageColorIndexes };
