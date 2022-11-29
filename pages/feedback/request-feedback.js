@@ -17,8 +17,6 @@ export const getStaticProps = async () => {
     headers: { authorization },
   }).then((res) => res.json());
 
-  console.log(projects);
-
   const props = { loggedUserRoles, ...projects };
 
   return { props };
