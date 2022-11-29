@@ -18,7 +18,7 @@ export const getStaticProps = async () => {
   //   headers: { authorization },
   // }).then((res) => res.json());
 
-  const devData = getDevData();
+  const devData = await getDevData();
 
   console.log("devData", devData);
 
