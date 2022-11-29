@@ -1,6 +1,4 @@
-import { createContext, useState } from "react";
-import Notification from "../../../components/atoms/Notification/Notification";
-import { replaceAll } from "../../../utils/utils";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 export const NotificationContext = createContext();
 
@@ -9,48 +7,42 @@ export const NotificationContextProvider = ({ children }) => {
     {
       kind: "success",
       message: "This is a test messae erthe rt hfrjythertnert hw etg sr th bwet g a4 a5h srt hsr5.",
+      id: "id1",
     },
     {
       kind: "error",
       message: "Thidsadasdsdasw etg sr th bwet g a4 a5h srt hsr5.",
+      id: "id2",
     },
   ]);
 
-  const notify = (newNotification) =>
+  useEffect(() => {
+    console.log("notifications", notifications);
+  }, [notifications]);
+
+  const notify = useCallback(
+    (newNotification) =>
+      setNotifications((prev) => {
+        const newNotifications = [...prev];
+        newNotifications.unshift(newNotification);
+        return newNotifications;
+      }),
+    [],
+  );
+
+  const removeNotification = useCallback((id) => {
+    console.log("removed id", id);
     setNotifications((prev) => {
-      const newNotifications = [...prev];
-      newNotifications.unshift(newNotification);
-      return newNotifications;
+      const newArr = JSON.parse(JSON.stringify(prev));
+      return newArr.filter((n) => n.id !== id);
     });
+  }, []);
 
   const value = {
     notify,
     notifications,
+    removeNotification,
   };
 
-  const onNotificationClose = (index) => {
-    setNotifications((prev) => {
-      const newNotifications = [...prev];
-      newNotifications.splice(index, 1);
-      return newNotifications;
-    });
-  };
-
-  return (
-    <NotificationContext.Provider value={value}>
-      <>{children}</>
-      <div className='absolute bottom-12 left-12 flex flex-col gap-4'>
-        {notifications.map((notification, i) => (
-          <Notification
-            key={`${notification.kind}_${replaceAll(notification.message, " ", "_")}`}
-            message={notification.message}
-            kind={notification.kind}
-            onClose={() => {
-              onNotificationClose(i);
-            }}
-          />
-        ))}
-      </div>
-    </NotificationContext.Provider>
-  );
+  return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
 };

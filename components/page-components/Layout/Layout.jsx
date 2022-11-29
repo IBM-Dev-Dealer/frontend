@@ -7,14 +7,15 @@ import styles from "./Layout.module.scss";
 import { useEffect, useMemo } from "react";
 import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
 import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import Notifications from "../../molecules/Notifications/Notifications";
 
 const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pathname } = useRouter();
   const title = getTitle(pathname);
-
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
+  const { notifications, removeNotification } = useNotifications();
 
-  const { notify } = useNotifications();
+  console.log("notifications", notifications, "removeNotification", removeNotification);
 
   const colorizeNavTabs = () => {
     const navLinksColorized = colorizeJSXArray(navLinks);
@@ -104,6 +105,7 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
           </div>
         </div>
       </div>
+      <Notifications notifications={notifications} removeNotification={removeNotification} />
     </>
   );
 };

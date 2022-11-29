@@ -15,14 +15,16 @@ const Home = () => {
         isLoading={isLoading}
         label='Label'
         onClick={() => {
+          const id = Math.random().toString();
           notify({
             kind: "error",
-            message: "This was added manually",
+            message: id + " . This was added manually",
+            id,
           });
           setIsLoading(true);
           setTimeout(() => {
             setIsLoading(false);
-          }, 500);
+          }, 250);
         }}
       />
     </>

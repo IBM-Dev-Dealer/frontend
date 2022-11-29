@@ -16,15 +16,15 @@ export const ROUTES = {
 export const getTitle = (route) => {
   let newRoute = route;
 
-  if (route.includes("-")) {
+  if (route && route.includes("-")) {
     newRoute = newRoute.replace("-", " ");
   }
 
-  if (route.length > 1) {
+  if (route && route.length > 1) {
     newRoute = newRoute.replace("/", " - ");
   }
 
-  if (route.length === 1) {
+  if (route && route.length === 1) {
     newRoute = newRoute.replace("/", "");
   }
 
