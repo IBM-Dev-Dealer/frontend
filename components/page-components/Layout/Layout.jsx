@@ -8,6 +8,8 @@ import { useEffect, useMemo } from "react";
 import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
 import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
 import Notifications from "../../molecules/Notifications/Notifications";
+import Image from "next/image";
+import LOGO from "../../../public/logo-full-svg.svg";
 
 const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pathname } = useRouter();
@@ -93,7 +95,9 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
         </Head>
         <div className={styles.layout}>
           <header className={styles.header}>
-            <div className={styles.logoWrapper}>IBM Dev Dealer</div>
+            <div className={styles.logoWrapper}>
+              <Image src={LOGO} alt='IBM Dev Dealer' className='h-20 w-auto' />
+            </div>
             <nav className={styles.nav}>{navLinksColorized}</nav>
           </header>
 
