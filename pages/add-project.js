@@ -11,7 +11,7 @@ export const getStaticProps = async () => {
   const queriedFields = ["technology", "seniorityLevel"];
   const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
 
-  const props = await fetch(`${process.env.HOST}/api/getFields?${queryParams}`, {
+  const props = await fetch(`${process.env.API_URL}/api/getFields?${queryParams}`, {
     method: "GET",
     headers: { authorization },
   }).then((res) => res.json());

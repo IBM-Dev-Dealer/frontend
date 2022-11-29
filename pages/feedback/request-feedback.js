@@ -11,7 +11,7 @@ export const getStaticProps = async () => {
 
   const loggedUserRoles = ["project-manager", "dev"];
 
-  const projects = await fetch(`${process.env.HOST}/api/getProjectsWithoutFeedback`, {
+  const projects = await fetch(`${process.env.API_URL}/api/getProjectsWithoutFeedback`, {
     method: "GET",
     headers: { authorization },
   }).then((res) => res.json());

@@ -12,7 +12,7 @@ export const getStaticProps = async () => {
   const loggedUserRoles = ["project-manager", "dev"];
   const projectId = "id-of-project";
 
-  const devData = await fetch(`${process.env.HOST}/api/getDevData`, {
+  const devData = await fetch(`${process.env.API_URL}/api/getDevData`, {
     method: "GET",
     headers: { authorization },
   }).then((res) => res.json());
@@ -21,7 +21,7 @@ export const getStaticProps = async () => {
 
   const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
 
-  const fields = await fetch(`${process.env.HOST}/api/getFields?${queryParams}`, {
+  const fields = await fetch(`${process.env.API_URL}/api/getFields?${queryParams}`, {
     method: "GET",
     headers: { authorization },
   }).then((res) => res.json());
