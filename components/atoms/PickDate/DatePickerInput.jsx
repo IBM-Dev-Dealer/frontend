@@ -1,8 +1,7 @@
 import Button from "../Button/Button";
 
 const DatePickerInput = ({ placeholder, label, onClick }) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div className='relative' onClick={onClick}>
+  <div className='relative' role='presentation' onClick={onClick}>
     <div className='flex absolute inset-y-0 left-0 items-center pl-3'>
       <svg
         aria-hidden='true'
