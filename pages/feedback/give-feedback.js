@@ -40,6 +40,7 @@ export const getStaticProps = async () => {
       { label: "Hannah Barbera", userId: "hannah-barbera" },
     ];
   }
+  console.log("[give-feedback] props", props);
 
   return { props };
 };
