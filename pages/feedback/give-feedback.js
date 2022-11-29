@@ -1,4 +1,5 @@
 import GiveFeedback from "../../components/page-components/GiveFeedback/GiveFeedback";
+import getDevData from "../api/getDevData";
 
 const GiveFeedbackPage = (props) => {
   return <GiveFeedback {...props} />;
@@ -12,10 +13,12 @@ export const getStaticProps = async () => {
   const loggedUserRoles = ["project-manager", "dev"];
   const projectId = "id-of-project";
 
-  const devData = await fetch(`${process.env.API_URL}/api/getDevData`, {
-    method: "GET",
-    headers: { authorization },
-  }).then((res) => res.json());
+  // const devData = await fetch(`${process.env.API_URL}/api/getDevData`, {
+  //   method: "GET",
+  //   headers: { authorization },
+  // }).then((res) => res.json());
+
+  const devData = getDevData().then((res) => res.json());
 
   const queriedFields = Object.keys(devData.devData.techSeniority[0]);
 
