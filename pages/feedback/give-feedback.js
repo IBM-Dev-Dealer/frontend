@@ -18,7 +18,9 @@ export const getStaticProps = async () => {
   //   headers: { authorization },
   // }).then((res) => res.json());
 
-  const devData = getDevData().then((res) => res.json());
+  const devData = getDevData();
+
+  console.log("devData", devData);
 
   const queriedFields = Object.keys(devData.devData.techSeniority[0]);
 
