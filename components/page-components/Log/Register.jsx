@@ -10,7 +10,9 @@ import classNames from "classnames";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import { useCallback, useMemo } from "react";
-
+import { useStringListState } from "../../molecules/StringList/useStringListState";
+import StringList from "../../molecules/StringList/StringList";
+import { linkColor } from "./Log.module.scss";
 // Register page fields:
 // email
 // parola
@@ -29,6 +31,8 @@ const initialValues = {
 	lastname: "",
 	technologies: [],
 	experience: "",
+	roleName: "",
+	roles: [],
 };
 
 const validate = yup.object({
@@ -52,6 +56,8 @@ const validate = yup.object({
 		.required("Re-password field empty"),
 	technologies: yup.array().of(yup.object()),
 	experience: yup.string().required("Experience is required"),
+	roleName: yup.string(),
+	roles: yup.array().of(yup.string()).min(1).required(),
 });
 
 const Register = ({ fields }) => {
@@ -67,8 +73,20 @@ const Register = ({ fields }) => {
 		[]
 	);
 
-	const loginFormTailwindContainer = "flex items-center flex-col w-full mt-24";
+	const {
+		stringList: rolesList,
+		setStringList: setRolesList,
+		stringInputValue: rolesInputValue,
+		setStringInputValue: setRolesInputValue,
+		inputWasTouched: rolesInputWasTouched,
+		setInputWasTouched: setRolesInputWasTouched,
+	} = useStringListState();
 
+	const registerFormTailwindContainer =
+		"flex items-center flex-col w-full mt-6";
+	const formFieldsContainerTailwind =
+		"w-3/4 flex gap-20 justify-center items-center flex-wrap";
+	const formSectionTaiwind = "flex-1 flex flex-col gap-2";
 	return (
 		<Formik
 			initialValues={initialValues}
@@ -79,18 +97,19 @@ const Register = ({ fields }) => {
 			}}
 		>
 			{(formik) => (
-				<div className={loginFormTailwindContainer}>
+				<div className={registerFormTailwindContainer}>
 					<Title>Register to get started!</Title>
 
-					<Form className="w-80 flex gap-2 flex-col">
-						<TextInput
-							type="email"
-							id="email"
-							name="email"
-							placeholder="Email"
-							labelText="Email"
-						/>
-						<div>
+					<Form className={formFieldsContainerTailwind}>
+						<div className={formSectionTaiwind}>
+							<TextInput
+								type="email"
+								id="email"
+								name="email"
+								placeholder="Email"
+								labelText="Email"
+							/>
+
 							<TextInput
 								type="text"
 								id="firstname"
@@ -105,8 +124,7 @@ const Register = ({ fields }) => {
 								placeholder="Lastname"
 								labelText="Lastname"
 							/>
-						</div>
-						<div>
+
 							<TextInput
 								type="password"
 								id="password"
@@ -121,6 +139,9 @@ const Register = ({ fields }) => {
 								placeholder="Repeat password"
 								labelText="Repeat password"
 							/>
+						</div>
+
+						<div className="flex-1">
 							<ObjectList
 								setList={setTechnologies}
 								list={technologies}
@@ -136,14 +157,33 @@ const Register = ({ fields }) => {
 								placeholder="Years"
 								labelText="Years of experience"
 							/>
+							<StringList
+								setList={setRolesList}
+								list={rolesList}
+								onChange={handleOnChange(formik.setFieldValue, "roles")}
+								name="repos"
+								textInput={{
+									label: "Roles in compnay",
+									id: "add-roles",
+									name: "roleName",
+									value: rolesInputValue,
+									setValue: setRolesInputValue,
+									touch: () => setRolesInputWasTouched(true),
+									untouch: () => setRolesInputWasTouched(false),
+									wasTouched: rolesInputWasTouched,
+								}}
+							/>
+							<Button type="submit" label="Submit" />
 						</div>
-						<Button type="submit" label="Submit" />
 					</Form>
 
-					<p className="mt-2 text-xs">
-						Not registered yet?{" "}
-						<Link className={classNames("text-xs")} href={ROUTES.LOG}>
-							Click Here!
+					<p className="mt-6 text-xs">
+						Registered?
+						<Link
+							className={classNames("text-xs", linkColor)}
+							href={ROUTES.LOG}
+						>
+							Login Here!
 						</Link>
 					</p>
 				</div>
