@@ -23,7 +23,7 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
   const NAV_LINKS = useMemo(
     () => ({
       logged: [
-        { href: ROUTES.HOME, label: "Home" },
+        // { href: ROUTES.HOME, label: "Home" },
         { href: ROUTES.CURRENT_PROJECT, label: "Current Project" },
         { href: ROUTES.ADD_PROJECT, label: "Add Project" },
         { href: ROUTES.OTHER_PROJECTS, label: "Other Projects" },
