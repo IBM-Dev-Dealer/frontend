@@ -3,7 +3,7 @@ import Link from "next/link";
 import Error from "../Error/Error";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { ROUTES, colorizeJSXArray, getTitle } from "../../../utils/utils";
 import styles from "./Layout.module.scss";
 import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
@@ -38,20 +38,29 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
     [],
   );
 
-  const generateNavLinks = (links) =>
-    links
-      .map((link) =>
-        link.visible !== false ? (
-          <Link href={link.href} key={link.href}>
-            {link.label}
-          </Link>
-        ) : null,
-      )
-      .filter((l) => l);
+  const generateNavLinks = useCallback(
+    (links) =>
+      links
+        .map((link) =>
+          link.visible !== false ? (
+            <Link
+              href={link.href}
+              key={link.href}
+              className={`${pathname.includes(link.href) ? "border-b-8 border-white" : ""}`}
+            >
+              <span className={`${pathname.includes(link.href) ? "font-bold" : "font-light"}`}>
+                {link.label}
+              </span>
+            </Link>
+          ) : null,
+        )
+        .filter((l) => l),
+    [pathname],
+  );
 
   const navLinks = useMemo(
     () => (logged ? generateNavLinks(NAV_LINKS.logged) : generateNavLinks(NAV_LINKS.notLogged)),
-    [NAV_LINKS.logged, NAV_LINKS.notLogged, logged],
+    [NAV_LINKS.logged, NAV_LINKS.notLogged, generateNavLinks, logged],
   );
 
   useEffect(() => {
