@@ -6,7 +6,7 @@ const OtherProjects = ({ projects }) => {
   return (
     <div>
       <Title>Other Projects</Title>
-      <ProjectsTable />
+      <ProjectsTable projects={projects} />
     </div>
   );
 };

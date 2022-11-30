@@ -1,3 +1,3 @@
 import { PROJECTS } from "./mock/otherProjectsMock";
 
-export const getAllProjects = async () => ({ projects: PROJECTS });
+export const getAllProjects = async () => PROJECTS;
