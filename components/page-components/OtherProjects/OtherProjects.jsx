@@ -1,12 +1,11 @@
 import Title from "../../atoms/Title/Title";
 import ProjectsTable from "../../molecules/ProjectsTable/ProjectsTable";
 
-const OtherProjects = ({ projects }) => {
-  console.log("projects", projects);
+const OtherProjects = ({ projects, fields }) => {
   return (
     <div>
       <Title>Other Projects</Title>
-      <ProjectsTable projects={projects} />
+      <ProjectsTable projects={projects} fields={fields.fields} />
     </div>
   );
 };

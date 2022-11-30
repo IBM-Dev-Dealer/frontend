@@ -30,6 +30,7 @@ const OTHER_FIELDS = [
   { codename: "projectName", label: "Project Name" },
   { codename: "projectDuration", label: "Project Duration" },
   { codename: "technologies", label: "Technologies" },
+  { codename: "requiredCapacity", label: "Required Capacity" },
   { codename: "repositories", label: "Repositories" },
   { codename: "slackChannels", label: "Slack Channels" },
   { codename: "accessZones", label: "Access Zones" },
