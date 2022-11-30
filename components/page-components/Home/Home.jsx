@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import { useNotifications } from "../../../context/hooks";
 import Button from "../../atoms/Button/Button";
 import Title from "../../atoms/Title/Title";
 

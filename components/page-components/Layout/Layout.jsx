@@ -6,8 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 import { ROUTES, colorizeJSXArray, getTitle } from "../../../utils/utils";
 import styles from "./Layout.module.scss";
-import { usePageColorContext } from "../../../context/pageColorContext/hooks/usePageColorContext";
-import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import { useNotifications, usePageColorContext } from "../../../context/hooks";
 import Notifications from "../../molecules/Notifications/Notifications";
 import LOGO from "../../../public/logo-full-svg.svg";
 
