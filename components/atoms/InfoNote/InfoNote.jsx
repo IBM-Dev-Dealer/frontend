@@ -1,7 +1,7 @@
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 
-const InfoNote = ({ message, position = "right" }) => {
+const InfoNote = ({ message, position = "right", type = "hover" }) => {
   const [displayMessage, setDisplayMessage] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -11,12 +11,20 @@ const InfoNote = ({ message, position = "right" }) => {
       : setTimeout(() => {
           setIsHidden(true);
         }, 250);
-  }, [displayMessage]);
+  }, [displayMessage, type]);
 
   return (
     <div className='relative w-6 h-6'>
       <InformationCircleIcon
-        onClick={() => setDisplayMessage((prev) => !prev)}
+        onClick={() => {
+          if (type === "click") setDisplayMessage((prev) => !prev);
+        }}
+        onMouseEnter={() => {
+          if (type === "hover") setDisplayMessage(true);
+        }}
+        onMouseLeave={() => {
+          if (type === "hover") setDisplayMessage(false);
+        }}
         className={`cursor-pointer w-6 h-6 hover:scale-125 ${
           displayMessage ? "fill-orangeade" : "fill-gray"
         } active:opacity-20`}

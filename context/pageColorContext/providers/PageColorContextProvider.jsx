@@ -1,16 +1,21 @@
-import { createContext, useState } from "react";
+import React, { createContext, useCallback, useMemo, useState } from "react";
 
 export const PageColorContext = createContext();
 
-export const PageColorContextProvider = ({ children }) => {
+export const PageColorContextProvider = React.memo(({ children }) => {
   const [pageColorIndexes, setColorsContext] = useState({});
 
-  const setPageColorIndexes = (newContext) => setColorsContext(newContext);
+  const setPageColorIndexes = useCallback((newContext) => setColorsContext(newContext), []);
 
-  const value = {
-    setPageColorIndexes,
-    pageColorIndexes,
-  };
+  const value = useMemo(
+    () => ({
+      setPageColorIndexes,
+      pageColorIndexes,
+    }),
+    [pageColorIndexes, setPageColorIndexes],
+  );
 
   return <PageColorContext.Provider value={value}>{children}</PageColorContext.Provider>;
-};
+});
+
+PageColorContextProvider.displayName = "PageColorContextProvider";
