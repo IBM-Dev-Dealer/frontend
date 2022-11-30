@@ -20,7 +20,7 @@ const INITIAL_VALUES = {
   technologies: [],
   requiredCapacity: [],
   repoName: "",
-  repos: [],
+  repositories: [],
   slackChannelName: "",
   slackChannels: [],
   accessZonesName: "",
@@ -35,7 +35,7 @@ const VALIDATE = yup.object({
   technologies: yup.array().of(yup.object()),
   requiredCapacity: yup.array().of(yup.object()),
   repoName: yup.string(),
-  repos: yup.array().of(yup.string()).min(1).required(),
+  repositories: yup.array().of(yup.string()).min(1).required(),
   slackChannelName: yup.string(),
   // .test('channel-name', 'Slack channel name shall not be empty.', () =>
   //   slackChannelInputValue.length > 0 ? true : false,
@@ -199,11 +199,11 @@ const AddProject = ({ fields }) => {
                     <StringList
                       setList={setReposList}
                       list={reposList}
-                      onChange={handleOnChange(formik.setFieldValue, "repos")}
-                      name='repos'
+                      onChange={handleOnChange(formik.setFieldValue, "repositories")}
+                      name='repositories'
                       textInput={{
                         label: "Repositories",
-                        id: "addproject-repos",
+                        id: "addproject-repositories",
                         name: "repoName",
                         value: reposInputValue,
                         setValue: setReposInputValue,
