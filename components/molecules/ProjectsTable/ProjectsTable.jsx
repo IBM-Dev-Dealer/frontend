@@ -5,7 +5,7 @@ const ProjectsTable = ({ projects, fields: tableFields }) => {
   return (
     <div className='rounded-lg border shadow-md p-2 overflow-auto flex'>
       {fields.map((field) => (
-        <div key={field} id='col' className='w-full'>
+        <div key={field} id='col' className='w-full hover:bg-transparent-gray-05 cursor-pointer'>
           <div>{tableFields[field].label}</div>
           <div>
             {projects.map((project) => {
