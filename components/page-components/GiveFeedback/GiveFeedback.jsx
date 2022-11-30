@@ -10,6 +10,7 @@ import Button from "../../atoms/Button/Button";
 import Link from "next/link";
 import { ROUTES } from "../../../utils/utils";
 import { INITIAL_VALUES, VALIDATE } from "./formikConstants";
+import TextArea from "../../atoms/TextArea/TextArea";
 import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
 
 const GiveFeedback = ({
@@ -151,29 +152,12 @@ const GiveFeedback = ({
                           />
                         )}
 
-                        {/* TODO: replace with proper list component - TEXT AREA */}
-                        <div className='flex flex-col gap-2 my-2'>
-                          <div className='text-sm'>Add more feedback</div>
-                          <textarea
-                            className={`w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4 
-                            text-sm overflow-auto`}
-                            name='additionalFeedback'
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                e.preventDefault();
-                                formik.setFieldValue(
-                                  "additionalFeedback",
-                                  `${formik.values.additionalFeedback}\r\n`,
-                                );
-                              }
-                            }}
-                            value={formik.values.additionalFeedback}
-                            onChange={(e) => {
-                              formik.setFieldValue("additionalFeedback", e.target.value);
-                            }}
-                            rows={8}
-                          />
-                        </div>
+                        <TextArea
+                          label={"Add more feedback"}
+                          name='additionalFeedback'
+                          setValue={formik.setFieldValue}
+                          value={formik.values.additionalFeedback}
+                        />
 
                         <Button label='Submit Feedback' type='submit' />
                       </div>
@@ -213,53 +197,19 @@ const GiveFeedback = ({
                       }
                     />
 
-                    {/* TODO: replace with proper list component - TEXT AREA */}
-                    <div className='flex flex-col gap-2 my-2'>
-                      <div className='text-sm'>What went well</div>
-                      <textarea
-                        className={`w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4 
-                            text-sm overflow-auto`}
-                        name='whatWentWell'
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            e.preventDefault();
-                            formik.setFieldValue(
-                              "whatWentWell",
-                              `${formik.values.whatWentWell}\r\n`,
-                            );
-                          }
-                        }}
-                        value={formik.values.whatWentWell}
-                        onChange={(e) => {
-                          formik.setFieldValue("whatWentWell", e.target.value);
-                        }}
-                        rows={8}
-                      />
-                    </div>
+                    <TextArea
+                      label={"What went well"}
+                      name='whatWentWell'
+                      setValue={formik.setFieldValue}
+                      value={formik.values.whatWentWell}
+                    />
 
-                    {/* TODO: replace with proper list component - TEXT AREA */}
-                    <div className='flex flex-col gap-2 my-2'>
-                      <div className='text-sm'>What could be improved</div>
-                      <textarea
-                        className={`w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4 
-                            text-sm overflow-auto`}
-                        name='whatCouldBeImproved'
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            e.preventDefault();
-                            formik.setFieldValue(
-                              "whatCouldBeImproved",
-                              `${formik.values.whatCouldBeImproved}\r\n`,
-                            );
-                          }
-                        }}
-                        value={formik.values.whatCouldBeImproved}
-                        onChange={(e) => {
-                          formik.setFieldValue("whatCouldBeImproved", e.target.value);
-                        }}
-                        rows={8}
-                      />
-                    </div>
+                    <TextArea
+                      label={"What could be improved"}
+                      name='whatCouldBeImproved'
+                      setValue={formik.setFieldValue}
+                      value={formik.values.whatCouldBeImproved}
+                    />
 
                     <Button label='Submit Feedback' type='submit' />
                   </Form>
