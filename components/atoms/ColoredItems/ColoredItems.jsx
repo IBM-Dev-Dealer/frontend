@@ -1,7 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { colorizeJSXArray } from "../../../utils/utils";
 
-const ColoredItems = ({ items, removeItem, entryJoinedBy }) => {
+const ColoredItems = ({ items, removeItem, entryJoinedBy, canDelete = true }) => {
   const mappedItems = items.map((entry, i) => {
     const splittedEntry = entry.split(entryJoinedBy);
     return (
@@ -19,12 +19,14 @@ const ColoredItems = ({ items, removeItem, entryJoinedBy }) => {
             </div>
           ))}
         </div>
-        <div className='flex items-center'>
-          <XMarkIcon
-            className='cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50'
-            onClick={() => removeItem(entry, i)}
-          />
-        </div>
+        {canDelete && (
+          <div className='flex items-center'>
+            <XMarkIcon
+              className='cursor-pointer w-6 h-6 hover:scale-125 active:opacity-20 active:scale-50'
+              onClick={() => removeItem(entry, i)}
+            />
+          </div>
+        )}
       </div>
     );
   });

@@ -162,7 +162,7 @@ const Register = ({ fields }) => {
           </Form>
 
           <p className='mt-6 text-xs'>
-            Registered?
+            Registered?{" "}
             <Link className={classNames("text-xs", linkColor)} href={ROUTES.LOG}>
               Login Here!
             </Link>
