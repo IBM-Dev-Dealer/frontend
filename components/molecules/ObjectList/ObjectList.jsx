@@ -69,9 +69,10 @@ const ObjectList = ({ setList, list, dataFields, label, onChange }) => {
           items={list.map((item) =>
             Object.keys(item)
               .map((key) => item[key].label)
-              .join(" / "),
+              .join("/"),
           )}
           removeItem={removeEntry}
+          entryJoinedBy='/'
         />
       </div>
     </div>
