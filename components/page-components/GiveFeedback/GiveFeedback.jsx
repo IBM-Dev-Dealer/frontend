@@ -10,6 +10,7 @@ import Button from "../../atoms/Button/Button";
 import Link from "next/link";
 import { ROUTES } from "../../../utils/utils";
 import { INITIAL_VALUES, VALIDATE } from "./formikConstants";
+import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
 
 const GiveFeedback = ({
   loggedUserRoles,
@@ -118,34 +119,17 @@ const GiveFeedback = ({
                           infoMessage={INFO_MESSAGE.TEAM_INTERACTION}
                         />
 
-                        {/* TODO: replace with proper list component - UNORDERED LIST */}
                         {devData && (
-                          <div className='my-2'>
-                            <div className='text-sm'>Previous seniority levels per technology</div>
-                            <ul className='p-4 bg-transparent-gray-05 rounded-lg my-2 shadow-md'>
-                              {devData.techSeniority.map((item, i) => (
-                                <li
-                                  key={i}
-                                  className='text-sm'
-                                >{`${item.technology.label} / ${item.seniorityLevel.label}`}</li>
-                              ))}
-                            </ul>
-                            <div className='flex justify-end'>
-                              <span
-                                className='text-xs inline-flex cursor-pointer active:opacity-25 select-none border-b hover:border-black border-transparent'
-                                onClick={handleUpdateSeniority}
-                                role='presentation'
-                              >
-                                <span className='text-xs inline-flex cursor-pointer active:opacity-25 select-none'>
-                                  Update seniority levels?
-                                </span>
-                                <span className=' text-xs inline-flex cursor-pointer active:opacity-25 select-none text-gray ml-1'>
-                                  {"  "}
-                                  Click to {newSeniorityLevelsVisible ? "hide" : "show"}
-                                </span>
-                              </span>
-                            </div>
-                          </div>
+                          <UnorderedList
+                            label={"Previous seniority levels per technology"}
+                            list={devData.techSeniority}
+                            onClick={handleUpdateSeniority}
+                            changeEnabler={{
+                              enablesChange: true,
+                              label: "Update seniority levels?",
+                              isChangeComponentVisible: newSeniorityLevelsVisible,
+                            }}
+                          />
                         )}
 
                         {newSeniorityLevelsVisible && (
