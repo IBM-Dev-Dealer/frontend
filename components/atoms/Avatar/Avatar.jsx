@@ -10,8 +10,8 @@ const Avatar = ({
   round = false,
   ...props
 }) => {
-  const imageClassName = `ring-2 w-${width} h-${height} ring-gray mr-5 rounded${
-    round ? "-full" : ""
+  const imageClassName = `ring-2 w-${width} h-${height} ring-gray mr-5 ${
+    round ? "rounded-full" : "rounded"
   } ${className}`;
 
   return src ? (
@@ -37,8 +37,8 @@ const Avatar = ({
     )
   ) : (
     <div
-      className={`overflow-hidden relative w-20 h-20 rounded${
-        round ? "-full" : ""
+      className={`overflow-hidden relative w-20 h-20 ${
+        round ? "rounded-full" : "rounded"
       } bg-gray ring-2 ring-black mr-5`}
     >
       <svg

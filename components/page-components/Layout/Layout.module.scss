@@ -20,11 +20,10 @@
 }
 
 .logoWrapper {
-  box-shadow: map-get($shadows, "box-small");
   margin: map-get($spacing, "l");
   margin-left: 0;
   display: inline-flex;
-  @apply py-2 px-4 bg-white text-3xl rounded-xl;
+  @apply py-4 px-6 bg-white text-3xl rounded-3xl shadow-lg;
 }
 
 .nav {

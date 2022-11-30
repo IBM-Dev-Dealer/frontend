@@ -2,6 +2,7 @@ import PickDate from "../../../atoms/PickDate/PickDate";
 import style from "./Client.module.scss";
 import { useState } from "react";
 import Avatar from "../../../atoms/Avatar/Avatar";
+import InfoNote from "../../../atoms/InfoNote/InfoNote";
 
 const Client = ({
   logo = "",
@@ -51,6 +52,7 @@ const Client = ({
             disabled={dateDisabled}
             todayButton='Ending date'
           />
+          <InfoNote message='Project duration' />
         </div>
         {project}
       </div>
