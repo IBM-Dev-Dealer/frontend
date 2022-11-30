@@ -46,14 +46,12 @@ const VALIDATE = yup.object({
 });
 
 const AddProject = ({ fields }) => {
-  const technologiesDataFields = useMemo(
-    () => [fields["technology"] ?? [], fields["seniorityLevel"] ?? []],
-    [fields],
-  );
+  const technologiesDataFields = useMemo(() => [fields["technology"] ?? []], [fields]);
   const capacityDataFields = useMemo(
     () => [
-      { codename: "noOfDevs", label: "No. of devs", fields: generateNumbers(100) },
+      { codename: "developers", label: "Developers", fields: generateNumbers(100) },
       fields["seniorityLevel"] ?? [],
+      fields["technology"] ?? [],
     ],
     [fields],
   );
@@ -105,7 +103,7 @@ const AddProject = ({ fields }) => {
     <>
       <Title>Add Project</Title>
       <div className='w-full'>
-        <div className='max-w-sm m-auto'>
+        <div className='max-w-md m-auto'>
           <Formik
             initialValues={INITIAL_VALUES}
             validationSchema={VALIDATE}

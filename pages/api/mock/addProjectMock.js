@@ -1,6 +1,6 @@
 const SENORITY_LEVELS = {
   codename: "seniorityLevel",
-  label: "Senority Level",
+  label: "Seniority",
   fields: [
     { label: "Junior", codename: "junior" },
     { label: "Junior-Mid", codename: "junior-mid" },
@@ -25,4 +25,5 @@ const TECHNOLOGIES = {
   ],
 };
 
+// export const ALL_FIELDS = [SENORITY_LEVELS, TECHNOLOGIES];
 export const ALL_FIELDS = [SENORITY_LEVELS, TECHNOLOGIES];

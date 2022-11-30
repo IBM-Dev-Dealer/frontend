@@ -5,3 +5,5 @@ const OtherProjectsPage = () => {
 };
 
 export default OtherProjectsPage;
+
+export const getStaticProps = async () => {};
