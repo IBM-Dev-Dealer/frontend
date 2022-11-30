@@ -17,74 +17,46 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
   const { notifications, removeNotification } = useNotifications();
 
-  console.log("sss");
+  useEffect(() => {}, []);
 
-  const navLinks = useMemo(
-    () =>
-      logged
-        ? [
-            <Link href={ROUTES.HOME} key={ROUTES.HOME}>
-              Home
-            </Link>,
-            <Link href={ROUTES.CURRENT_PROJECT} key={ROUTES.CURRENT_PROJECT}>
-              Current Project
-            </Link>,
-            <Link href={ROUTES.ADD_PROJECT} key={ROUTES.ADD_PROJECT}>
-              Add Project
-            </Link>,
-            <Link href={ROUTES.OTHER_PROJECTS} key={ROUTES.OTHER_PROJECTS}>
-              Other Projects
-            </Link>,
-            <Link href={ROUTES.FEEDBACK} key={ROUTES.FEEDBACK}>
-              Feedback
-            </Link>,
-            <Link href={ROUTES.SOURCE} key={ROUTES.SOURCE}>
-              Source
-            </Link>,
-            <Link href={ROUTES.PROFILE} key={ROUTES.PROFILE}>
-              Profile
-            </Link>,
-            isPM ? (
-              <Link href={ROUTES.MANAGE_EMPLOYEES} key={ROUTES.MANAGE_EMPLOYEES}>
-                Manage Employees
-              </Link>
-            ) : null,
-            <Link href={ROUTES.LOG} key={ROUTES.LOG}>
-              Logout
-            </Link>,
-          ]
-        : [
-            <Link href={ROUTES.LOG} key={ROUTES.LOG}>
-              Login
-            </Link>,
-            <Link href={ROUTES.REGISTER} key={ROUTES.REGISTER}>
-              Register
-            </Link>,
-          ],
-    [isPM, logged],
+  // Defined here because the `visible` prop of links will depend on props like `isPM`
+  const NAV_LINKS = useMemo(
+    () => ({
+      logged: [
+        { href: ROUTES.HOME, label: "Home" },
+        { href: ROUTES.CURRENT_PROJECT, label: "Current Project" },
+        { href: ROUTES.ADD_PROJECT, label: "Add Project" },
+        { href: ROUTES.OTHER_PROJECTS, label: "Other Projects" },
+        { href: ROUTES.FEEDBACK, label: "Feedback" },
+        { href: ROUTES.LOG, label: "Logout" },
+      ],
+      notLogged: [
+        { href: ROUTES.LOG, label: "Login" },
+        { href: ROUTES.REGISTER, label: "Register" },
+      ],
+    }),
+    [],
   );
 
-  // const colorizeNavTabs = useCallback(() => {
-  //   const navLinksColorized = colorizeJSXArray(navLinks);
-  //   const newContext = { ...pageColorIndexes };
-  //   navLinksColorized.forEach((link) => {
-  //     if (!newContext[link.props.href]) {
-  //       newContext[link.props.href] = link.props.className.split("Bg")[1];
-  //     }
-  //   });
+  const generateNavLinks = (links) =>
+    links
+      .map((link) =>
+        link.visible !== false ? (
+          <Link href={link.href} key={link.href}>
+            {link.label}
+          </Link>
+        ) : null,
+      )
+      .filter((l) => l);
 
-  //   setPageColorIndexes(newContext);
-  // }, [navLinks, pageColorIndexes, setPageColorIndexes]);
+  const navLinks = useMemo(
+    () => (logged ? generateNavLinks(NAV_LINKS.logged) : generateNavLinks(NAV_LINKS.notLogged)),
+    [NAV_LINKS.logged, NAV_LINKS.notLogged, logged],
+  );
 
   useEffect(() => {
     const colorizeNavTabs = () => {
       const navLinksColorized = colorizeJSXArray(navLinks);
-      // const newContext = { ...pageColorIndexes };
-      // navLinksColorized.forEach((link) => {
-      //   if (!newContext[link.props.href]) {
-      //     newContext[link.props.href] = link.props.className.split("Bg")[1];
-      //   }
-      // });
 
       setPageColorIndexes((prev) => {
         const newContext = { ...prev };
@@ -98,10 +70,6 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
     };
     colorizeNavTabs();
   }, [navLinks, setPageColorIndexes]);
-
-  // useEffect(() => {
-  //   colorizeNavTabs();
-  // }, [colorizeNavTabs]);
 
   const navLinksColorized = colorizeJSXArray(navLinks);
 
