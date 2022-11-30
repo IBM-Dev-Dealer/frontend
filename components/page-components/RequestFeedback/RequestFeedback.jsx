@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { ROUTES } from "../../../utils/utils";
 import Button from "../../atoms/Button/Button";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
+import TextArea from "../../atoms/TextArea/TextArea";
 import Title from "../../atoms/Title/Title";
 
 const INITIAL_VALUES = {
@@ -71,26 +72,13 @@ const RequestFeedback = ({ projects }) => {
                 </div>
                 {isProjectSelected && (
                   <div className='flex flex-col gap-2 pt-2 border-t border-transparent-gray-05 px-4'>
-                    {/* TODO: replace with proper list component - TEXT AREA */}
-                    <div className='flex flex-col gap-2 my-2'>
-                      <div className='text-sm'>Add everything you want to get feedback for</div>
-                      <textarea
-                        className={`w-full shadow-md border p-4 rounded-xl outline-none focus:outline-4 
-                            text-sm overflow-auto`}
-                        name='feedback'
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            e.preventDefault();
-                            formik.setFieldValue("feedback", `${formik.values.feedback}\r\n`);
-                          }
-                        }}
-                        value={formik.values.feedback}
-                        onChange={(e) => {
-                          formik.setFieldValue("feedback", e.target.value);
-                        }}
-                        rows={8}
-                      />
-                    </div>
+                    <TextArea
+                      label={"Add everything you want to get feedback for"}
+                      name='feedback'
+                      value={formik.values.feedback}
+                      setValue={formik.setFieldValue}
+                    />
+
                     <Button label='Submit' type='submit' />
                   </div>
                 )}

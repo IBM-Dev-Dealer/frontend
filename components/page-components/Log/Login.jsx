@@ -19,7 +19,7 @@ const Login = () => {
   });
 
   const loginFormTailwindContainer = "flex items-center flex-col w-full mt-24";
-
+  const formTailwind = "w-80 flex gap-2 flex-col";
   return (
     <Formik
       initialValues={initialValues}
@@ -32,8 +32,7 @@ const Login = () => {
       {(formik) => (
         <div className={loginFormTailwindContainer}>
           <Title>Welcome back!</Title>
-
-          <Form className='w-80 flex gap-2 flex-col'>
+          <Form className={formTailwind}>
             <TextInput type='email' id='email' name='email' placeholder='Email' labelText='Email' />
 
             <TextInput
