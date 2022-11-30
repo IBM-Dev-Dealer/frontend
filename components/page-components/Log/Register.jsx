@@ -13,15 +13,6 @@ import { useCallback, useMemo } from "react";
 import { useStringListState } from "../../molecules/StringList/useStringListState";
 import StringList from "../../molecules/StringList/StringList";
 import { linkColor } from "./Log.module.scss";
-// Register page fields:
-// email
-// parola
-// confirmare parola
-// first name
-// last name
-// grad senioritate per tehnologii
-// experienta (ani)
-// company role (array cu valori din enum - multi-rol)
 
 const initialValues = {
 	email: "",
