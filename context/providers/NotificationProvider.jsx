@@ -9,7 +9,7 @@ export const NotificationContextProvider = ({ children }) => {
     (newNotification) =>
       setNotifications((prev) => {
         const newNotifications = [...prev];
-        newNotifications.unshift(newNotification);
+        newNotifications.push(newNotification);
         return newNotifications;
       }),
     [],
