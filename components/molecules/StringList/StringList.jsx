@@ -81,7 +81,7 @@ const StringList = ({ textInput, setList, list, emptyValue = "", onChange }) => 
         />
       </div>
 
-      <div className='flex gap-4 flex-wrap my-2'>
+      <div className='flex gap-2 flex-wrap my-2'>
         <ColoredItems items={list} removeItem={removeEntry} />
       </div>
     </div>

@@ -20,7 +20,7 @@ const INITIAL_VALUES = {
   technologies: [],
   requiredCapacity: [],
   repoName: "",
-  repos: [],
+  repositories: [],
   slackChannelName: "",
   slackChannels: [],
   accessZonesName: "",
@@ -35,7 +35,7 @@ const VALIDATE = yup.object({
   technologies: yup.array().of(yup.object()),
   requiredCapacity: yup.array().of(yup.object()),
   repoName: yup.string(),
-  repos: yup.array().of(yup.string()).min(1).required(),
+  repositories: yup.array().of(yup.string()).min(1).required(),
   slackChannelName: yup.string(),
   // .test('channel-name', 'Slack channel name shall not be empty.', () =>
   //   slackChannelInputValue.length > 0 ? true : false,
@@ -46,14 +46,12 @@ const VALIDATE = yup.object({
 });
 
 const AddProject = ({ fields }) => {
-  const technologiesDataFields = useMemo(
-    () => [fields["technology"] ?? [], fields["seniorityLevel"] ?? []],
-    [fields],
-  );
+  const technologiesDataFields = useMemo(() => [fields["technology"] ?? []], [fields]);
   const capacityDataFields = useMemo(
     () => [
-      { codename: "noOfDevs", label: "No. of devs", fields: generateNumbers(100) },
+      { codename: "developers", label: "Developers", fields: generateNumbers(100) },
       fields["seniorityLevel"] ?? [],
+      fields["technology"] ?? [],
     ],
     [fields],
   );
@@ -105,7 +103,7 @@ const AddProject = ({ fields }) => {
     <>
       <Title>Add Project</Title>
       <div className='w-full'>
-        <div className='max-w-sm m-auto'>
+        <div className='max-w-md m-auto'>
           <Formik
             initialValues={INITIAL_VALUES}
             validationSchema={VALIDATE}
@@ -201,11 +199,11 @@ const AddProject = ({ fields }) => {
                     <StringList
                       setList={setReposList}
                       list={reposList}
-                      onChange={handleOnChange(formik.setFieldValue, "repos")}
-                      name='repos'
+                      onChange={handleOnChange(formik.setFieldValue, "repositories")}
+                      name='repositories'
                       textInput={{
                         label: "Repositories",
-                        id: "addproject-repos",
+                        id: "addproject-repositories",
                         name: "repoName",
                         value: reposInputValue,
                         setValue: setReposInputValue,
