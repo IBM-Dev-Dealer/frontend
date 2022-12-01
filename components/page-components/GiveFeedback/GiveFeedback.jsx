@@ -216,8 +216,7 @@ const GiveFeedback = ({
 							initialValues={INITIAL_VALUES.DEV}
 							validationSchema={VALIDATE.DEV}
 							onSubmit={(values) => {
-								//   submitHandler(values);
-								console.log("[AddProject] form values", values);
+								submitHandler(values);
 							}}
 						>
 							{(formik) => {
