@@ -12,7 +12,7 @@ import { ROUTES } from "../../../utils/utils";
 import { INITIAL_VALUES, VALIDATE } from "./formikConstants";
 import TextArea from "../../atoms/TextArea/TextArea";
 import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
-import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import { useNotifications } from "../../../context/hooks/useNotifications";
 
 const GiveFeedback = ({
 	loggedUserRoles,

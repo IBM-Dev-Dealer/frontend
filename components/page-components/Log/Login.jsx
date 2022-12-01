@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ROUTES } from "../../../utils/utils";
 import Button from "../../atoms/Button/Button";
 import classNames from "classnames";
-import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import { useNotifications } from "../../../context/hooks/useNotifications";
 const Login = () => {
 	const initialValues = {
 		email: "",
