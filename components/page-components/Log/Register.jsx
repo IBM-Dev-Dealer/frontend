@@ -173,7 +173,7 @@ const Register = ({ fields }) => {
                 onChange={handleOnChange(formik.setFieldValue, "roles")}
                 name='repos'
                 textInput={{
-                  label: "Roles in compnay",
+                  label: "Roles in company",
                   id: "add-roles",
                   name: "roleName",
                   value: rolesInputValue,
@@ -190,6 +190,7 @@ const Register = ({ fields }) => {
           <p className='mt-6 text-xs'>
             Registered?
             <Link className={classNames("text-xs", linkColor)} href={ROUTES.LOG}>
+              {" "}
               Login Here!
             </Link>
           </p>
