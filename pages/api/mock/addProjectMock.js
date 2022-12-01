@@ -1,6 +1,6 @@
 const SENORITY_LEVELS = {
   codename: "seniorityLevel",
-  label: "Senority Level",
+  label: "Seniority",
   fields: [
     { label: "Junior", codename: "junior" },
     { label: "Junior-Mid", codename: "junior-mid" },
@@ -25,4 +25,15 @@ const TECHNOLOGIES = {
   ],
 };
 
-export const ALL_FIELDS = [SENORITY_LEVELS, TECHNOLOGIES];
+const OTHER_FIELDS = [
+  { codename: "client", label: "Client" },
+  { codename: "projectName", label: "Project Name" },
+  { codename: "projectDuration", label: "Project Duration" },
+  { codename: "technologies", label: "Technologies" },
+  { codename: "requiredCapacity", label: "Required Capacity" },
+  { codename: "repositories", label: "Repositories" },
+  { codename: "slackChannels", label: "Slack Channels" },
+  { codename: "accessZones", label: "Access Zones" },
+];
+
+export const ALL_FIELDS = [SENORITY_LEVELS, TECHNOLOGIES, ...OTHER_FIELDS];

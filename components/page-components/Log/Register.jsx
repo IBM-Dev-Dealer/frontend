@@ -13,7 +13,7 @@ import { useCallback, useMemo } from "react";
 import { useStringListState } from "../../molecules/StringList/useStringListState";
 import StringList from "../../molecules/StringList/StringList";
 import { linkColor } from "./Log.module.scss";
-import { useNotifications } from "../../../context/pageColorContext/hooks/useNotifications";
+import { useNotifications } from "../../../context/hooks/useNotifications";
 
 const initialValues = {
 	email: "",

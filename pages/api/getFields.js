@@ -24,7 +24,6 @@ const getFields = async (queryFields) => {
 
   queryFields.forEach((paramKey) => {
     const foundField = ALL_FIELDS.find((field) => field.codename === paramKey);
-    console.log("foundField", foundField);
     if (foundField) fields[foundField.codename] = foundField;
   });
 

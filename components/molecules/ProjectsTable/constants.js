@@ -1,0 +1,1 @@
+export const PAGE_DESCRIPTION = `All running projects that are searching for developers will be listed here. The "Required Capacity" field contains the number of required developers, along with the required technology and the seniority level requested for that specific technology.`;

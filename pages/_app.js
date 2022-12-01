@@ -2,8 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loader from "../components/atoms/Loader/Loader";
 import Layout from "../components/page-components/Layout/Layout";
-import { NotificationContextProvider } from "../context/pageColorContext/providers/NotificationProvider";
-import { PageColorContextProvider } from "../context/pageColorContext/providers/PageColorContextProvider";
+import { NotificationContextProvider, PageColorContextProvider } from "../context/providers";
 import "../styles/globals.scss";
 
 const App = ({ Component, pageProps }) => {
