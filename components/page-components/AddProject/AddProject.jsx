@@ -134,7 +134,7 @@ const AddProject = ({ fields }) => {
     <>
       <Title>Add Project</Title>
       <div className='w-full'>
-        <div className='max-w-sm m-auto'>
+        <div className='max-w-md m-auto'>
           <Formik
             initialValues={INITIAL_VALUES}
             validationSchema={VALIDATE}
@@ -236,23 +236,6 @@ const AddProject = ({ fields }) => {
                       textInput={{
                         label: "Repositories",
                         id: "addproject-repositories",
-                        name: "repoName",
-                        value: reposInputValue,
-                        setValue: setReposInputValue,
-                        touch: () => setReposInputWasTouched(true),
-                        untouch: () => setReposInputWasTouched(false),
-                        wasTouched: reposInputWasTouched,
-                      }}
-                    />
-
-                    <StringList
-                      setList={setReposList}
-                      list={reposList}
-                      onChange={handleOnChange(formik.setFieldValue, "repos")}
-                      name='repos'
-                      textInput={{
-                        label: "Repositories",
-                        id: "addproject-repos",
                         name: "repoName",
                         value: reposInputValue,
                         setValue: setReposInputValue,
