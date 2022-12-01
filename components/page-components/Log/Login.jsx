@@ -8,6 +8,14 @@ import { ROUTES } from "../../../utils/utils";
 import Button from "../../atoms/Button/Button";
 import classNames from "classnames";
 import { useNotifications } from "../../../context/hooks/useNotifications";
+import {
+	LOGIN_NOTIFICATION_ERROR_ID,
+	LOGIN_NOTIFICATION_SUCCESS_ID,
+	LOGIN_SUCCESS,
+	NOTIFICATION_ERROR,
+	NOTIFICATION_SUCCESS,
+	SERVER_ERROR,
+} from "../../../utils/constants";
 const Login = () => {
 	const initialValues = {
 		email: "",
@@ -24,15 +32,15 @@ const Login = () => {
 		try {
 			console.log("values", values);
 			notify({
-				kind: "success",
-				message: "Logged in successfully!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_SUCCESS,
+				message: LOGIN_SUCCESS,
+				id: LOGIN_NOTIFICATION_SUCCESS_ID,
 			});
 		} catch (error) {
 			notify({
-				kind: "error",
-				message: "Server error!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_ERROR,
+				message: SERVER_ERROR,
+				id: LOGIN_NOTIFICATION_ERROR_ID,
 			});
 		}
 	};

@@ -12,6 +12,14 @@ import TextInput from "../../atoms/TextInput/TextInput";
 import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
 import PickDate from "../../atoms/PickDate/PickDate";
 import { useNotifications } from "../../../context/hooks/useNotifications";
+import {
+	ADD_PROJECT_NOTIFICATION_ERROR_ID,
+	ADD_PROJECT_NOTIFICATION_SUCCESS_ID,
+	ADD_PROJECT_SUCCESS,
+	NOTIFICATION_ERROR,
+	NOTIFICATION_SUCCESS,
+	SERVER_ERROR,
+} from "../../../utils/constants";
 
 const INITIAL_VALUES = {
 	client: "",
@@ -118,15 +126,15 @@ const AddProject = ({ fields }) => {
 		try {
 			console.log("values", values);
 			notify({
-				kind: "success",
-				message: "Project added successfully!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_SUCCESS,
+				message: ADD_PROJECT_SUCCESS,
+				id: ADD_PROJECT_NOTIFICATION_SUCCESS_ID,
 			});
 		} catch (error) {
 			notify({
-				kind: "error",
-				message: "Server error!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_ERROR,
+				message: SERVER_ERROR,
+				id: ADD_PROJECT_NOTIFICATION_ERROR_ID,
 			});
 		}
 	};

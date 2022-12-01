@@ -14,6 +14,14 @@ import { useStringListState } from "../../molecules/StringList/useStringListStat
 import StringList from "../../molecules/StringList/StringList";
 import { linkColor } from "./Log.module.scss";
 import { useNotifications } from "../../../context/hooks/useNotifications";
+import {
+	NOTIFICATION_ERROR,
+	NOTIFICATION_SUCCESS,
+	REGISTER_NOTIFICATION_ERROR_ID,
+	REGISTER_NOTIFICATION_SUCCESS_ID,
+	REGISTER_SUCCESS,
+	SERVER_ERROR,
+} from "../../../utils/constants";
 
 const initialValues = {
 	email: "",
@@ -69,15 +77,15 @@ const Register = ({ fields }) => {
 		try {
 			console.log("values", values);
 			notify({
-				kind: "success",
-				message: "Registered successfully!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_SUCCESS,
+				message: REGISTER_SUCCESS,
+				id: REGISTER_NOTIFICATION_SUCCESS_ID,
 			});
 		} catch (error) {
 			notify({
-				kind: "error",
-				message: "Server error!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_ERROR,
+				message: SERVER_ERROR,
+				id: REGISTER_NOTIFICATION_ERROR_ID,
 			});
 		}
 	};

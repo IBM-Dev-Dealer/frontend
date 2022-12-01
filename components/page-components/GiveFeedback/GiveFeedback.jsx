@@ -13,6 +13,14 @@ import { INITIAL_VALUES, VALIDATE } from "./formikConstants";
 import TextArea from "../../atoms/TextArea/TextArea";
 import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
 import { useNotifications } from "../../../context/hooks/useNotifications";
+import {
+	FEEDBACK_NOTIFICATION_ERROR_ID,
+	FEEDBACK_NOTIFICATION_SUCCESS_ID,
+	FEEDBACK_SUCCESS,
+	NOTIFICATION_ERROR,
+	NOTIFICATION_SUCCESS,
+	SERVER_ERROR,
+} from "../../../utils/constants";
 
 const GiveFeedback = ({
 	loggedUserRoles,
@@ -35,19 +43,35 @@ const GiveFeedback = ({
 	};
 
 	const { notify } = useNotifications();
-	const submitHandler = (values) => {
+	const submitDevHandler = (values) => {
 		try {
 			console.log("values", values);
 			notify({
-				kind: "success",
-				message: "Feedback sent successfully!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_SUCCESS,
+				message: FEEDBACK_SUCCESS,
+				id: FEEDBACK_NOTIFICATION_SUCCESS_ID,
 			});
 		} catch (error) {
 			notify({
-				kind: "error",
-				message: "Server error!",
-				id: Math.floor(Math.random() * 10000).toString(),
+				kind: NOTIFICATION_ERROR,
+				message: SERVER_ERROR,
+				id: FEEDBACK_NOTIFICATION_ERROR_ID,
+			});
+		}
+	};
+	const submitManagerHandler = (values) => {
+		try {
+			console.log("values", values);
+			notify({
+				kind: NOTIFICATION_SUCCESS,
+				message: FEEDBACK_SUCCESS,
+				id: FEEDBACK_NOTIFICATION_SUCCESS_ID,
+			});
+		} catch (error) {
+			notify({
+				kind: NOTIFICATION_ERROR,
+				message: SERVER_ERROR,
+				id: FEEDBACK_NOTIFICATION_ERROR_ID,
 			});
 		}
 	};
@@ -86,7 +110,7 @@ const GiveFeedback = ({
 							initialValues={INITIAL_VALUES.PM}
 							validationSchema={VALIDATE.PM}
 							onSubmit={(values) => {
-								submitHandler(values);
+								submitManagerHandler(values);
 							}}
 						>
 							{(formik) => {
@@ -216,7 +240,7 @@ const GiveFeedback = ({
 							initialValues={INITIAL_VALUES.DEV}
 							validationSchema={VALIDATE.DEV}
 							onSubmit={(values) => {
-								submitHandler(values);
+								submitDevHandler(values);
 							}}
 						>
 							{(formik) => {
