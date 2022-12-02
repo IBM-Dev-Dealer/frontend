@@ -10,8 +10,6 @@ import classNames from "classnames";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import { useCallback, useMemo } from "react";
-import { useStringListState } from "../../molecules/StringList/useStringListState";
-import StringList from "../../molecules/StringList/StringList";
 import { linkColor } from "./Log.module.scss";
 import { useNotifications } from "../../../context/hooks/useNotifications";
 import {
@@ -31,27 +29,27 @@ const initialValues = {
   lastname: "",
   technologies: [],
   experience: "",
-  roleName: "",
-  roles: [],
+  // roleName: "",
+  // roles: [],
 };
 
 const validate = yup.object({
-  // email: yup.string().email("Invalid email format").required("Email field empty"),
-  // firstname: yup.string().required("Firstname field empty"),
-  // lastname: yup.string().required("Lastname field empty"),
-  // password: yup
-  //   .string()
-  //   .required("Password field empty")
-  //   .matches(
-  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-  //     "min 6 length = 0-9,a-z,A-Z and specials",
-  //   ),
-  // rePassword: yup
-  //   .string()
-  //   .oneOf([yup.ref("password"), null], "Passwords not matched")
-  //   .required("Re-password field empty"),
-  // technologies: yup.array().of(yup.object()),
-  // experience: yup.string().required("Experience is required"),
+  email: yup.string().email("Invalid email format").required("Email field empty"),
+  firstname: yup.string().required("Firstname field empty"),
+  lastname: yup.string().required("Lastname field empty"),
+  password: yup
+    .string()
+    .required("Password field empty")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+      "min 6 length = 0-9,a-z,A-Z and specials",
+    ),
+  rePassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords not matched")
+    .required("Re-password field empty"),
+  technologies: yup.array().of(yup.object()),
+  experience: yup.string().required("Experience is required"),
   // roleName: yup.string(),
   // roles: yup.array().of(yup.string()).min(1).required(),
 });
@@ -96,14 +94,14 @@ const Register = ({ fields }) => {
     }
   };
 
-  const {
-    stringList: rolesList,
-    setStringList: setRolesList,
-    stringInputValue: rolesInputValue,
-    setStringInputValue: setRolesInputValue,
-    inputWasTouched: rolesInputWasTouched,
-    setInputWasTouched: setRolesInputWasTouched,
-  } = useStringListState();
+  // const {
+  //   stringList: rolesList,
+  //   setStringList: setRolesList,
+  //   stringInputValue: rolesInputValue,
+  //   setStringInputValue: setRolesInputValue,
+  //   inputWasTouched: rolesInputWasTouched,
+  //   setInputWasTouched: setRolesInputWasTouched,
+  // } = useStringListState();
 
   const registerFormTailwindContainer = "flex items-center flex-col w-full mt-6";
   const formFieldsContainerTailwind = "w-3/4 flex gap-20 justify-center items-center flex-wrap";
@@ -177,7 +175,7 @@ const Register = ({ fields }) => {
                 placeholder='Years'
                 labelText='Years of experience'
               />
-              <StringList
+              {/* <StringList
                 setList={setRolesList}
                 list={rolesList}
                 onChange={handleOnChange(formik.setFieldValue, "roles")}
@@ -192,7 +190,7 @@ const Register = ({ fields }) => {
                   untouch: () => setRolesInputWasTouched(false),
                   wasTouched: rolesInputWasTouched,
                 }}
-              />
+              /> */}
               <Button type='submit' label='Submit' />
             </div>
           </Form>
