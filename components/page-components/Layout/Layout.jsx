@@ -102,7 +102,7 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
         <div className={styles.layout}>
           <header className={styles.header}>
             <div className={styles.logoWrapper}>
-              <Image src={LOGO} alt='IBM Dev Dealer' className='h-20 w-auto' />
+              <Image src={LOGO} alt='IBM Dev Dealer' className='h-20 w-auto' priority />
             </div>
             <nav className={styles.nav}>{navLinksColorized}</nav>
           </header>
