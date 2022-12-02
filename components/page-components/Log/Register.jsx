@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ROUTES } from "../../../utils/utils";
+import { ROUTES, callAPI } from "../../../utils/utils";
 import Title from "../../atoms/Title/Title";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
@@ -36,24 +36,24 @@ const initialValues = {
 };
 
 const validate = yup.object({
-  email: yup.string().email("Invalid email format").required("Email field empty"),
-  firstname: yup.string().required("Firstname field empty"),
-  lastname: yup.string().required("Lastname field empty"),
-  password: yup
-    .string()
-    .required("Password field empty")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-      "min 6 length = 0-9,a-z,A-Z and specials",
-    ),
-  rePassword: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "Passwords not matched")
-    .required("Re-password field empty"),
-  technologies: yup.array().of(yup.object()),
-  experience: yup.string().required("Experience is required"),
-  roleName: yup.string(),
-  roles: yup.array().of(yup.string()).min(1).required(),
+  // email: yup.string().email("Invalid email format").required("Email field empty"),
+  // firstname: yup.string().required("Firstname field empty"),
+  // lastname: yup.string().required("Lastname field empty"),
+  // password: yup
+  //   .string()
+  //   .required("Password field empty")
+  //   .matches(
+  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+  //     "min 6 length = 0-9,a-z,A-Z and specials",
+  //   ),
+  // rePassword: yup
+  //   .string()
+  //   .oneOf([yup.ref("password"), null], "Passwords not matched")
+  //   .required("Re-password field empty"),
+  // technologies: yup.array().of(yup.object()),
+  // experience: yup.string().required("Experience is required"),
+  // roleName: yup.string(),
+  // roles: yup.array().of(yup.string()).min(1).required(),
 });
 
 const Register = ({ fields }) => {
@@ -69,9 +69,19 @@ const Register = ({ fields }) => {
   );
 
   const { notify } = useNotifications();
-  const submitHandler = (values) => {
+
+  const submitHandler = async (values) => {
+    const body = {
+      email: values.email,
+      firstName: values.firstname,
+      lastName: values.lastname,
+      password: values.password,
+      // roles: values.roles,
+      techStacks: values.technologies,
+    };
     try {
-      console.log("values", values);
+      const res = await callAPI("/user", body, "POST");
+
       notify({
         kind: NOTIFICATION_SUCCESS,
         message: REGISTER_SUCCESS,

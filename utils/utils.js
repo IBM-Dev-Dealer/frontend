@@ -68,3 +68,15 @@ export const replaceAll = (fullString, stringToReplace, replacementString) => {
     replacementString,
   );
 };
+
+export const callAPI = async (path, body, method = "GET") => {
+  const config = {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  console.log(`${process.env.HOST}${path}`);
+  if (body) config.body = JSON.stringify(body);
+  return await fetch(`${process.env.HOST}${path}`, config);
+};
