@@ -22,6 +22,7 @@ const Avatar = ({
         alt={alt}
         width={width}
         height={height}
+        priority
         {...props}
       />
     ) : (

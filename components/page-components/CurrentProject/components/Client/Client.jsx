@@ -1,8 +1,8 @@
-import PickDate from "../../../atoms/PickDate/PickDate";
+import PickDate from "../../../../atoms/PickDate/PickDate";
 import style from "./Client.module.scss";
 import { useState } from "react";
-import Avatar from "../../../atoms/Avatar/Avatar";
-import InfoNote from "../../../atoms/InfoNote/InfoNote";
+import Avatar from "../../../../atoms/Avatar/Avatar";
+import InfoNote from "../../../../atoms/InfoNote/InfoNote";
 
 const Client = ({
   logo = "",
