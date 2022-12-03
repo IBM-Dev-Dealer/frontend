@@ -24,12 +24,13 @@ import {
 
 const GiveFeedback = ({
   loggedUserRoles,
-  projectID,
   devsWhoRequestedFeedback,
   devData,
   newSeniorityLevelFields,
+  projects,
 }) => {
   const [feedbackView, setFeedbackView] = useState("");
+  const [project, setProject] = useState("");
   const [newSeniorityLevelsVisible, setNewSeniorityLevelsVisible] = useState(false);
 
   const { objectList: newSeniorityLevels, setObjectList: setNewSeniorityLevels } =
@@ -59,7 +60,26 @@ const GiveFeedback = ({
   };
 
   const submitManagerHandler = (values) => {
-    const body = {};
+    //   {
+    //     "projectName": "perulelulelulel12ula",
+    //     "projectID": 1,
+    //     "to": 1,
+    //     "businessResults": "Expect more",
+    //     "clientSuccess": "Expect more",
+    //     "innovation": "Expect more",
+    //     "teamInteractionRating": 3,
+    //     "suggestedSeniorityLevels": "medium level"
+    // }
+    const body = {
+      // projectName: values.,
+      projectID: 1,
+      to: 1,
+      businessResults: "Expect more",
+      clientSuccess: "Expect more",
+      innovation: "Expect more",
+      teamInteractionRating: 3,
+      suggestedSeniorityLevels: "medium level",
+    };
     try {
       console.log("values", values);
       notify({
@@ -87,6 +107,14 @@ const GiveFeedback = ({
         </Link>
       </Title>
       <div className='mb-6 max-w-xl m-auto'>
+        {/* <Dropdown
+          infoMessage={INFO_MESSAGE.PROJECT}
+          infoMessagePosition='right'
+          list={projects.map((prj) => ({ ...prj, label: prj.projectName }))}
+          placeholder={"Select Project"}
+          select={(role) => setProject(role.label)}
+          selected={project}
+        /> */}
         <Dropdown
           infoMessage={INFO_MESSAGE.FEEDBACK_VIEW}
           infoMessagePosition='right'

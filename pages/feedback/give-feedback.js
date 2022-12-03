@@ -40,8 +40,13 @@ export const getStaticProps = async () => {
     .filter((dev) => dev.projectID === projectID)
     .map((dev) => ({ ...dev, label: `${dev.firstName} ${dev.lastName}` }));
 
+  const pmProject = await await callAPI("/projects" + new URLSearchParams({ id: 1 }), null, "GET");
+
+  console.log("pmProject", pmProject);
+
   if (loggedUserRoles.includes("project-manager")) {
     props.devsWhoRequestedFeedback = devsOfPmProject;
+    // props.projects = [pmProject];
   }
   return { props };
 };
