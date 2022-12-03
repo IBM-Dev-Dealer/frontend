@@ -3,12 +3,11 @@ import CardList from "../../molecules/CardList/CardList";
 import Link from "next/link";
 import Button from "../../atoms/Button/Button";
 import { PlusIcon } from "@heroicons/react/20/solid";
+import Title from "../../atoms/Title/Title";
 
-const formatDate = (date, moment) => new Date(JSON.parse(date)[moment]).toLocaleDateString("RO-ro");
+const formatDate = (date, moment) => new Date(JSON.parse(date)[moment]);
 const formatTechnologies = (technologies) => JSON.parse(technologies).map((t) => t.technology);
 const formatRepos = (repositories) => JSON.parse(repositories).map((r) => ({ label: r }));
-const formatSlackChannels = (channels) => JSON.parse(channels).map((r) => ({ label: r }));
-
 const formatDevelopers = (devs) =>
   devs.map((dev) => ({
     ...dev,
@@ -16,28 +15,23 @@ const formatDevelopers = (devs) =>
     techSeniority: JSON.parse(dev.techStacks),
   }));
 
-const CurrentProjects = ({
-  projects,
-  // client,
-  // technologies,
-  developers,
-  // repos,
-  // slackChannels,
-  // tutorials,
-}) => {
-  const borderTopClass = "m-5 p-5 border-t-2 border-";
+const CurrentProjects = ({ projects, developers }) => {
+  const borderTopClass = "m-5 p-5 border-t border-";
 
   console.log("projects", projects);
   return (
-    <div>
+    <div className='flex flex-col'>
+      <Title>Current Projects</Title>
       {projects.map((project, i) => {
         return (
-          <div key={i}>
+          <div key={i} className={`${i !== 0 ? "border-t-4 border-dotted pt-10" : ""}`}>
             <Client
               name={project.client}
               project={project.projectName}
               startDate={formatDate(project.projectPeriod, "start")}
               endDate={formatDate(project.projectPeriod, "end")}
+              // startDate={JSON.parse(project.projectPeriod).start}
+              // endDate={JSON.parse(project.projectPeriod).end}
             />
             <div className={`${borderTopClass}light-green`}>
               <p className='text-xl text-light-green'>Technologies:</p>

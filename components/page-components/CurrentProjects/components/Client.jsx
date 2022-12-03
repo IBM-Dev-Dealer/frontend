@@ -14,17 +14,19 @@ const Client = ({
   project = "",
   dateDisabled = false,
 }) => {
-  const [date, setDate] = useState({ startDate: null, endDate: null });
+  const [date, setDate] = useState({ startDate: new Date(startDate), endDate: new Date(endDate) });
 
   // Function formatDate - for testing string date mock
   const formatDate = (d) => {
-    if (!d) return null;
-    const formatDateNum = (num) => (num > 9 ? num : `0${num}`);
-    const day = formatDateNum(d.getDate());
-    const month = formatDateNum(d.getMonth() + 1);
-    const year = d.getFullYear();
+    // if (!d) return null;
+    // const formatDateNum = (num) => (num > 9 ? num : `0${num}`);
+    // const day = formatDateNum(d.getDate());
+    // const month = formatDateNum(d.getMonth() + 1);
+    // const year = d.getFullYear();
 
-    return day + "." + month + "." + year;
+    // return day + "." + month + "." + year;
+
+    return new Date(d).toLocaleDateString("RO-ro");
   };
 
   const onDateChange = (comingDate, type) => {
@@ -43,7 +45,7 @@ const Client = ({
           <div className='flex justify-between items-center w-72'>
             <PickDate
               inputLabel={formatDate(date.startDate) || startDate}
-              selected={date.startDate || new Date(startDate)}
+              selected={date.startDate}
               onChange={(date) => onDateChange(date, "startDate")}
               disabled={dateDisabled}
               todayButton='Starting date'

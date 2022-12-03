@@ -104,7 +104,7 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
           message: `${selectedDeveloper.firstName} ${selectedDeveloper.lastName} was successfully assigned to project ${selectedProject.projectName}`,
         });
       setSelectedProject(null);
-      setSelectedDeveloper((prev) => ({ ...prev, projectID: JSON.stringify(updatedProjects) }));
+      // setSelectedDeveloper((prev) => ({ ...prev, projectID: JSON.stringify(updatedProjects) }));
     } catch (error) {
       notify({
         kind: "success",
