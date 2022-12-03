@@ -28,7 +28,7 @@ const TECHNOLOGIES = {
 const OTHER_FIELDS = [
   { codename: "client", label: "Client" },
   { codename: "projectName", label: "Project Name" },
-  { codename: "projectDuration", label: "Project Duration" },
+  { codename: "projectPeriod", label: "Project Period" },
   { codename: "technologies", label: "Technologies" },
   { codename: "requiredCapacity", label: "Required Capacity" },
   { codename: "repositories", label: "Repositories" },

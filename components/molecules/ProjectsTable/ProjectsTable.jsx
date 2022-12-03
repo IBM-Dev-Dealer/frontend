@@ -4,7 +4,7 @@ import { PAGE_DESCRIPTION } from "./constants";
 
 const formatData = (type, data) => {
   switch (type) {
-    case "projectDuration":
+    case "projectPeriod":
       return (
         <div className='flex flex-col gap-2'>
           <div className='flex flex-col'>
@@ -48,7 +48,7 @@ const formatData = (type, data) => {
 const ProjectsTable = ({ projects, fields: tableFields }) => {
   const fields = Object.keys(tableFields);
 
-  console.log("projects", projects);
+  console.log("[ProjectsTable] projects", projects);
 
   return (
     <>
