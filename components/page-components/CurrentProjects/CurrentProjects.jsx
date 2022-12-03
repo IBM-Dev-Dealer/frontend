@@ -1,8 +1,14 @@
 import Client from "./components/Client";
 import CardList from "../../molecules/CardList/CardList";
+import Link from "next/link";
+import Button from "../../atoms/Button/Button";
+import { PlusIcon } from "@heroicons/react/20/solid";
 
 const formatDate = (date, moment) => new Date(JSON.parse(date)[moment]).toLocaleDateString("RO-ro");
 const formatTechnologies = (technologies) => JSON.parse(technologies).map((t) => t.technology);
+const formatRepos = (repositories) => JSON.parse(repositories).map((r) => ({ label: r }));
+const formatSlackChannels = (channels) => JSON.parse(channels).map((r) => ({ label: r }));
+
 const formatDevelopers = (devs) =>
   devs.map((dev) => ({
     ...dev,
@@ -22,7 +28,6 @@ const CurrentProjects = ({
   const borderTopClass = "m-5 p-5 border-t-2 border-";
 
   console.log("projects", projects);
-  Date.now().toLocaleString("RO-ro");
   return (
     <div>
       {projects.map((project, i) => {
@@ -68,13 +73,13 @@ const CurrentProjects = ({
                 )}
               </CardList>
             </div>
-            {/* <div className={`flex justify-between flex-wrap ${borderTopClass}orangeade`}>
+            <div className={`flex justify-between flex-wrap ${borderTopClass}orangeade`}>
               <div>
                 <p className='text-xl text-orangeade'>Repos:</p>
                 <CardList
-                  list={repos}
+                  list={formatRepos(project.repositories)}
                   titleColor='orangeade'
-                  subListName='zone'
+                  // subListName='zone'
                   addSubList='Add zone'
                   addToList
                   listWidth={36}
@@ -86,11 +91,11 @@ const CurrentProjects = ({
                   )}
                 </CardList>
                 <p className='text-xl text-orangeade'>Slack channels:</p>
-                <div className='text-sm flex-wrap'>
-                  {slackChannels.map((slack) => (
+                <div className='text-sm flex flex-wrap items-center gap-3'>
+                  {JSON.parse(project.slackChannels).map((slack) => (
                     <Link
                       key={slack}
-                      className='mr-3 rounded-xl bg-mustard hover:bg-orangeade'
+                      className='rounded-xl bg-mustard hover:bg-orangeade px-4 py-2 shadow-md'
                       href={slack}
                     >
                       {slack}
@@ -99,7 +104,7 @@ const CurrentProjects = ({
                   <Button label={<PlusIcon className='w-6 h-6' />} type='button' isSquare={true} />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <p className='text-xl text-orangeade'>Tutorials:</p>
                 <div className='text-sm'>
                   {tutorials.map(({ link, title }) => (
@@ -108,8 +113,8 @@ const CurrentProjects = ({
                     </Link>
                   ))}
                 </div>
-              </div>
-            </div> */}
+              </div> */}
+            </div>
           </div>
         );
       })}

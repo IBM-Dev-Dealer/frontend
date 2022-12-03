@@ -12,10 +12,10 @@ const CardList = ({
   addToList,
   listWidth = 28,
 }) => {
-  const listClass = "flex flex-col justify-between shadow-md rounded-xl m-2 py-2 px-4";
+  const listClass = "flex flex-col justify-between shadow-md rounded-xl py-2 px-4";
   console.log("list", list);
   return (
-    <ul className='flex m-4 flex-wrap'>
+    <ul className='flex mt-4 my-2 flex-wrap gap-4'>
       {list.map((l, i) => (
         <li key={i} className={listClass}>
           <div className='flex'>

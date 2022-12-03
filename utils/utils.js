@@ -1,6 +1,6 @@
 export const ROUTES = {
   // HOME: "/home",
-  CURRENT_PROJECT: "/current-projects",
+  CURRENT_PROJECTS: "/current-projects",
   ADD_PROJECT: "/add-project",
   OTHER_PROJECTS: "/other-projects",
   SOURCE: "/source",
