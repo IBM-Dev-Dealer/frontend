@@ -73,9 +73,15 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
 
   const assignDev = async () => {
     console.log("selectedProject", selectedProject);
+    console.log("selectedDeveloper", selectedDeveloper);
 
-    const previousUserProjects =
-      selectedDeveloper.projectID ?? JSON.parse(selectedDeveloper.projectID);
+    if (!selectedDeveloper) return;
+
+    const previousUserProjects = JSON.parse(selectedDeveloper.projectID) ?? [];
+    selectedDeveloper.projectID;
+
+    console.log("previousUserProjects", previousUserProjects);
+
     if (previousUserProjects.includes(selectedProject.id)) {
       notify({
         kind: "info",
@@ -96,6 +102,7 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
     console.log("body", body);
     try {
       const res = await callAPI("/user", body, "PUT");
+      // const res = { status: 200 };
 
       if (res.status === 200)
         notify({
