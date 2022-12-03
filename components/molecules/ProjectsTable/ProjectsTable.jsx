@@ -73,12 +73,27 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
 
   const assignDev = async () => {
     console.log("selectedProject", selectedProject);
+
+    const previousUserProjects =
+      selectedDeveloper.projectID ?? JSON.parse(selectedDeveloper.projectID);
+    if (previousUserProjects.includes(selectedProject.id)) {
+      notify({
+        kind: "info",
+        id: "projectAlreadyAssigned",
+        message: "User is already assigned to the selected project.",
+      });
+      return;
+    }
+
+    const updatedProjects = [...previousUserProjects, selectedProject.id];
+
     const body = {
       userEmail: selectedDeveloper.email,
       fieldsToUpdate: {
-        projectID: selectedProject.id,
+        projectID: updatedProjects,
       },
     };
+    console.log("body", body);
     try {
       const res = await callAPI("/user", body, "PUT");
 
@@ -89,6 +104,7 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
           message: `${selectedDeveloper.firstName} ${selectedDeveloper.lastName} was successfully assigned to project ${selectedProject.projectName}`,
         });
       setSelectedProject(null);
+      setSelectedDeveloper((prev) => ({ ...prev, projectID: JSON.stringify(updatedProjects) }));
     } catch (error) {
       notify({
         kind: "success",
@@ -116,11 +132,11 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
           {projects.map((project) => (
             <tr
               onClick={() => setSelectedProject(project)}
-              key={project.projectId}
+              key={project.projectName}
               className='hover:bg-transparent-gray-05 hover:shadow-md cursor-pointer border border-x-transparent'
             >
               {fields.map((field) => (
-                <td key={`${project.projectId}_${field}`} className='px-4 py-2'>
+                <td key={`${project.projectName}_${field}`} className='px-4 py-2'>
                   {formatData(field, project[field])}
                 </td>
               ))}

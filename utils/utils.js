@@ -1,6 +1,6 @@
 export const ROUTES = {
   // HOME: "/home",
-  CURRENT_PROJECT: "/current-project",
+  CURRENT_PROJECT: "/current-projects",
   ADD_PROJECT: "/add-project",
   OTHER_PROJECTS: "/other-projects",
   SOURCE: "/source",
@@ -72,19 +72,13 @@ export const replaceAll = (fullString, stringToReplace, replacementString) => {
 export const callAPI = async (path, body, method = "GET") => {
   const config = {
     method: method,
-    // mode: "cors", // no-cors, *cors, same-origin
-    // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     headers: {
       "Content-Type": "application/json",
-      // Connection: "keep-alive",
-      // "Accept-Encoding": "gzip, deflate, br",
-      // Accept: "*/*",
     },
   };
   if (body) {
     config.body = JSON.stringify(body);
   }
   const URL = `${process.env.HOST}${path}`;
-  console.log("URL", URL);
   return await fetch(URL, config);
 };

@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
   // const authorization = "authorization";
 
   const loggedUserRoles = ["project-manager", "dev"];
-  const projectID = "1";
+  const projectID = "15";
 
   // const devData = await fetch(`${process.env.API_URL}/api/getDevData`, {
   //   method: "GET",
@@ -40,13 +40,13 @@ export const getStaticProps = async () => {
     .filter((dev) => dev.projectID === projectID)
     .map((dev) => ({ ...dev, label: `${dev.firstName} ${dev.lastName}` }));
 
-  const pmProject = await await callAPI("/projects" + new URLSearchParams({ id: 1 }), null, "GET");
+  const pmProject = await (await callAPI(`/projects/${projectID}`, null, "GET")).json();
 
   console.log("pmProject", pmProject);
 
   if (loggedUserRoles.includes("project-manager")) {
     props.devsWhoRequestedFeedback = devsOfPmProject;
-    // props.projects = [pmProject];
+    props.projects = [pmProject];
   }
   return { props };
 };
