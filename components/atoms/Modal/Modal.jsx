@@ -9,7 +9,7 @@ const Modal = ({ button, dropdown, onBackdropClick = () => {} }) => {
         onClick={onBackdropClick}
         role='presentation'
       />
-      <div className=' w-2/5 p-12 bg-white shadow-2xl rounded-2xl absolute z-6 top-1/3'>
+      <div className=' w-2/5 p-12 bg-white shadow-2xl rounded-2xl fixed z-6 top-1/3'>
         <Dropdown
           list={dropdown.list}
           placeholder={dropdown.placeholder}
