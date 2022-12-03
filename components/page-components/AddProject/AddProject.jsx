@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { useStringListState } from "../../molecules/StringList/useStringListState";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
-import { generateNumbers } from "../../../utils/utils";
+import { callAPI, generateNumbers } from "../../../utils/utils";
 import { useCallback, useMemo } from "react";
 import TextInput from "../../atoms/TextInput/TextInput";
 import { useTextInputState } from "../../atoms/TextInput/useTextInputState";
@@ -113,15 +113,34 @@ const AddProject = ({ fields }) => {
   );
 
   const { notify } = useNotifications();
-  const submitHandler = (values) => {
+  const submitHandler = async (values) => {
+    const body = {
+      client: values.client,
+      clientLogoURL: values.clientLogoURL,
+      projectName: values.projectName,
+      projectPeriod: {
+        start: values.projectPeriod.start.toISOString(),
+        end: values.projectPeriod.start.toISOString(),
+      },
+      requiredCapacity: values.requiredCapacity,
+      repositories: values.repositories,
+      slackChannels: values.slackChannels,
+      accessZones: values.accessZones,
+    };
     try {
       console.log("values", values);
-      notify({
-        kind: NOTIFICATION_SUCCESS,
-        message: ADD_PROJECT_SUCCESS,
-        id: ADD_PROJECT_NOTIFICATION_SUCCESS_ID,
-      });
+      const res = await callAPI("/projects", body, "POST");
+      console.log("res", JSON.stringify(res));
+
+      if (res.status === 200) {
+        notify({
+          kind: NOTIFICATION_SUCCESS,
+          message: ADD_PROJECT_SUCCESS,
+          id: ADD_PROJECT_NOTIFICATION_SUCCESS_ID,
+        });
+      } else throw new Error();
     } catch (error) {
+      console.log("error", error);
       notify({
         kind: NOTIFICATION_ERROR,
         message: SERVER_ERROR,

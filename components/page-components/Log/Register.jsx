@@ -79,12 +79,13 @@ const Register = ({ fields }) => {
     };
     try {
       const res = await callAPI("/user", body, "POST");
-
-      notify({
-        kind: NOTIFICATION_SUCCESS,
-        message: REGISTER_SUCCESS,
-        id: REGISTER_NOTIFICATION_SUCCESS_ID,
-      });
+      if (res.status === 200) {
+        notify({
+          kind: NOTIFICATION_SUCCESS,
+          message: REGISTER_SUCCESS,
+          id: REGISTER_NOTIFICATION_SUCCESS_ID,
+        });
+      } else throw new Error();
     } catch (error) {
       notify({
         kind: NOTIFICATION_ERROR,

@@ -76,7 +76,8 @@ export const callAPI = async (path, body, method = "GET") => {
       "Content-Type": "application/json",
     },
   };
-  console.log(`${process.env.HOST}${path}`);
-  if (body) config.body = JSON.stringify(body);
+  if (body) {
+    config.body = JSON.stringify(body);
+  }
   return await fetch(`${process.env.HOST}${path}`, config);
 };
