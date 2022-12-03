@@ -1,5 +1,3 @@
-import { colorizeJSXArray } from "../../../utils/utils";
-import ColoredItems from "../../atoms/ColoredItems/ColoredItems";
 import { PAGE_DESCRIPTION } from "./constants";
 
 const formatData = (type, data) => {
@@ -18,26 +16,26 @@ const formatData = (type, data) => {
         </div>
       );
     case "technologies":
+      console.log("technologies", data);
       return (
         <div className='flex flex-col gap-2'>
-          <ColoredItems items={data.map((d) => d.label)} canDelete={false} />
+          {/* <ColoredItems items={data.map((d) => d.label)} canDelete={false} /> */}
         </div>
       );
     case "requiredCapacity":
+      console.log("requiredCapacity", data);
+
       return (
         <div className='flex flex-col gap-2'>
-          {colorizeJSXArray(
+          {/* {colorizeJSXArray(
             data.map((d, i) => (
               <div key={i} className='flex flex-col rounded-md shadow-md p-2 gap-1'>
-                {/* <span className='text-xs font-bold'>Developers:</span> */}
                 <span className='text-sm self-end'>{d.developers}</span>
-                {/* <span className='text-xs font-bold'>Seniority:</span> */}
                 <span className='text-sm self-end'>{d.seniority.label}</span>
-                {/* <span className='text-xs font-bold'>Technology:</span> */}
                 <span className='text-sm self-end'>{d.technology.label}</span>
               </div>
             )),
-          )}
+          )} */}
         </div>
       );
     default:

@@ -21,7 +21,26 @@ export const getStaticProps = async () => {
   const projects2 = await getAllProjects();
   const projects = await (await callAPI("/all_projects", null, "GET")).json();
 
-  console.log("projects", JSON.stringify(projects));
+  console.log("projects", projects);
 
-  return { props: { fields, projects: projects2 } };
+  const jsons = [
+    "requiredCapacity",
+    "repositories",
+    "slackChannels",
+    "accessZones",
+    "projectPeriod",
+  ];
+  // const map = {};
+  // projects.map((project) => {
+  //   for (const key in project) {
+  //     if (Object.hasOwnProperty.call(project, key)) {
+  //       const element = project[key];
+  //       if (jsons.includes(key)) {
+  //         console.log(typeof element, "element", element);
+  //       }
+  //     }
+  //   }
+  // });
+
+  return { props: { fields, projects } };
 };
