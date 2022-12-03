@@ -74,7 +74,10 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
   const assignDev = async () => {
     console.log("selectedProject", selectedProject);
     const body = {
-      projectID: selectedProject.id,
+      userEmail: selectedDeveloper.email,
+      fieldsToUpdate: {
+        projectID: selectedProject.id,
+      },
     };
     try {
       const res = await callAPI("/user", body, "PUT");
@@ -83,8 +86,9 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
         notify({
           kind: "success",
           id: "devAssignedToProject",
-          message: `Developer successfully assigned to project ${selectedProject.projectName}`,
+          message: `${selectedDeveloper.firstName} ${selectedDeveloper.lastName} was successfully assigned to project ${selectedProject.projectName}`,
         });
+      setSelectedProject(null);
     } catch (error) {
       notify({
         kind: "success",

@@ -24,7 +24,7 @@ import {
 
 const GiveFeedback = ({
   loggedUserRoles,
-  projectId,
+  projectID,
   devsWhoRequestedFeedback,
   devData,
   newSeniorityLevelFields,
@@ -40,6 +40,7 @@ const GiveFeedback = ({
   };
 
   const { notify } = useNotifications();
+
   const submitDevHandler = (values) => {
     try {
       console.log("values", values);
@@ -56,7 +57,9 @@ const GiveFeedback = ({
       });
     }
   };
+
   const submitManagerHandler = (values) => {
+    const body = {};
     try {
       console.log("values", values);
       notify({

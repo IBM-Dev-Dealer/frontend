@@ -1,4 +1,5 @@
 import GiveFeedback from "../../components/page-components/GiveFeedback/GiveFeedback";
+import { callAPI } from "../../utils/utils";
 import getDevData from "../api/getDevData";
 import getFields from "../api/getFields";
 
@@ -12,7 +13,7 @@ export const getStaticProps = async () => {
   // const authorization = "authorization";
 
   const loggedUserRoles = ["project-manager", "dev"];
-  const projectId = "id-of-project";
+  const projectID = "1";
 
   // const devData = await fetch(`${process.env.API_URL}/api/getDevData`, {
   //   method: "GET",
@@ -32,14 +33,15 @@ export const getStaticProps = async () => {
 
   const fields = await getFields(queriedFields);
 
-  const props = { loggedUserRoles, projectId, ...devData, newSeniorityLevelFields: fields.fields };
+  const props = { loggedUserRoles, projectID, ...devData, newSeniorityLevelFields: fields.fields };
+
+  const allDevs = await (await callAPI("/all_users")).json();
+  const devsOfPmProject = allDevs
+    .filter((dev) => dev.projectID === projectID)
+    .map((dev) => ({ ...dev, label: `${dev.firstName} ${dev.lastName}` }));
 
   if (loggedUserRoles.includes("project-manager")) {
-    props.devsWhoRequestedFeedback = [
-      { label: "Dev Devinson", userId: "dev-devinson" },
-      { label: "Lev Tolstoievsky", userId: "lev-tolstoievsky" },
-      { label: "Hannah Barbera", userId: "hannah-barbera" },
-    ];
+    props.devsWhoRequestedFeedback = devsOfPmProject;
   }
   return { props };
 };
