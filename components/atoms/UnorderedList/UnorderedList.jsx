@@ -1,7 +1,9 @@
-const UnorderedList = ({ label, list, onClick, changeEnabler = {} }) => {
+const UnorderedList = ({ label, list, onClick, changeEnabler = {}, classNames }) => {
   return (
     <div className='my-2'>
-      <div className='text-sm'>{label}</div>
+      <div className={`text-sm ${classNames && classNames.label ? classNames.label : ""}`}>
+        {label}
+      </div>
       <ul className='p-4 bg-transparent-gray-05 rounded-2xl my-2 shadow-sm'>
         {list.map((item, i) => (
           <li key={i} className='text-sm flex items-center'>
