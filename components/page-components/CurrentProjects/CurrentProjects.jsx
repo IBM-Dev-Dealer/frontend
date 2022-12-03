@@ -74,8 +74,8 @@ const CurrentProjects = ({
               </CardList>
             </div>
             <div className={`flex justify-between flex-wrap ${borderTopClass}orangeade`}>
-              <div>
-                <p className='text-xl text-orangeade'>Repos:</p>
+              <div className='flex flex-col gap-2'>
+                <p className='text-xl text-orangeade'>Repositories:</p>
                 <CardList
                   list={formatRepos(project.repositories)}
                   titleColor='orangeade'
@@ -90,7 +90,7 @@ const CurrentProjects = ({
                     </p>
                   )}
                 </CardList>
-                <p className='text-xl text-orangeade'>Slack channels:</p>
+                <p className='text-xl text-orangeade'>Slack Channels:</p>
                 <div className='text-sm flex flex-wrap items-center gap-3'>
                   {JSON.parse(project.slackChannels).map((slack) => (
                     <Link
