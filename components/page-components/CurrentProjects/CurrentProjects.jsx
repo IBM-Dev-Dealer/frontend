@@ -3,12 +3,18 @@ import CardList from "../../molecules/CardList/CardList";
 
 const formatDate = (date, moment) => new Date(JSON.parse(date)[moment]).toLocaleDateString("RO-ro");
 const formatTechnologies = (technologies) => JSON.parse(technologies).map((t) => t.technology);
+const formatDevelopers = (devs) =>
+  devs.map((dev) => ({
+    ...dev,
+    label: `${dev.firstName} ${dev.lastName}`,
+    techSeniority: JSON.parse(dev.techStacks),
+  }));
 
 const CurrentProjects = ({
   projects,
   // client,
   // technologies,
-  // developers,
+  developers,
   // repos,
   // slackChannels,
   // tutorials,
@@ -35,7 +41,7 @@ const CurrentProjects = ({
                 titleColor='light-green'
                 // subListName='level'
                 // addSubList='Add seniority level'
-                // addToList
+                addToList
               >
                 {({ type, dev }) => (
                   <div className='flex justify-between'>
@@ -47,9 +53,8 @@ const CurrentProjects = ({
             </div>
             <div className={`${borderTopClass}blue`}>
               <p className='text-xl text-blue'>Developers:</p>
-              {/* <CardList
-                list={developers}
-                list={formatTechnologies(project.developers)}
+              <CardList
+                list={formatDevelopers(developers)}
                 titleColor='blue'
                 subListName='techSeniority'
                 addSubList='Add technology'
@@ -58,10 +63,10 @@ const CurrentProjects = ({
               >
                 {({ technology, seniorityLevel }) => (
                   <div className='text-sm'>
-                    {technology.label} - {seniorityLevel.label}
+                    {technology.label} / {seniorityLevel.label}
                   </div>
                 )}
-              </CardList> */}
+              </CardList>
             </div>
             {/* <div className={`flex justify-between flex-wrap ${borderTopClass}orangeade`}>
               <div>
