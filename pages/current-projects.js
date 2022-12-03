@@ -6,7 +6,7 @@ const CurrentProjectsPage = (props) => <CurrentProjects {...props} />;
 export default CurrentProjectsPage;
 
 export const getStaticProps = async () => {
-  const currentUserProjectIDs = [15];
+  const currentUserProjectIDs = [15]; // Will throw error if current user is not assigned to any of the project IDs
 
   // const props = await getClient();
 
