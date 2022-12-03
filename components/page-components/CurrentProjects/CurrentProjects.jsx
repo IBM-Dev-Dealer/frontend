@@ -54,7 +54,7 @@ const CurrentProjects = ({ projects, developers }) => {
                 addToList
               >
                 {({ type, dev }) => (
-                  <div className='flex justify-between'>
+                  <div className='flex justify-between' key={`${type}_${dev}`}>
                     <div className='text-sm'>{type}</div>
                     <div className='text-sm'>{dev}</div>
                   </div>
@@ -72,7 +72,7 @@ const CurrentProjects = ({ projects, developers }) => {
                 listWidth={32}
               >
                 {({ technology, seniorityLevel }) => (
-                  <div className='text-sm'>
+                  <div className='text-sm' key={`${technology.label}_${seniorityLevel.label}`}>
                     {technology.label} / {seniorityLevel.label}
                   </div>
                 )}

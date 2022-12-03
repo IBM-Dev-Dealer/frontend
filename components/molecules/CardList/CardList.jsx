@@ -24,9 +24,7 @@ const CardList = ({
             )}
             <div className={`flex flex-col w-${listWidth}`}>
               <p className={`text-${titleColor}`}>{l.label}</p>
-              {children &&
-                l[subListName] &&
-                l[subListName].map((subL, i) => <div key={i}>children(subL)</div>)}
+              {children && l[subListName] && l[subListName].map((subL) => children(subL))}
             </div>
           </div>
           {addSubList && <Button label={addSubList} />}
