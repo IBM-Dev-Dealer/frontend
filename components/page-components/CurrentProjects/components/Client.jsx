@@ -3,8 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import Avatar from "../../../atoms/Avatar/Avatar";
 import InfoNote from "../../../atoms/InfoNote/InfoNote";
-import { ROUTES } from "../../../../utils/utils";
-import { PlusIcon } from "@heroicons/react/20/solid";
 
 const Client = ({
   logo = "",
@@ -62,13 +60,6 @@ const Client = ({
           {project}
         </div>
       </div>
-      <Link
-        className='flex h-min p-3 rounded-xl shadow-md hover:bg-light-green'
-        href={ROUTES.ADD_PROJECT}
-      >
-        <PlusIcon className='w-6 h-6' />
-        <div className='max-md:hidden'> add project</div>
-      </Link>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Button from "../../atoms/Button/Button";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import Title from "../../atoms/Title/Title";
+import { ROUTES } from "../../../utils/utils";
 
 const formatDate = (date, moment) => new Date(JSON.parse(date)[moment]);
 const formatTechnologies = (technologies) => JSON.parse(technologies).map((t) => t.technology);
@@ -21,10 +22,20 @@ const CurrentProjects = ({ projects, developers }) => {
   console.log("projects", projects);
   return (
     <div className='flex flex-col'>
-      <Title>Current Projects</Title>
+      <div className='flex justify-between'>
+        <Title>Current Projects</Title>
+        <Link
+          className='flex h-min p-3 rounded-xl shadow-md hover:bg-light-green'
+          href={ROUTES.ADD_PROJECT}
+        >
+          <PlusIcon className='w-6 h-6' />
+          <div className='max-md:hidden'> add project</div>
+        </Link>
+      </div>
       {projects.map((project, i) => {
         return (
-          <div key={i} className={`${i !== 0 ? "border-t-4 border-dotted pt-10" : ""}`}>
+          // <div key={i} className={`${i !== 0 ? "border-t-4 border-dotted pt-10" : ""}`}>
+          <div key={i} className={`border-t-4 border-dotted pt-10`}>
             <Client
               name={project.client}
               project={project.projectName}
