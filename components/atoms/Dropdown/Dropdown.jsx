@@ -44,7 +44,12 @@ const Dropdown = ({ list, selected, select, placeholder, infoMessage, infoMessag
               {list &&
                 list.map((listItem) => {
                   return (
-                    <Menu.Item as='div' key={listItem.label} className='overflow-hidden'>
+                    <Menu.Item
+                      as='div'
+                      key={`${listItem.label}_${listItem.id}`}
+                      // key={`${listItem.label}`}
+                      className='overflow-hidden'
+                    >
                       {({ active }) => (
                         <div
                           role='presentation'

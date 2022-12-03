@@ -122,6 +122,7 @@ const AddProject = ({ fields }) => {
         start: values.projectPeriod.start.toISOString(),
         end: values.projectPeriod.start.toISOString(),
       },
+      technologies: values.technologies,
       requiredCapacity: values.requiredCapacity,
       repositories: values.repositories,
       slackChannels: values.slackChannels,
