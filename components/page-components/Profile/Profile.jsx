@@ -30,7 +30,7 @@ const Profile = ({ projects }) => {
               placeholder={"Select project"}
               selected={project && project.title && { ...project, label: project.title }}
               select={(projectNameSelected) => setProject(getProject(projectNameSelected.label))}
-              infoMessage='View your feedback on a specific project.'
+              infoMessage='View the feedback you received from the Project Managers of the projects you have been enrolled in.'
             />
           </div>
           {project && (
