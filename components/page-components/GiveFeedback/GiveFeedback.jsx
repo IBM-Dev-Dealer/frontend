@@ -84,7 +84,9 @@ const GiveFeedback = ({
       innovation: values.innovation.label,
       teamInteractionRating: values.teamInteraction,
       suggestedSeniorityLevels: newSeniorityLevels,
+      additionalFeedback: values.additionalFeedback,
     };
+    console.log("body", body);
     try {
       const res = await callAPI("/user_feedback", body, "POST");
       if (!res.ok) throw new Error();

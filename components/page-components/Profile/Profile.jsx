@@ -9,6 +9,8 @@ import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
 const Profile = ({ projects }) => {
   const [project, setProject] = useState();
 
+  console.log("project", project);
+
   return (
     <>
       <Title>Profile</Title>
@@ -51,11 +53,14 @@ const Profile = ({ projects }) => {
                   <div className='mr-3 text-sm font-bold'>Team Interaction:</div>
                   <StarRating rating={project.teamInteraction} disabled />
                 </div>
-                <UnorderedList
-                  label={"Suggested Seniority:"}
-                  list={JSON.parse(project.suggestedSeniorityLevels)}
-                  classNames={{ label: "text-sm font-bold" }}
-                />
+
+                {JSON.parse(project.suggestedSeniorityLevels).length > 0 && (
+                  <UnorderedList
+                    label={"Suggested Seniority:"}
+                    list={JSON.parse(project.suggestedSeniorityLevels)}
+                    classNames={{ label: "text-sm font-bold" }}
+                  />
+                )}
                 {project.additionalFeedback && (
                   <div className='p-3 mt-5 text-center rounded-xl w-72 bg-mustard self-end shadow-lg'>
                     {project.additionalFeedback}
