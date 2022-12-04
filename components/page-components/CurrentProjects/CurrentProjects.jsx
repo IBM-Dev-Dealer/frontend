@@ -64,7 +64,7 @@ const CurrentProjects = ({ projects, developers }) => {
             <div className={`${borderTopClass}blue`}>
               <p className='text-xl text-blue'>Developers:</p>
               <CardList
-                list={formatDevelopers(developers)}
+                list={formatDevelopers(project.developers)}
                 titleColor='blue'
                 subListName='techSeniority'
                 addSubList='Add technology'

@@ -78,7 +78,6 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
     if (!selectedDeveloper) return;
 
     const previousUserProjects = JSON.parse(selectedDeveloper.projectID) ?? [];
-    selectedDeveloper.projectID;
 
     console.log("previousUserProjects", previousUserProjects);
 

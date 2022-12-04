@@ -82,3 +82,7 @@ export const callAPI = async (path, body, method = "GET") => {
   const URL = `${process.env.HOST}${path}`;
   return await fetch(URL, config);
 };
+
+export const isArray = (what) => {
+  return Object.prototype.toString.call(what) === "[object Array]";
+};
