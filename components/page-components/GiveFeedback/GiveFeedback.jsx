@@ -43,7 +43,7 @@ const GiveFeedback = ({
     setNewSeniorityLevelsVisible((prev) => !prev);
   };
 
-  console.log("[GiveFeedback] projects", projects);
+  // console.log("[GiveFeedback] projects", projects);
 
   const { notify } = useNotifications();
 
@@ -87,7 +87,6 @@ const GiveFeedback = ({
     };
     try {
       const res = await callAPI("/user_feedback", body, "POST");
-      console.log("res", res);
       if (!res.ok) throw new Error();
       notify({
         kind: NOTIFICATION_SUCCESS,
@@ -115,7 +114,7 @@ const GiveFeedback = ({
         });
         return contains;
       });
-      console.log("devs", devs);
+      // console.log("devs", devs);
       setDeveloperList(devs);
     };
     if (project) getDevelopers();
@@ -263,10 +262,6 @@ const GiveFeedback = ({
                               seniorityLevelFields["seniorityLevel"] ?? [],
                             ]}
                             list={newSeniorityLevels}
-                            // setList={(newList) => {
-                            //   formik.setFieldValue("newSeniorityLevels", newList);
-                            //   return setNewSeniorityLevels(newList);
-                            // }}
                             setList={setNewSeniorityLevels}
                             label='New Seniority Levels'
                           />

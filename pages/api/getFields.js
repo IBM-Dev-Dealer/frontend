@@ -1,7 +1,7 @@
 import { ALL_FIELDS } from "./mock/addProjectMock";
 
 export const getFields = async (queryFields) => {
-  console.log("queryFields", queryFields);
+  // console.log("queryFields", queryFields);
   const fields = {};
 
   queryFields.forEach((paramKey) => {
@@ -18,7 +18,7 @@ const getFieldsExternal = async (req, res) => {
 
     if (queryParamKeys.includes("fields")) {
       const fields = getFields(req.query.fields);
-      console.log("fields", fields);
+      // console.log("fields", fields);
 
       return res.status(200).json(JSON.stringify(fields));
     }

@@ -129,9 +129,9 @@ const AddProject = ({ fields }) => {
       accessZones: values.accessZones,
     };
     try {
-      console.log("values", values);
+      // console.log("values", values);
       const res = await callAPI("/projects", body, "POST");
-      console.log("res", JSON.stringify(res));
+      // console.log("res", JSON.stringify(res));
 
       if (res.status === 200) {
         notify({

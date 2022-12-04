@@ -16,10 +16,10 @@ const formatDevelopers = (devs) =>
     techSeniority: JSON.parse(dev.techStacks),
   }));
 
-const CurrentProjects = ({ projects, developers }) => {
+const CurrentProjects = ({ projects }) => {
   const borderTopClass = "m-5 p-5 border-t border-";
 
-  console.log("projects", projects);
+  // console.log("projects", projects);
   return (
     <div className='flex flex-col'>
       <div className='flex justify-between'>

@@ -13,7 +13,7 @@ const CardList = ({
   listWidth = 28,
 }) => {
   const listClass = "flex flex-col justify-between shadow-md rounded-xl py-2 px-4";
-  console.log("list", list);
+  // console.log("list", list);
   return (
     <ul className='flex mt-4 my-2 flex-wrap gap-4'>
       {list.map((l, i) => (

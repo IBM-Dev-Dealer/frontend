@@ -30,7 +30,7 @@ const Login = () => {
   const { notify } = useNotifications();
   const submitHandler = (values) => {
     try {
-      console.log("values", values);
+      // console.log("values", values);
       notify({
         kind: NOTIFICATION_SUCCESS,
         message: LOGIN_SUCCESS,

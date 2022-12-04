@@ -8,11 +8,6 @@ import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
 
 const Profile = ({ projects }) => {
   const [project, setProject] = useState();
-  const projectsNames = projects.map(({ title }) => ({ label: title }));
-
-  console.log("projects", projects);
-
-  // const getProject = (projectName) => projects.find((p) => p.title === projectName);
 
   return (
     <>
@@ -30,7 +25,6 @@ const Profile = ({ projects }) => {
               name='innovation'
               list={projects}
               placeholder={"Select project"}
-              // selected={project && project.title && { ...project, label: project.title }}
               selected={project}
               select={(projectNameSelected) => setProject(projectNameSelected)}
               infoMessage='View the feedback you received from the Project Managers of the projects you have been enrolled in.'

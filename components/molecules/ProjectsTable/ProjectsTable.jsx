@@ -64,22 +64,14 @@ const formatData = (type, data) => {
 const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
   const fields = Object.keys(tableFields);
 
-  console.log("[ProjectsTable] developers", developers);
-  console.log("[ProjectsTable] projects", projects);
-
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
   const { notify } = useNotifications();
 
   const assignDev = async () => {
-    console.log("selectedProject", selectedProject);
-    console.log("selectedDeveloper", selectedDeveloper);
-
     if (!selectedDeveloper) return;
 
     const previousUserProjects = JSON.parse(selectedDeveloper.projectID) ?? [];
-
-    console.log("previousUserProjects", previousUserProjects);
 
     if (previousUserProjects.includes(selectedProject.id)) {
       notify({
@@ -98,7 +90,7 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
         projectID: updatedProjects,
       },
     };
-    console.log("body", body);
+    // console.log("body", body);
     try {
       const res = await callAPI("/user", body, "PUT");
       // const res = { status: 200 };
