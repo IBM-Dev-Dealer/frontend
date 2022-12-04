@@ -4,11 +4,11 @@ import Dropdown from "../../atoms/Dropdown/Dropdown";
 import StarRating from "../../atoms/StarRating/StarRating";
 import { DIMENSIONS_RATING, INFO_MESSAGE } from "./constants";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import Button from "../../atoms/Button/Button";
 import Link from "next/link";
-import { ROUTES } from "../../../utils/utils";
+import { ROUTES, callAPI } from "../../../utils/utils";
 import { INITIAL_VALUES, VALIDATE } from "./formikConstants";
 import TextArea from "../../atoms/TextArea/TextArea";
 import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
@@ -33,12 +33,16 @@ const GiveFeedback = ({
   const [project, setProject] = useState("");
   const [newSeniorityLevelsVisible, setNewSeniorityLevelsVisible] = useState(false);
 
+  const [developerList, setDeveloperList] = useState();
+
   const { objectList: newSeniorityLevels, setObjectList: setNewSeniorityLevels } =
     useObjectListState();
 
   const handleUpdateSeniority = async () => {
     setNewSeniorityLevelsVisible((prev) => !prev);
   };
+
+  console.log("[GiveFeedback] projects", projects);
 
   const { notify } = useNotifications();
 
@@ -61,23 +65,16 @@ const GiveFeedback = ({
 
   const submitManagerHandler = (values) => {
     //   {
-    //     "projectName": "perulelulelulel12ula",
-    //     "projectID": 1,
-    //     "to": 1,
-    //     "businessResults": "Expect more",
-    //     "clientSuccess": "Expect more",
-    //     "innovation": "Expect more",
-    //     "teamInteractionRating": 3,
     //     "suggestedSeniorityLevels": "medium level"
     // }
     const body = {
-      // projectName: values.,
-      projectID: 1,
-      to: 1,
-      businessResults: "Expect more",
-      clientSuccess: "Expect more",
-      innovation: "Expect more",
-      teamInteractionRating: 3,
+      projectName: project.projectName,
+      projectID: project.id,
+      to: values.dev.id,
+      businessResults: values.businessResults.label,
+      clientSuccess: values.clientSuccess.label,
+      innovation: values.innovation.label,
+      teamInteractionRating: values.teamInteraction,
       suggestedSeniorityLevels: "medium level",
     };
     try {
@@ -95,6 +92,25 @@ const GiveFeedback = ({
       });
     }
   };
+
+  useEffect(() => {
+    const getDevelopers = async () => {
+      const idsOfCurrentProjects = projects.map((p) => p.id);
+      const devs = (await (await callAPI("/all_users")).json()).filter((d) => {
+        if (!d.projectID) return false;
+        let contains = false;
+        const projectIDs = JSON.parse(d.projectID);
+        projectIDs.forEach((id) => {
+          if (idsOfCurrentProjects.includes(id)) contains = true;
+        });
+        return contains;
+      });
+      console.log("devs", devs);
+      setDeveloperList(devs);
+    };
+    if (project) getDevelopers();
+  }, [project, projects]);
+
   return (
     <div>
       <Title>
@@ -107,21 +123,25 @@ const GiveFeedback = ({
         </Link>
       </Title>
       <div className='mb-6 max-w-xl m-auto'>
-        {/* <Dropdown
+        <Dropdown
           infoMessage={INFO_MESSAGE.PROJECT}
           infoMessagePosition='right'
-          list={projects.map((prj) => ({ ...prj, label: prj.projectName }))}
+          list={projects.map((prj) => ({ ...prj, label: `${prj.client} - ${prj.projectName}` }))}
           placeholder={"Select Project"}
-          select={(role) => setProject(role.label)}
+          select={(project) => setProject(project)}
           selected={project}
-        /> */}
-        <Dropdown
-          infoMessage={INFO_MESSAGE.FEEDBACK_VIEW}
-          infoMessagePosition='right'
-          list={loggedUserRoles.map((role) => ({ label: role }))}
-          placeholder={feedbackView ? `Give feedback as: ${feedbackView}` : "Select Feedback View"}
-          select={(role) => setFeedbackView(role.label)}
         />
+        {project && (
+          <Dropdown
+            infoMessage={INFO_MESSAGE.FEEDBACK_VIEW}
+            infoMessagePosition='right'
+            list={loggedUserRoles.map((role) => ({ label: role }))}
+            placeholder={
+              feedbackView ? `Give feedback as: ${feedbackView}` : "Select Feedback View"
+            }
+            select={(role) => setFeedbackView(role.label)}
+          />
+        )}
       </div>
 
       <div>
@@ -145,7 +165,11 @@ const GiveFeedback = ({
                   >
                     <Dropdown
                       name='dev'
-                      list={devsWhoRequestedFeedback}
+                      // list={devsWhoRequestedFeedback}
+                      list={developerList.map((d) => ({
+                        ...d,
+                        label: `${d.firstName} ${d.lastName}`,
+                      }))}
                       placeholder='Developer to give feedback to'
                       select={(dev) => {
                         setNewSeniorityLevelsVisible(false);

@@ -13,16 +13,16 @@ export const getStaticProps = async () => {
   // const authorization = "authorization";
 
   const loggedUserRoles = ["project-manager", "dev"];
-  const projectID = "15";
+  // const projectID = "15";
 
   // const devData = await fetch(`${process.env.API_URL}/api/getDevData`, {
   //   method: "GET",
   //   headers: { authorization },
   // }).then((res) => res.json());
 
-  const devData = await getDevData();
+  // const devData = await getDevData();
 
-  const queriedFields = Object.keys(devData.devData.techSeniority[0]);
+  // const queriedFields = Object.keys(devData.devData.techSeniority[0]);
 
   // const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
 
@@ -31,7 +31,7 @@ export const getStaticProps = async () => {
   //   headers: { authorization },
   // }).then((res) => res.json());
 
-  const fields = await getFields(queriedFields);
+  // const fields = await getFields(queriedFields);
 
   // const props = { loggedUserRoles, projectID, ...devData, newSeniorityLevelFields: fields.fields };
 
@@ -74,25 +74,39 @@ export const getStaticProps = async () => {
 
   const allDevs = await (await callAPI("/all_users")).json();
 
-  const devsOfPmProject = allDevs
-    .filter((dev) => {
-      if (!dev.projectID) return false;
-      const devProjectIDs = JSON.parse(dev.projectID);
-      let contains = false;
+  // const devsOfPmProject = allDevs
+  //   .filter((dev) => {
+  //     if (!dev.projectID) return false;
+  //     const devProjectIDs = JSON.parse(dev.projectID);
+  //     let contains = false;
 
-      if (isArray(devProjectIDs)) {
-        devProjectIDs.forEach((id) => {
-          if (projectIDs.includes(id)) contains = true;
-        });
-      }
-      return contains;
-    })
-    .map((dev) => ({ ...dev, label: `${dev.firstName} ${dev.lastName}` }));
+  //     if (isArray(devProjectIDs)) {
+  //       devProjectIDs.forEach((id) => {
+  //         if (projectIDs.includes(id)) contains = true;
+  //       });
+  //     }
+  //     return contains;
+  //   })
+  //   .map((dev) => ({ ...dev, label: `${dev.firstName} ${dev.lastName}` }));
 
-  console.log("allDevs", allDevs);
-  console.log("devsOfPmProject", devsOfPmProject);
+  // console.log("allDevs", allDevs);
+  // console.log("devsOfPmProject", devsOfPmProject);
 
-  const props = { loggedUserRoles, projectID, ...devData, newSeniorityLevelFields: fields.fields };
+  // const devData = await getDevData();
+
+  // const queriedFields = Object.keys(devData.devData.techSeniority[0]);
+
+  // const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
+
+  // const fields = await fetch(`${process.env.API_URL}/api/getFields?${queryParams}`, {
+  //   method: "GET",
+  //   headers: { authorization },
+  // }).then((res) => res.json());
+
+  // const fields = await getFields(queriedFields);
+
+  // const props = { loggedUserRoles, ...devData, newSeniorityLevelFields: fields.fields };
+  const props = { loggedUserRoles, projects };
 
   return { props };
 };
