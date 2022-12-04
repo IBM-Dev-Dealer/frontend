@@ -1,5 +1,5 @@
 import Register from "../components/page-components/Log/Register";
-import getFields from "./api/getFields";
+import { getFields } from "./api/getFields";
 
 const RegisterPage = (props) => {
   return <Register {...props} />;

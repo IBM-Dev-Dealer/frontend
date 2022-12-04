@@ -111,6 +111,21 @@ const GiveFeedback = ({
     if (project) getDevelopers();
   }, [project, projects]);
 
+  useEffect(() => {
+    const getFieldsContents = async () => {
+      const queriedFields = Object.keys(JSON.parse(developerList[0].techStacks)[0]);
+      const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
+      // const fields = await (await callAPI(`/getFields?${queryParams}`, null, "GET", true)).json();
+      const fields = callAPI(`/getFields?${queryParams}`, null, "GET", true)
+        .then((res) => res.json())
+        .then((res) => console.log("res", res));
+      console.log("useEffect fields ", fields);
+    };
+    if (developerList) {
+      getFieldsContents();
+    }
+  }, [developerList]);
+
   return (
     <div>
       <Title>
@@ -216,10 +231,10 @@ const GiveFeedback = ({
                           infoMessage={INFO_MESSAGE.TEAM_INTERACTION}
                         />
 
-                        {devData && (
+                        {formik.values.dev && (
                           <UnorderedList
                             label={"Previous seniority levels per technology"}
-                            list={devData.techSeniority}
+                            list={JSON.parse(formik.values.dev.techStacks)}
                             onClick={handleUpdateSeniority}
                             changeEnabler={{
                               enablesChange: true,

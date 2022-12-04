@@ -69,7 +69,7 @@ export const replaceAll = (fullString, stringToReplace, replacementString) => {
   );
 };
 
-export const callAPI = async (path, body, method = "GET") => {
+export const callAPI = async (path, body, method = "GET", callInternal = false) => {
   const config = {
     method: method,
     headers: {
@@ -79,7 +79,7 @@ export const callAPI = async (path, body, method = "GET") => {
   if (body) {
     config.body = JSON.stringify(body);
   }
-  const URL = `${process.env.HOST}${path}`;
+  const URL = callInternal ? `${process.env.NEXTJS_API}${path}` : `${process.env.HOST}${path}`;
   return await fetch(URL, config);
 };
 

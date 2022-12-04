@@ -1,5 +1,5 @@
 import AddProject from "../components/page-components/AddProject/AddProject";
-import getFields from "./api/getFields";
+import { getFields } from "./api/getFields";
 
 const AddProjectPage = (props) => {
   return <AddProject {...props} />;

@@ -6,5 +6,6 @@ module.exports = {
   },
   env: {
     HOST: process.env.HOST,
+    NEXTJS_API: process.env.NEXTJS_API,
   },
 };

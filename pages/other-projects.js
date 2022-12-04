@@ -1,6 +1,6 @@
 import OtherProjects from "../components/page-components/OtherProjects/OtherProjects";
 import { callAPI } from "../utils/utils";
-import getFields from "./api/getFields";
+import { getFields } from "./api/getFields";
 
 const OtherProjectsPage = (props) => {
   return <OtherProjects {...props} />;
