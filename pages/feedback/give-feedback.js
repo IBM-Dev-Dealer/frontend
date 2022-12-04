@@ -1,7 +1,7 @@
 import GiveFeedback from "../../components/page-components/GiveFeedback/GiveFeedback";
 import { callAPI, isArray } from "../../utils/utils";
+import { getFields } from "../api/getFields";
 // import getDevData from "../api/getDevData";
-// import getFields from "../api/getFields";
 
 const GiveFeedbackPage = (props) => {
   return <GiveFeedback {...props} />;
@@ -72,7 +72,7 @@ export const getStaticProps = async () => {
   const projects = await getProjects();
   console.log("projects", projects);
 
-  const allDevs = await (await callAPI("/all_users")).json();
+  // const allDevs = await (await callAPI("/all_users")).json();
 
   // const devsOfPmProject = allDevs
   //   .filter((dev) => {
@@ -103,12 +103,12 @@ export const getStaticProps = async () => {
   //   headers: { authorization },
   // }).then((res) => res.json());
 
-  // const fields = await getFields(queriedFields);
+  const fields = await getFields(["technology", "seniorityLevel"]);
 
   // const fields = await callAPI("/getFields")
 
   // const props = { loggedUserRoles, ...devData, newSeniorityLevelFields: fields.fields };
-  const props = { loggedUserRoles, projects };
+  const props = { loggedUserRoles, projects, newSeniorityLevelFields: fields.fields };
 
   return { props };
 };

@@ -24,8 +24,8 @@ import {
 
 const GiveFeedback = ({
   loggedUserRoles,
-  devsWhoRequestedFeedback,
-  devData,
+  // devsWhoRequestedFeedback,
+  // devData,
   newSeniorityLevelFields,
   projects,
 }) => {
@@ -34,6 +34,7 @@ const GiveFeedback = ({
   const [newSeniorityLevelsVisible, setNewSeniorityLevelsVisible] = useState(false);
 
   const [developerList, setDeveloperList] = useState();
+  const [seniorityLevelFields, setSeniorityLevelFields] = useState();
 
   const { objectList: newSeniorityLevels, setObjectList: setNewSeniorityLevels } =
     useObjectListState();
@@ -46,9 +47,19 @@ const GiveFeedback = ({
 
   const { notify } = useNotifications();
 
-  const submitDevHandler = (values) => {
+  const submitDevHandler = async (values) => {
+    const body = {
+      from: 3, // TODO: replace with id of logged user
+      projectName: project.projectName,
+      rating: values.overallRating,
+      pros: values.whatWentWell,
+      cons: values.whatCouldBeImproved,
+    };
+
     try {
-      console.log("values", values);
+      const res = await callAPI("/project_feedback", body, "POST");
+      if (!res.ok) throw new Error();
+
       notify({
         kind: NOTIFICATION_SUCCESS,
         message: FEEDBACK_SUCCESS,
@@ -63,10 +74,7 @@ const GiveFeedback = ({
     }
   };
 
-  const submitManagerHandler = (values) => {
-    //   {
-    //     "suggestedSeniorityLevels": "medium level"
-    // }
+  const submitManagerHandler = async (values) => {
     const body = {
       projectName: project.projectName,
       projectID: project.id,
@@ -75,10 +83,13 @@ const GiveFeedback = ({
       clientSuccess: values.clientSuccess.label,
       innovation: values.innovation.label,
       teamInteractionRating: values.teamInteraction,
-      suggestedSeniorityLevels: "medium level",
+      suggestedSeniorityLevels: newSeniorityLevels,
     };
+    console.log("body", body);
     try {
-      console.log("values", values);
+      const res = await callAPI("/user_feedback", body, "POST");
+      console.log("res", res);
+      if (!res.ok) throw new Error();
       notify({
         kind: NOTIFICATION_SUCCESS,
         message: FEEDBACK_SUCCESS,
@@ -113,18 +124,16 @@ const GiveFeedback = ({
 
   useEffect(() => {
     const getFieldsContents = async () => {
-      const queriedFields = Object.keys(JSON.parse(developerList[0].techStacks)[0]);
-      const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
+      // const queriedFields = Object.keys(JSON.parse(developerList[0].techStacks)[0]);
+      // const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
       // const fields = await (await callAPI(`/getFields?${queryParams}`, null, "GET", true)).json();
-      const fields = callAPI(`/getFields?${queryParams}`, null, "GET", true)
-        .then((res) => res.json())
-        .then((res) => console.log("res", res));
-      console.log("useEffect fields ", fields);
+
+      setSeniorityLevelFields(newSeniorityLevelFields);
     };
     if (developerList) {
       getFieldsContents();
     }
-  }, [developerList]);
+  }, [developerList, newSeniorityLevelFields]);
 
   return (
     <div>
@@ -244,21 +253,22 @@ const GiveFeedback = ({
                           />
                         )}
 
-                        {newSeniorityLevelsVisible && (
+                        {newSeniorityLevelsVisible && seniorityLevelFields && (
                           <ObjectList
                             name='newSeniorityLevels'
                             dataFields={[
                               {
-                                ...newSeniorityLevelFields["technology"],
+                                ...seniorityLevelFields["technology"],
                                 // fields: devData.techSeniority.map((t) => t.technology), // uses only fields in list
                               } ?? [],
-                              newSeniorityLevelFields["seniorityLevel"] ?? [],
+                              seniorityLevelFields["seniorityLevel"] ?? [],
                             ]}
                             list={newSeniorityLevels}
-                            setList={(newList) => {
-                              formik.setFieldValue("newSeniorityLevels", newList);
-                              return setNewSeniorityLevels(newList);
-                            }}
+                            // setList={(newList) => {
+                            //   formik.setFieldValue("newSeniorityLevels", newList);
+                            //   return setNewSeniorityLevels(newList);
+                            // }}
+                            setList={setNewSeniorityLevels}
                             label='New Seniority Levels'
                           />
                         )}
