@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
   // const authorization = "authorization";
 
   const loggedUserRoles = ["project-manager", "dev"];
-  const projectIDs = [2, 3];
+  const projectIDs = [1, 2];
 
   const getProjects = async () => {
     const projects = projectIDs.map((p) => callAPI(`/projects/${p}`).then((r) => r.json()));
