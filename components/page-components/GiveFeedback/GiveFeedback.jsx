@@ -85,7 +85,6 @@ const GiveFeedback = ({
       teamInteractionRating: values.teamInteraction,
       suggestedSeniorityLevels: newSeniorityLevels,
     };
-    console.log("body", body);
     try {
       const res = await callAPI("/user_feedback", body, "POST");
       console.log("res", res);

@@ -10,7 +10,9 @@ const Profile = ({ projects }) => {
   const [project, setProject] = useState();
   const projectsNames = projects.map(({ title }) => ({ label: title }));
 
-  const getProject = (projectName) => projects.find((p) => p.title === projectName);
+  console.log("projects", projects);
+
+  // const getProject = (projectName) => projects.find((p) => p.title === projectName);
 
   return (
     <>
@@ -26,10 +28,11 @@ const Profile = ({ projects }) => {
           <div className='flex w-96'>
             <Dropdown
               name='innovation'
-              list={projectsNames}
+              list={projects}
               placeholder={"Select project"}
-              selected={project && project.title && { ...project, label: project.title }}
-              select={(projectNameSelected) => setProject(getProject(projectNameSelected.label))}
+              // selected={project && project.title && { ...project, label: project.title }}
+              selected={project}
+              select={(projectNameSelected) => setProject(projectNameSelected)}
               infoMessage='View the feedback you received from the Project Managers of the projects you have been enrolled in.'
             />
           </div>
@@ -55,13 +58,13 @@ const Profile = ({ projects }) => {
                   <StarRating rating={project.teamInteraction} disabled />
                 </div>
                 <UnorderedList
-                  label={"Levels per technology:"}
-                  list={project.techSeniority}
+                  label={"Suggested Seniority:"}
+                  list={JSON.parse(project.suggestedSeniorityLevels)}
                   classNames={{ label: "text-sm font-bold" }}
                 />
-                {project.feedbackMessage && (
+                {project.additionalFeedback && (
                   <div className='p-3 mt-5 text-center rounded-xl w-72 bg-mustard self-end shadow-lg'>
-                    {project.feedbackMessage}
+                    {project.additionalFeedback}
                   </div>
                 )}
               </div>
