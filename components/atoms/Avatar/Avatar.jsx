@@ -40,18 +40,18 @@ const Avatar = ({
     <div
       className={`overflow-hidden relative w-20 h-20 ${
         round ? "rounded-full" : "rounded"
-      } bg-gray ring-2 ring-black mr-5`}
+      } bg-white ring-2 ring-gray shadow-md mr-5`}
     >
       <svg
-        className='absolute -left-1 w-25 text-gray-400'
-        fill='currentColor'
+        className=' text-gray-400'
+        fill='#84c25e'
         viewBox='0 0 20 20'
         xmlns='http://www.w3.org/2000/svg'
       >
         <path
-          fill-rule='evenodd'
+          fillRule='evenodd'
           d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'
-          clip-rule='evenodd'
+          clipRule='evenodd'
         ></path>
       </svg>
     </div>

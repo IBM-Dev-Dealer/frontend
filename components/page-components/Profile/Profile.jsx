@@ -1,61 +1,72 @@
 import { useState } from "react";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import StarRating from "../../atoms/StarRating/StarRating";
+import Title from "../../atoms/Title/Title";
+import BgImage from "../../../public/feedback_background.svg";
+import Image from "next/image";
+import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
 
 const Profile = ({ projects }) => {
   const [project, setProject] = useState();
-  const projectsNames = projects.map(({ title }) => ({ label: title }));
-
-  const getProject = (projectName) => projects.find((p) => p.title === projectName);
 
   return (
-    <div>
-      <div className='flex w-96 items-center'>
-        <div className='w-60 text-xl'>Feedback on:</div>
-        <Dropdown
-          name='innovation'
-          list={projectsNames}
-          placeholder={project?.title || "Select project"}
-          select={(projectNameSelected) => setProject(getProject(projectNameSelected.label))}
-          infoMessage='View your feedback on a specific project.'
-        />
-      </div>
-      {project && (
-        <div
-          className={`flex relative mt-5 flex-col p-10 text-white rounded-xl bg-cover bg-[url(https://img.freepik.com/free-photo/beautiful-colorful-background-congratulate-birthday_24972-1489.jpg?w=1380&t=st=1670013716~exp=1670014316~hmac=2a94996e7d532ab948aac33514b628cc26e0906d91a92cc36dc2f075524add0d)]`}
-        >
-          <div className='flex items-center'>
-            <div className='mr-2 text-sm'>Business Results:</div>
-            {project.businessResults}
+    <>
+      <Title>Profile</Title>
+      <div className='flex flex-col items-center'>
+        <div className='max-w-lg'>
+          <Image
+            src={BgImage}
+            alt=''
+            className=' opacity-5 absolute top-28 w-2/3 bottom-0 left-0 right-0 m-auto overflow-hidden'
+          />
+
+          <div className='flex w-96'>
+            <Dropdown
+              name='innovation'
+              list={projects}
+              placeholder={"Select project"}
+              selected={project}
+              select={(projectNameSelected) => setProject(projectNameSelected)}
+              infoMessage='View the feedback you received from the Project Managers of the projects you have been enrolled in.'
+            />
           </div>
-          <div className='flex items-center'>
-            <div className='mr-2 text-sm'>Client Success:</div>
-            {project.clientSuccess}
-          </div>
-          <div className='flex items-center'>
-            <div className='mr-2 text-sm'>Innovation:</div>
-            {project.innovation}
-          </div>
-          <div className='flex items-center'>
-            <div className='mr-3 text-sm'>Team Interaction:</div>
-            <StarRating rating={project.teamInteraction} disabled />
-          </div>
-          <div className='flex flex-col'>
-            <div className='mr-3 text-sm'>Levels per technology:</div>
-            {project.techSeniority.map(({ technology, seniorityLevel }, i) => (
-              <div className='ml-3' key={i}>
-                {technology.label} - {seniorityLevel.label}
+          {project && (
+            <>
+              <div
+                className={`flex relative mt-5 flex-col max-w-lg text-black rounded-xl bg-cover gap-2`}
+              >
+                <div className='flex items-end'>
+                  <div className='mr-2 text-sm font-bold'>Business Results:</div>
+                  <span className='mr-2 text-sm font-light'>{project.businessResults}</span>
+                </div>
+                <div className='flex items-end'>
+                  <div className='mr-2 text-sm font-bold'>Client Success:</div>
+                  <span className='mr-2 text-sm font-light'>{project.clientSuccess}</span>
+                </div>
+                <div className='flex items-end'>
+                  <div className='mr-2 text-sm font-bold'>Innovation:</div>
+                  <span className='mr-2 text-sm font-light'>{project.innovation}</span>
+                </div>
+                <div className='flex items-center'>
+                  <div className='mr-3 text-sm font-bold'>Team Interaction:</div>
+                  <StarRating rating={project.teamInteraction} disabled />
+                </div>
+                <UnorderedList
+                  label={"Suggested Seniority:"}
+                  list={JSON.parse(project.suggestedSeniorityLevels)}
+                  classNames={{ label: "text-sm font-bold" }}
+                />
+                {project.additionalFeedback && (
+                  <div className='p-3 mt-5 text-center rounded-xl w-72 bg-mustard self-end shadow-lg'>
+                    {project.additionalFeedback}
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-          {project.feedbackMessage && (
-            <div className='p-3 mt-5 text-center rounded-xl w-72 bg-gradient-to-t from-green to-orangeade self-end'>
-              {project.feedbackMessage}
-            </div>
+            </>
           )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

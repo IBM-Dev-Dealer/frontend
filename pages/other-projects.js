@@ -1,6 +1,6 @@
 import OtherProjects from "../components/page-components/OtherProjects/OtherProjects";
-import { getAllProjects } from "./api/getAllProjects";
-import getFields from "./api/getFields";
+import { callAPI } from "../utils/utils";
+import { getFields } from "./api/getFields";
 
 const OtherProjectsPage = (props) => {
   return <OtherProjects {...props} />;
@@ -12,12 +12,17 @@ export const getStaticProps = async () => {
   const queryFields = [
     "client",
     "projectName",
-    "projectDuration",
+    "projectPeriod",
     "technologies",
     "requiredCapacity",
   ];
   const fields = await getFields(queryFields);
-  const projects = await getAllProjects();
+  // const projects2 = await getAllProjects();
+  const projects = await (await callAPI("/all_projects", null, "GET")).json();
+  const developers = await (await callAPI("/all_users", null, "GET")).json();
 
-  return { props: { fields, projects } };
+  // console.log("developers", developers);
+  // console.log("projects", projects);
+
+  return { props: { fields, projects, developers } };
 };

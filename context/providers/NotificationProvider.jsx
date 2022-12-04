@@ -9,7 +9,8 @@ export const NotificationContextProvider = ({ children }) => {
     (newNotification) =>
       setNotifications((prev) => {
         const newNotifications = [...prev];
-        newNotifications.push(newNotification);
+        const index = prev.findIndex((item) => item.id === newNotification.id);
+        if (index === -1) newNotifications.push(newNotification);
         return newNotifications;
       }),
     [],

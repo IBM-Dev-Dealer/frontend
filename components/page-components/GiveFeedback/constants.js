@@ -5,6 +5,8 @@ export const DIMENSIONS_RATING = [
 ];
 
 export const INFO_MESSAGE = {
+  PROJECT:
+    "Select the project that the developer was enrolled in, to give feedback on his activity on the selected project.",
   FEEDBACK_VIEW: "Change feedback view based on what you want to give feedback for.",
   BUSINESS_RESULTS:
     "This section will evaluate your individual contribution to the account results: how you delivered your key committed business and financial objectives.",

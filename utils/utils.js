@@ -1,6 +1,6 @@
 export const ROUTES = {
-  HOME: "/home",
-  CURRENT_PROJECT: "/current-project",
+  // HOME: "/home",
+  CURRENT_PROJECTS: "/current-projects",
   ADD_PROJECT: "/add-project",
   OTHER_PROJECTS: "/other-projects",
   SOURCE: "/source",
@@ -67,4 +67,22 @@ export const replaceAll = (fullString, stringToReplace, replacementString) => {
     stringToReplace,
     replacementString,
   );
+};
+
+export const callAPI = async (path, body, method = "GET", callInternal = false) => {
+  const config = {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  if (body) {
+    config.body = JSON.stringify(body);
+  }
+  const URL = callInternal ? `${process.env.NEXTJS_API}${path}` : `${process.env.HOST}${path}`;
+  return await fetch(URL, config);
+};
+
+export const isArray = (what) => {
+  return Object.prototype.toString.call(what) === "[object Array]";
 };

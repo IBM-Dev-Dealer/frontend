@@ -4,11 +4,11 @@ import Dropdown from "../../atoms/Dropdown/Dropdown";
 import StarRating from "../../atoms/StarRating/StarRating";
 import { DIMENSIONS_RATING, INFO_MESSAGE } from "./constants";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import Button from "../../atoms/Button/Button";
 import Link from "next/link";
-import { ROUTES } from "../../../utils/utils";
+import { ROUTES, callAPI } from "../../../utils/utils";
 import { INITIAL_VALUES, VALIDATE } from "./formikConstants";
 import TextArea from "../../atoms/TextArea/TextArea";
 import UnorderedList from "../../atoms/UnorderedList/UnorderedList";
@@ -24,13 +24,17 @@ import {
 
 const GiveFeedback = ({
   loggedUserRoles,
-  projectId,
-  devsWhoRequestedFeedback,
-  devData,
+  // devsWhoRequestedFeedback,
+  // devData,
   newSeniorityLevelFields,
+  projects,
 }) => {
   const [feedbackView, setFeedbackView] = useState("");
+  const [project, setProject] = useState("");
   const [newSeniorityLevelsVisible, setNewSeniorityLevelsVisible] = useState(false);
+
+  const [developerList, setDeveloperList] = useState();
+  const [seniorityLevelFields, setSeniorityLevelFields] = useState();
 
   const { objectList: newSeniorityLevels, setObjectList: setNewSeniorityLevels } =
     useObjectListState();
@@ -39,10 +43,23 @@ const GiveFeedback = ({
     setNewSeniorityLevelsVisible((prev) => !prev);
   };
 
+  // console.log("[GiveFeedback] projects", projects);
+
   const { notify } = useNotifications();
-  const submitDevHandler = (values) => {
+
+  const submitDevHandler = async (values) => {
+    const body = {
+      from: 3, // TODO: replace with id of logged user
+      projectName: project.projectName,
+      rating: values.overallRating,
+      pros: values.whatWentWell,
+      cons: values.whatCouldBeImproved,
+    };
+
     try {
-      console.log("values", values);
+      const res = await callAPI("/project_feedback", body, "POST");
+      if (!res.ok) throw new Error();
+
       notify({
         kind: NOTIFICATION_SUCCESS,
         message: FEEDBACK_SUCCESS,
@@ -56,9 +73,21 @@ const GiveFeedback = ({
       });
     }
   };
-  const submitManagerHandler = (values) => {
+
+  const submitManagerHandler = async (values) => {
+    const body = {
+      projectName: project.projectName,
+      projectID: project.id,
+      to: values.dev.id,
+      businessResults: values.businessResults.label,
+      clientSuccess: values.clientSuccess.label,
+      innovation: values.innovation.label,
+      teamInteractionRating: values.teamInteraction,
+      suggestedSeniorityLevels: newSeniorityLevels,
+    };
     try {
-      console.log("values", values);
+      const res = await callAPI("/user_feedback", body, "POST");
+      if (!res.ok) throw new Error();
       notify({
         kind: NOTIFICATION_SUCCESS,
         message: FEEDBACK_SUCCESS,
@@ -72,6 +101,38 @@ const GiveFeedback = ({
       });
     }
   };
+
+  useEffect(() => {
+    const getDevelopers = async () => {
+      const idsOfCurrentProjects = projects.map((p) => p.id);
+      const devs = (await (await callAPI("/all_users")).json()).filter((d) => {
+        if (!d.projectID) return false;
+        let contains = false;
+        const projectIDs = JSON.parse(d.projectID);
+        projectIDs.forEach((id) => {
+          if (idsOfCurrentProjects.includes(id)) contains = true;
+        });
+        return contains;
+      });
+      // console.log("devs", devs);
+      setDeveloperList(devs);
+    };
+    if (project) getDevelopers();
+  }, [project, projects]);
+
+  useEffect(() => {
+    const getFieldsContents = async () => {
+      // const queriedFields = Object.keys(JSON.parse(developerList[0].techStacks)[0]);
+      // const queryParams = `${queriedFields.map((qField) => `fields=${qField}`).join("&")}`;
+      // const fields = await (await callAPI(`/getFields?${queryParams}`, null, "GET", true)).json();
+
+      setSeniorityLevelFields(newSeniorityLevelFields);
+    };
+    if (developerList) {
+      getFieldsContents();
+    }
+  }, [developerList, newSeniorityLevelFields]);
+
   return (
     <div>
       <Title>
@@ -85,12 +146,24 @@ const GiveFeedback = ({
       </Title>
       <div className='mb-6 max-w-xl m-auto'>
         <Dropdown
-          infoMessage={INFO_MESSAGE.FEEDBACK_VIEW}
+          infoMessage={INFO_MESSAGE.PROJECT}
           infoMessagePosition='right'
-          list={loggedUserRoles.map((role) => ({ label: role }))}
-          placeholder={feedbackView ? `Give feedback as: ${feedbackView}` : "Select Feedback View"}
-          select={(role) => setFeedbackView(role.label)}
+          list={projects.map((prj) => ({ ...prj, label: `${prj.client} - ${prj.projectName}` }))}
+          placeholder={"Select Project"}
+          select={(project) => setProject(project)}
+          selected={project}
         />
+        {project && (
+          <Dropdown
+            infoMessage={INFO_MESSAGE.FEEDBACK_VIEW}
+            infoMessagePosition='right'
+            list={loggedUserRoles.map((role) => ({ label: role }))}
+            placeholder={
+              feedbackView ? `Give feedback as: ${feedbackView}` : "Select Feedback View"
+            }
+            select={(role) => setFeedbackView(role.label)}
+          />
+        )}
       </div>
 
       <div>
@@ -114,7 +187,11 @@ const GiveFeedback = ({
                   >
                     <Dropdown
                       name='dev'
-                      list={devsWhoRequestedFeedback}
+                      // list={devsWhoRequestedFeedback}
+                      list={developerList.map((d) => ({
+                        ...d,
+                        label: `${d.firstName} ${d.lastName}`,
+                      }))}
                       placeholder='Developer to give feedback to'
                       select={(dev) => {
                         setNewSeniorityLevelsVisible(false);
@@ -161,10 +238,10 @@ const GiveFeedback = ({
                           infoMessage={INFO_MESSAGE.TEAM_INTERACTION}
                         />
 
-                        {devData && (
+                        {formik.values.dev && (
                           <UnorderedList
                             label={"Previous seniority levels per technology"}
-                            list={devData.techSeniority}
+                            list={JSON.parse(formik.values.dev.techStacks)}
                             onClick={handleUpdateSeniority}
                             changeEnabler={{
                               enablesChange: true,
@@ -174,21 +251,18 @@ const GiveFeedback = ({
                           />
                         )}
 
-                        {newSeniorityLevelsVisible && (
+                        {newSeniorityLevelsVisible && seniorityLevelFields && (
                           <ObjectList
                             name='newSeniorityLevels'
                             dataFields={[
                               {
-                                ...newSeniorityLevelFields["technology"],
+                                ...seniorityLevelFields["technology"],
                                 // fields: devData.techSeniority.map((t) => t.technology), // uses only fields in list
                               } ?? [],
-                              newSeniorityLevelFields["seniorityLevel"] ?? [],
+                              seniorityLevelFields["seniorityLevel"] ?? [],
                             ]}
                             list={newSeniorityLevels}
-                            setList={(newList) => {
-                              formik.setFieldValue("newSeniorityLevels", newList);
-                              return setNewSeniorityLevels(newList);
-                            }}
+                            setList={setNewSeniorityLevels}
                             label='New Seniority Levels'
                           />
                         )}

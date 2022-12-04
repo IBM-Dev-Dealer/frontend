@@ -23,9 +23,10 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
     () => ({
       logged: [
         // { href: ROUTES.HOME, label: "Home" },
-        { href: ROUTES.CURRENT_PROJECT, label: "Current Project" },
+        { href: ROUTES.CURRENT_PROJECTS, label: "Current Projects" },
         { href: ROUTES.ADD_PROJECT, label: "Add Project" },
         { href: ROUTES.OTHER_PROJECTS, label: "Other Projects" },
+        { href: ROUTES.PROFILE, label: "Profile" },
         { href: ROUTES.FEEDBACK, label: "Feedback" },
         { href: ROUTES.LOG, label: "Logout" },
       ],

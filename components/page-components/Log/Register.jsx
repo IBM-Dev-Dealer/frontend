@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ROUTES } from "../../../utils/utils";
+import { ROUTES, callAPI } from "../../../utils/utils";
 import Title from "../../atoms/Title/Title";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
@@ -10,8 +10,6 @@ import classNames from "classnames";
 import ObjectList from "../../molecules/ObjectList/ObjectList";
 import { useObjectListState } from "../../molecules/ObjectList/useObjectListState";
 import { useCallback, useMemo } from "react";
-import { useStringListState } from "../../molecules/StringList/useStringListState";
-import StringList from "../../molecules/StringList/StringList";
 import { linkColor } from "./Log.module.scss";
 import { useNotifications } from "../../../context/hooks/useNotifications";
 import {
@@ -31,8 +29,8 @@ const initialValues = {
   lastname: "",
   technologies: [],
   experience: "",
-  roleName: "",
-  roles: [],
+  // roleName: "",
+  // roles: [],
 };
 
 const validate = yup.object({
@@ -52,8 +50,8 @@ const validate = yup.object({
     .required("Re-password field empty"),
   technologies: yup.array().of(yup.object()),
   experience: yup.string().required("Experience is required"),
-  roleName: yup.string(),
-  roles: yup.array().of(yup.string()).min(1).required(),
+  // roleName: yup.string(),
+  // roles: yup.array().of(yup.string()).min(1).required(),
 });
 
 const Register = ({ fields }) => {
@@ -69,14 +67,25 @@ const Register = ({ fields }) => {
   );
 
   const { notify } = useNotifications();
-  const submitHandler = (values) => {
+
+  const submitHandler = async (values) => {
+    const body = {
+      email: values.email,
+      firstName: values.firstname,
+      lastName: values.lastname,
+      password: values.password,
+      // roles: values.roles,
+      techStacks: values.technologies,
+    };
     try {
-      console.log("values", values);
-      notify({
-        kind: NOTIFICATION_SUCCESS,
-        message: REGISTER_SUCCESS,
-        id: REGISTER_NOTIFICATION_SUCCESS_ID,
-      });
+      const res = await callAPI("/user", body, "POST");
+      if (res.status === 200) {
+        notify({
+          kind: NOTIFICATION_SUCCESS,
+          message: REGISTER_SUCCESS,
+          id: REGISTER_NOTIFICATION_SUCCESS_ID,
+        });
+      } else throw new Error();
     } catch (error) {
       notify({
         kind: NOTIFICATION_ERROR,
@@ -86,14 +95,14 @@ const Register = ({ fields }) => {
     }
   };
 
-  const {
-    stringList: rolesList,
-    setStringList: setRolesList,
-    stringInputValue: rolesInputValue,
-    setStringInputValue: setRolesInputValue,
-    inputWasTouched: rolesInputWasTouched,
-    setInputWasTouched: setRolesInputWasTouched,
-  } = useStringListState();
+  // const {
+  //   stringList: rolesList,
+  //   setStringList: setRolesList,
+  //   stringInputValue: rolesInputValue,
+  //   setStringInputValue: setRolesInputValue,
+  //   inputWasTouched: rolesInputWasTouched,
+  //   setInputWasTouched: setRolesInputWasTouched,
+  // } = useStringListState();
 
   const registerFormTailwindContainer = "flex items-center flex-col w-full mt-6";
   const formFieldsContainerTailwind = "w-3/4 flex gap-20 justify-center items-center flex-wrap";
@@ -167,7 +176,7 @@ const Register = ({ fields }) => {
                 placeholder='Years'
                 labelText='Years of experience'
               />
-              <StringList
+              {/* <StringList
                 setList={setRolesList}
                 list={rolesList}
                 onChange={handleOnChange(formik.setFieldValue, "roles")}
@@ -182,7 +191,7 @@ const Register = ({ fields }) => {
                   untouch: () => setRolesInputWasTouched(false),
                   wasTouched: rolesInputWasTouched,
                 }}
-              />
+              /> */}
               <Button type='submit' label='Submit' />
             </div>
           </Form>

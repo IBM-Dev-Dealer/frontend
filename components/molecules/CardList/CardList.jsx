@@ -12,18 +12,18 @@ const CardList = ({
   addToList,
   listWidth = 28,
 }) => {
-  const listClass = "flex flex-col justify-between hover:shadow-md rounded-xl m-2 p-2";
-
+  const listClass = "flex flex-col justify-between shadow-md rounded-xl py-2 px-4";
+  // console.log("list", list);
   return (
-    <ul className='flex m-4 flex-wrap'>
+    <ul className='flex mt-4 my-2 flex-wrap gap-4'>
       {list.map((l, i) => (
         <li key={i} className={listClass}>
           <div className='flex'>
-            {l.src && (
-              <Avatar src={l.src} round width={srcSize} height={srcSize} className='ring-white' />
+            {l.image && (
+              <Avatar src={l.image} round width={srcSize} height={srcSize} className='ring-white' />
             )}
             <div className={`flex flex-col w-${listWidth}`}>
-              <p className={`underline text-${titleColor}`}>{l.title}</p>
+              <p className={`text-${titleColor}`}>{l.label}</p>
               {children && l[subListName] && l[subListName].map((subL) => children(subL))}
             </div>
           </div>
@@ -41,7 +41,7 @@ const CardList = ({
               <div className='h-2 bg-gray rounded' />
             </div>
           </div>
-          <Button label={<PlusIcon className='w-6 h-6' />} type='button' />
+          <Button label={<PlusIcon className='w-6 h-6' />} type='button' className='p-4' />
         </li>
       )}
     </ul>

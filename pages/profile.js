@@ -1,14 +1,20 @@
 import Profile from "../components/page-components/Profile/Profile";
-import getProjects from "./api/getProjects";
+import { callAPI } from "../utils/utils";
 
 const ProfilePage = (props) => <Profile {...props} />;
 
 export default ProfilePage;
 
 export const getStaticProps = async () => {
-  const projects = await getProjects();
+  const loggedUserID = 1;
+
+  const userFeedback = (await (await callAPI(`/user_feedback/${loggedUserID}`)).json()).map(
+    (p) => ({ ...p, label: p.projectName }),
+  );
+
+  // console.log("userFeedback", userFeedback);
 
   return {
-    props: { projects },
+    props: { projects: userFeedback },
   };
 };
