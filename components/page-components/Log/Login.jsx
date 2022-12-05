@@ -16,6 +16,8 @@ import {
   NOTIFICATION_SUCCESS,
   SERVER_ERROR,
 } from "../../../utils/constants";
+import { useAuth } from "../../../context/hooks/useAuth";
+import { useRouter } from "next/router";
 const Login = () => {
   const initialValues = {
     email: "",
@@ -27,15 +29,19 @@ const Login = () => {
     password: yup.string().required("Password field empty"),
   });
 
+  const router = useRouter();
   const { notify } = useNotifications();
+  const { login } = useAuth();
   const submitHandler = (values) => {
     try {
-      // console.log("values", values);
+      console.log("values", values);
+      login(values.email);
       notify({
         kind: NOTIFICATION_SUCCESS,
         message: LOGIN_SUCCESS,
         id: LOGIN_NOTIFICATION_SUCCESS_ID,
       });
+      router.push(ROUTES.ADD_PROJECT);
     } catch (error) {
       notify({
         kind: NOTIFICATION_ERROR,

@@ -9,12 +9,14 @@ import styles from "./Layout.module.scss";
 import { useNotifications, usePageColorContext } from "../../../context/hooks";
 import Notifications from "../../molecules/Notifications/Notifications";
 import LOGO from "../../../public/logo-full-svg.svg";
+import { useAuth } from "../../../context/hooks/useAuth";
 
-const Layout = ({ logged = true, isPM = false, error, children }) => {
+const Layout = ({ isPM = false, error, children }) => {
   const { pathname } = useRouter();
   const title = getTitle(pathname);
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
   const { notifications, removeNotification } = useNotifications();
+  const { logged } = useAuth();
 
   useEffect(() => {}, []);
 
@@ -28,10 +30,10 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
         { href: ROUTES.OTHER_PROJECTS, label: "Other Projects" },
         { href: ROUTES.PROFILE, label: "Profile" },
         { href: ROUTES.FEEDBACK, label: "Feedback" },
-        { href: ROUTES.LOG, label: "Logout" },
+        { href: ROUTES.LOGIN, label: "Logout" },
       ],
       notLogged: [
-        { href: ROUTES.LOG, label: "Login" },
+        { href: ROUTES.LOGOUT, label: "Login" },
         { href: ROUTES.REGISTER, label: "Register" },
       ],
     }),

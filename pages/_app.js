@@ -2,14 +2,18 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loader from "../components/atoms/Loader/Loader";
 import Layout from "../components/page-components/Layout/Layout";
-import { NotificationContextProvider, PageColorContextProvider } from "../context/providers";
+import {
+  AuthProvider,
+  NotificationContextProvider,
+  PageColorContextProvider,
+} from "../context/providers";
 import "../styles/globals.scss";
 
 const App = ({ Component, pageProps }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { events: routerEvents } = useRouter();
 
-  const { logged, isPM, error } = pageProps;
+  const { isPM, error } = pageProps;
 
   useEffect(() => {
     routerEvents.on("routeChangeStart", () => setIsLoading(true));
@@ -17,14 +21,16 @@ const App = ({ Component, pageProps }) => {
   }, [routerEvents]);
 
   return (
-    <NotificationContextProvider>
-      <PageColorContextProvider>
-        <Layout logged={logged} isPM={isPM} error={error}>
-          <Loader loading={isLoading} />
-          <Component {...pageProps} />
-        </Layout>
-      </PageColorContextProvider>
-    </NotificationContextProvider>
+    <AuthProvider>
+      <NotificationContextProvider>
+        <PageColorContextProvider>
+          <Layout isPM={isPM} error={error}>
+            <Loader loading={isLoading} />
+            <Component {...pageProps} />
+          </Layout>
+        </PageColorContextProvider>
+      </NotificationContextProvider>
+    </AuthProvider>
   );
 };
 

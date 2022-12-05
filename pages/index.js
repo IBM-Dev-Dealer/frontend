@@ -5,7 +5,7 @@ import { ROUTES } from "../utils/utils";
 const DefaultPage = () => {
   const { push } = useRouter();
   useEffect(() => {
-    push(ROUTES.HOME);
+    push(ROUTES.CURRENT_PROJECTS);
   }, [push]);
   return <></>;
 };
