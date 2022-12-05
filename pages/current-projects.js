@@ -19,8 +19,8 @@ const CurrentProjectsPage = () => {
       const currentUserProjectIDs = JSON.parse((await user.json()).projectID);
       console.log("[CurrentProjectsPage] currentUserProjectIDs", currentUserProjectIDs);
 
-      const projects = (await (await callAPI("/all_projects")).json()).filter((p) =>
-        currentUserProjectIDs.includes(p.id),
+      const projects = (await (await callAPI("/all_projects")).json()).filter(
+        (p) => currentUserProjectIDs && currentUserProjectIDs.includes(p.id),
       );
 
       const getProjectsWithDevs = async () => {
