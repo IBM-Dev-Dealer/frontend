@@ -32,16 +32,11 @@ const Login = () => {
   const router = useRouter();
   const { notify } = useNotifications();
   const { login } = useAuth();
-  const submitHandler = (values) => {
+  const submitHandler = async (values) => {
     try {
       console.log("values", values);
-      login(values.email);
-      notify({
-        kind: NOTIFICATION_SUCCESS,
-        message: LOGIN_SUCCESS,
-        id: LOGIN_NOTIFICATION_SUCCESS_ID,
-      });
-      router.push(ROUTES.ADD_PROJECT);
+      const loginOutcome = await login(values.email);
+      if (loginOutcome) router.push(ROUTES.ADD_PROJECT);
     } catch (error) {
       notify({
         kind: NOTIFICATION_ERROR,

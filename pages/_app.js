@@ -21,16 +21,16 @@ const App = ({ Component, pageProps }) => {
   }, [routerEvents]);
 
   return (
-    <AuthProvider>
-      <NotificationContextProvider>
+    <NotificationContextProvider>
+      <AuthProvider>
         <PageColorContextProvider>
           <Layout isPM={isPM} error={error}>
             <Loader loading={isLoading} />
             <Component {...pageProps} />
           </Layout>
         </PageColorContextProvider>
-      </NotificationContextProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </NotificationContextProvider>
   );
 };
 

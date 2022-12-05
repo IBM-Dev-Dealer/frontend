@@ -18,6 +18,7 @@ const ProfilePage = () => {
   useEffect(() => {
     getUserFeedback();
   }, [getUserFeedback]);
+
   return <Profile {...props} />;
 };
 
