@@ -9,14 +9,22 @@ import styles from "./Layout.module.scss";
 import { useNotifications, usePageColorContext } from "../../../context/hooks";
 import Notifications from "../../molecules/Notifications/Notifications";
 import LOGO from "../../../public/logo-full-svg.svg";
+import { useAuth } from "../../../context/hooks/useAuth";
 
-const Layout = ({ logged = true, isPM = false, error, children }) => {
-  const { pathname } = useRouter();
+const Layout = ({ isPM = false, error, children }) => {
+  const router = useRouter();
+  const { pathname } = router;
   const title = getTitle(pathname);
   const { pageColorIndexes, setPageColorIndexes } = usePageColorContext();
   const { notifications, removeNotification } = useNotifications();
+  const { logged, logout } = useAuth();
 
   useEffect(() => {}, []);
+
+  const handleLogout = useCallback(() => {
+    logout();
+    router.push(ROUTES.LOG);
+  }, [logout, router]);
 
   // Defined here because the `visible` prop of links will depend on props like `isPM`
   const NAV_LINKS = useMemo(
@@ -28,14 +36,14 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
         { href: ROUTES.OTHER_PROJECTS, label: "Other Projects" },
         { href: ROUTES.PROFILE, label: "Profile" },
         { href: ROUTES.FEEDBACK, label: "Feedback" },
-        { href: ROUTES.LOG, label: "Logout" },
+        { func: handleLogout, label: "Logout" },
       ],
       notLogged: [
         { href: ROUTES.LOG, label: "Login" },
         { href: ROUTES.REGISTER, label: "Register" },
       ],
     }),
-    [],
+    [handleLogout],
   );
 
   const generateNavLinks = useCallback(
@@ -43,15 +51,27 @@ const Layout = ({ logged = true, isPM = false, error, children }) => {
       links
         .map((link) =>
           link.visible !== false ? (
-            <Link
-              href={link.href}
-              key={link.href}
-              className={`${pathname.includes(link.href) ? "border-b-8 border-white" : ""}`}
-            >
-              <span className={`${pathname.includes(link.href) ? "font-bold" : "font-light"}`}>
-                {link.label}
-              </span>
-            </Link>
+            link.href ? (
+              <Link
+                href={link.href}
+                key={link.href}
+                className={`${pathname.includes(link.href) ? "border-b-8 border-white" : ""}`}
+              >
+                <span className={`${pathname.includes(link.href) ? "font-bold" : "font-light"}`}>
+                  {link.label}
+                </span>
+              </Link>
+            ) : (
+              <div
+                className={`${pathname.includes(link.href) ? "border-b-8 border-white" : ""}`}
+                onClick={link.func}
+                role='presentation'
+              >
+                <span className={`${pathname.includes(link.href) ? "font-bold" : "font-light"}`}>
+                  {link.label}
+                </span>
+              </div>
+            )
           ) : null,
         )
         .filter((l) => l),

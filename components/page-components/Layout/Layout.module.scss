@@ -30,12 +30,13 @@
   display: flex;
   align-self: flex-end;
 
-  a {
+  a, div {
     padding: map-get($spacing, "xs");
     margin-left: map-get($spacing, "xs");
     @apply rounded-tr-xl rounded-tl-xl rounded-bl-none rounded-br-none;
     box-shadow: map-get($shadows, "box-small");
     user-select: none;
+    cursor: pointer;
   }
 }
 
