@@ -24,5 +24,5 @@ export const getStaticProps = async () => {
   // console.log("developers", developers);
   // console.log("projects", projects);
 
-  return { props: { fields, projects, developers } };
+  return { props: { fields, projects, developers }, revalidate: 10 };
 };
