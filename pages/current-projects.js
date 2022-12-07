@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
+import Loader from "../components/atoms/Loader/Loader";
 import CurrentProjects from "../components/page-components/CurrentProjects/CurrentProjects";
 import { useAuth } from "../context/hooks/useAuth";
 import { callAPI, isArray } from "../utils/utils";
 
-const CurrentProjectsPage = ({ setLoading }) => {
+const CurrentProjectsPage = () => {
   const { loggedUserEmail } = useAuth();
 
   const [props, setProps] = useState({ projects: [] });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getProjects = async () => {
-      setLoading(true);
       const user = await callAPI(`/user/${loggedUserEmail}`);
       console.log("[CurrentProjectsPage] user", user);
 
@@ -49,10 +50,18 @@ const CurrentProjectsPage = ({ setLoading }) => {
 
       console.log("[CurrentProjectsPage] projectsWithDevs", projectsWithDevs);
     };
-    if (loggedUserEmail) getProjects();
+    if (loggedUserEmail) {
+      setLoading(true);
+      getProjects();
+    }
   }, [loggedUserEmail, setLoading]);
 
-  return <CurrentProjects {...props} />;
+  return (
+    <>
+      <CurrentProjects {...props} />
+      <Loader loading={loading} />
+    </>
+  );
 };
 
 export default CurrentProjectsPage;

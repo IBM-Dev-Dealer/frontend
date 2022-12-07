@@ -20,15 +20,13 @@ const App = ({ Component, pageProps }) => {
     routerEvents.on("routeChangeComplete", () => setIsLoading(false));
   }, [routerEvents]);
 
-  const setLoading = useCallback((val) => setIsLoading(!!val), []);
-
   return (
     <NotificationContextProvider>
       <AuthProvider>
         <PageColorContextProvider>
           <Layout isPM={isPM} error={error}>
             <Loader loading={isLoading} />
-            <Component setLoading={setLoading} {...pageProps} />
+            <Component {...pageProps} />
           </Layout>
         </PageColorContextProvider>
       </AuthProvider>

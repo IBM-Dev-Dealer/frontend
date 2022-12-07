@@ -71,7 +71,7 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
   const assignDev = async () => {
     if (!selectedDeveloper) return;
 
-    const previousUserProjects = JSON.parse(selectedDeveloper.projectID) ?? [];
+    const previousUserProjects = JSON.parse(selectedDeveloper.projectID);
 
     if (previousUserProjects.includes(selectedProject.id)) {
       notify({
@@ -82,12 +82,14 @@ const ProjectsTable = ({ projects, fields: tableFields, developers }) => {
       return;
     }
 
-    const updatedProjects = [...previousUserProjects, selectedProject.id];
+    // const updatedProjects = [...previousUserProjects, selectedProject.id];
+    previousUserProjects.push(+selectedProject.id);
 
     const body = {
       userEmail: selectedDeveloper.email,
       fieldsToUpdate: {
-        projectID: updatedProjects,
+        // projectID: updatedProjects,
+        projectID: previousUserProjects,
       },
     };
     // console.log("body", body);
