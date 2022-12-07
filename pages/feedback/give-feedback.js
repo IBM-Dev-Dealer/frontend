@@ -42,5 +42,5 @@ export const getStaticProps = async () => {
 
   const props = { loggedUserRoles, newSeniorityLevelFields: fields.fields };
 
-  return { props };
+  return { props, revalidate: 1 };
 };
