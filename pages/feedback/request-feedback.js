@@ -21,5 +21,5 @@ export const getStaticProps = async () => {
 
   const props = { loggedUserRoles, ...projects };
 
-  return { props, revalidate: 1 };
+  return { props };
 };
