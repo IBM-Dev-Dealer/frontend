@@ -80,6 +80,7 @@ export const callAPI = async (path, body, method = "GET", callInternal = false) 
     config.body = JSON.stringify(body);
   }
   const URL = callInternal ? `${process.env.NEXTJS_API}${path}` : `${process.env.HOST}${path}`;
+  console.log("URL", URL);
   return await fetch(URL, config);
 };
 

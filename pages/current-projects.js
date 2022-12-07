@@ -3,18 +3,21 @@ import CurrentProjects from "../components/page-components/CurrentProjects/Curre
 import { useAuth } from "../context/hooks/useAuth";
 import { callAPI, isArray } from "../utils/utils";
 
-const CurrentProjectsPage = () => {
+const CurrentProjectsPage = ({ setLoading }) => {
   const { loggedUserEmail } = useAuth();
 
   const [props, setProps] = useState({ projects: [] });
 
   useEffect(() => {
     const getProjects = async () => {
+      setLoading(true);
       const user = await callAPI(`/user/${loggedUserEmail}`);
       console.log("[CurrentProjectsPage] user", user);
 
       if (user.status !== 200) {
         setProps({ projects: [] });
+        setLoading(false);
+        return;
       }
       const currentUserProjectIDs = JSON.parse((await user.json()).projectID);
       console.log("[CurrentProjectsPage] currentUserProjectIDs", currentUserProjectIDs);
@@ -41,12 +44,13 @@ const CurrentProjectsPage = () => {
       };
 
       const projectsWithDevs = await getProjectsWithDevs();
+      setLoading(false);
       setProps({ projects: projectsWithDevs });
 
       console.log("[CurrentProjectsPage] projectsWithDevs", projectsWithDevs);
     };
     if (loggedUserEmail) getProjects();
-  }, [loggedUserEmail]);
+  }, [loggedUserEmail, setLoading]);
 
   return <CurrentProjects {...props} />;
 };

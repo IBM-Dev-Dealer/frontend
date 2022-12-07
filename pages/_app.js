@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loader from "../components/atoms/Loader/Loader";
 import Layout from "../components/page-components/Layout/Layout";
 import {
@@ -20,13 +20,15 @@ const App = ({ Component, pageProps }) => {
     routerEvents.on("routeChangeComplete", () => setIsLoading(false));
   }, [routerEvents]);
 
+  const setLoading = useCallback((val) => setIsLoading(!!val), []);
+
   return (
     <NotificationContextProvider>
       <AuthProvider>
         <PageColorContextProvider>
           <Layout isPM={isPM} error={error}>
             <Loader loading={isLoading} />
-            <Component {...pageProps} />
+            <Component setLoading={setLoading} {...pageProps} />
           </Layout>
         </PageColorContextProvider>
       </AuthProvider>
